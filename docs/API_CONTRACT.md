@@ -73,6 +73,7 @@ class Character:
     start_mood: int    # 0-100, higher = more upset
     voice_id: str      # ElevenLabs voice id
     opening_line: str  # first line the character says
+    starter_suggestions: tuple[str, ...]  # exactly 2 example first replies for the player
     persona_prompt: str
     techniques: tuple[str, ...]  # good techniques that calm this character
     bad_moves: tuple[str, ...]   # things that make it worse
@@ -93,7 +94,9 @@ History = list[dict]  # [{"role": "user" | "character", "text": str}, ...] oldes
 def character_reply(character: Character, history: History, user_text: str, mood: int) -> dict:
     """Returns {"reply": str, "mood_delta": int (clamped -25..25),
     "techniques": list[str] (subset of character.techniques used in user_text),
-    "note": str (one short coaching hint for the player)}"""
+    "note": str (one short coaching hint for the player),
+    "suggestions": list[str] (exactly 2 things the player could say NEXT, each <= 20 words,
+    each using a different technique from character.techniques; [] if the model omits them)}"""
 
 def score_session(character: Character, history: History, final_mood: int, outcome: str) -> dict:
     """Returns {"score": int 0-100, "summary": str,
@@ -131,10 +134,13 @@ Errors use FastAPI's default body `{"detail": "<message>"}`.
 |---|---|---|---|
 | `GET /api/health` | — | `200 {"status": "ok", "gemini": bool, "elevenlabs": bool}` (bools = key configured) | — |
 | `GET /api/characters` | — | `200 {"characters": [CharacterPublic]}` | — |
-| `POST /api/sessions` | JSON `{"character_id": str}` | `201 {"session_id", "character": CharacterPublic, "mood", "status": "active", "turn": 0, "max_turns": 8, "opening": {"text", "audio_b64": str \| null}}` | 404 unknown character |
-| `POST /api/sessions/{id}/turns` | `multipart/form-data`: `audio` file (optional, browser webm/ogg) and/or `text` field (optional); at least one | `200 {"turn", "user_text", "reply_text", "reply_audio_b64": str \| null, "mood", "mood_delta", "techniques": [str], "note", "status", "max_turns"}` | 404 session, 409 not active, 422 neither field / empty transcript, 502 Gemini or STT failure |
+| `POST /api/sessions` | JSON `{"character_id": str}` | `201 {"session_id", "character": CharacterPublic, "mood", "status": "active", "turn": 0, "max_turns": 8, "opening": {"text", "audio_b64": str \| null, "suggestions": [str]}}` (suggestions = `character.starter_suggestions`) | 404 unknown character |
+| `POST /api/sessions/{id}/turns` | `multipart/form-data`: `audio` file (optional, browser webm/ogg) and/or `text` field (optional); at least one | `200 {"turn", "user_text", "reply_text", "reply_audio_b64": str \| null, "mood", "mood_delta", "techniques": [str], "note", "suggestions": [str], "status", "max_turns"}` (suggestions pass through from Gemini; `[]` when status is not `active`) | 404 session, 409 not active, 422 neither field / empty transcript, 502 Gemini or STT failure |
 | `GET /api/sessions/{id}/scorecard` | — | `200 {"outcome": status, "final_mood", "score", "summary", "techniques_used", "best_line", "worst_line", "transcript": [{"role", "text"}]}` | 404 session, 409 zero turns, 502 Gemini failure |
 
 - If `text` is given it wins over `audio` (typed fallback for noisy rooms).
 - TTS failure never fails a request: return `audio_b64: null` and the text.
+- **Suggestions (v1.1):** the UI shows the current 2 suggestions as "Try saying" chips under the
+  latest character line; clicking one fills the text box (does not auto-send). A "Hints" toggle
+  (default on) hides them.
 - Audio is mp3, base64; the frontend plays `data:audio/mpeg;base64,<b64>`.
