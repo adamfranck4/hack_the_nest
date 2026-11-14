@@ -1,6 +1,6 @@
 ---
 name: data-integrations
-description: Data and integrations worker for hack_the_nest. Owns the database schema, migrations, seed data, and third-party APIs and SDKs. Use for data modelling or wiring up an external service.
+description: Data and integrations worker for hack_the_nest. Owns character/demo data, data-access helpers, and third-party API clients. Use for data modelling or wiring up an external service.
 model: sonnet
 ---
 

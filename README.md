@@ -1,8 +1,8 @@
 # Talk It Out
 
 Practice hard conversations with AI characters, then review what you said and
-what you could try differently. Built at Hack The Nest 2026, Eastern Michigan
-University, November 14–15.
+what you could try differently. Built by three first-time hackathon attendees at
+Hack The Nest 2026, Eastern Michigan University, November 14–15.
 
 [**Live app**](https://talk-it-out-0dzk.onrender.com/) ·
 [**Simulated demo — no API keys**](https://talk-it-out-0dzk.onrender.com/?mock=1)
@@ -98,8 +98,10 @@ if (!(Test-Path .env)) { Copy-Item .env.example .env }
 
 ### 2. Configure live services
 
-Before starting the server, edit `.env` and set `GEMINI_API_KEY` and
-`ELEVENLABS_API_KEY`. The copy commands above preserve an existing `.env`.
+Before starting the server, edit `.env`: set `GEMINI_API_KEY` for real
+conversations and `ELEVENLABS_API_KEY` to enable transcription and character
+speech. Typed conversations can run without ElevenLabs. The copy commands above
+preserve an existing `.env`.
 Approved environment secret storage can be used instead. Never commit key values.
 See the [configuration reference](docs/API_CONTRACT.md#env-vars-repo-root-env-git-ignored-names-only-here)
 for optional settings and defaults. Provider accounts:

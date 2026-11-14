@@ -74,7 +74,8 @@ values, credential files, or sensitive logs belong in the entry.
 
 ## Team and tracks
 
-The [team record](../coordination/TEAM_DECISIONS.md) contains the roster and confirmed app
+All three teammates are first-time hackathon attendees. The
+[team record](../coordination/TEAM_DECISIONS.md) contains the roster and confirmed app
 selections. Enter the corresponding main-track and applicable award entries in
 Devpost. Provider conditions for AI/ML and any additional MLH entry remain
 organizer-confirmation items; selection alone does not establish eligibility.

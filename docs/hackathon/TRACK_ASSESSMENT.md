@@ -4,7 +4,9 @@ Assessment date: November 14, 2026. Code baseline: `70dcb25`. These are Codex's
 recommendations, not organizer scoring weights or accepted team decisions.
 Current selections/status remain in [TEAM_DECISIONS.md](../coordination/TEAM_DECISIONS.md#tracks).
 Subsequent same-day updates confirm all three tracks selected and identify the
-official Devpost event/rules. The verified five judging criteria and submission
+official Devpost event/rules. Adam also confirmed all three members are first-time
+hackathon attendees; the [team record](../coordination/TEAM_DECISIONS.md#team) is authoritative.
+The verified five judging criteria and submission
 requirements are recorded in [event context](HACKATHON_CONTEXT.md#verified-judging-requirements).
 
 ## Overall assessment
@@ -17,7 +19,7 @@ and judges' comparisons.
 
 | Track | Published basis | Current judging assessment |
 |---|---|---|
-| Best Beginner | Official site says most members must be first-timers and judging emphasizes growth/learning, not polish | Strong fit if the supplied beginner status is confirmed and the humans can explain their learning and decisions |
+| Best Beginner | Official site says most members must be first-timers and judging emphasizes growth/learning, not polish | The team confirms all three are first-time attendees; strong fit if participants can explain their learning and decisions |
 | Best Use of ElevenLabs | Official site highlights ideas that talk/listen, conversational agents, TTS and STT; game characters are an explicit example | Meaningful integration: character speech plus user transcription. Main uncertainty is the unverified live microphone loop and whether voice delivery makes the practice convincing |
 | AI/ML | Website's differently named Future of Intelligence promotes OpenAI models and Exa search, useful agents/apps/tools and product polish | Gemini roleplay, structured feedback and stateful gameplay are implemented, but provider eligibility is unresolved and the general coaching concept is established elsewhere |
 
@@ -52,8 +54,8 @@ without presenting agent-written work as unaided human implementation. Each
 member should be able to explain one technical problem, their contribution to
 resolving it, and one thing they understand now that they did not before.
 
-Confirm which members are first-timers; for a three-person team, a majority means
-at least two. Do not describe the whole team as first-time hackers unless true.
+The confirmed team experience meets the published majority-first-timers condition;
+this does not guarantee an award or replace the remaining event requirements.
 Present the architecture and one bug/fix plainly rather than emphasizing code
 volume or treating a test count as a prize criterion. Further cosmetic work has
 less direct support from this track's published wording than the learning story.
@@ -175,7 +177,8 @@ uses words, not vocal tone. Do not promise either capability without implementin
   verified submission requirements, five criteria, and in-person judging schedule.
 - [Entrant tracks](https://app.hackthenest.tech/tracks): team selections come from
   supplied shared context. This research session was redirected to login, so
-  current signed-in provider conditions/selection state need confirmation.
+  signed-in provider conditions were not independently verified. Team-confirmed
+  selections are recorded in the team record; provider eligibility remains unresolved.
 - [MLH judging plan](https://guide.mlh.com/general-information/judging-and-submissions/judging-plan):
   general demonstration/learning guidance, not a replacement event rubric.
 - [ElevenLabs TTS](https://elevenlabs.io/docs/overview/capabilities/text-to-speech):

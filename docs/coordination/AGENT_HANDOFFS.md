@@ -9,6 +9,34 @@ In a shared checkout, the coordinator serializes entries from its workers.
 Apply the [shared transparency requirements](../../AGENTS.md#required-transparency-for-every-agent)
 to operational actions and push/deployment status as well as code changes.
 
+Entries below are dated history. Read the latest applicable outcome first;
+older ownership requests, test counts, placeholders, and verification notes
+describe their original task. Consult newer outcomes and the authoritative
+references before treating an older note as current.
+
+## 2026-11-14 — codex-docs-continuity — cross-document review
+
+- Branch/base: local `work` targeting shared `main`, base `2ef8e05`.
+- Input: review all documentation for continuity; Adam confirmed every teammate
+  is a first-time hackathon attendee. Recorded that fact in the team record.
+- Outcome: aligned README, submission copy, and assessment with the team record;
+  removed stale beginner-status caveats. Corrected voice-key requirements, hint
+  guarantees, text precedence, audio fields, and the documented 429 response
+  against existing code. Updated role guidance for the current no-database app
+  and hosted-first README; labeled handoff history without rewriting old evidence.
+- Validation: all 19 tracked Markdown files render; 83 local references and 12
+  role references resolve. Six Codex TOMLs and six Claude metadata blocks parse,
+  with matching role descriptions and unchanged model settings. Both test suites
+  passed (89 backend, 4 frontend); the existing Starlette deprecation warning
+  remains. Earlier 20-file checks included an ignored pytest-cache README;
+  this review counts tracked documentation only. Diff checks pass.
+- Operations/delivery: no new dependencies, app servers, paid API calls, secrets,
+  application code, runtime settings, or track/scope changes. Ownership was
+  limited to the corrected docs and two role descriptions. GitHub `main` delivery
+  is verified after push and reported with a commit link; Render may auto-deploy,
+  with deployment unverified. Microphone testing and provider eligibility remain
+  open; no new external research was used to change event claims.
+
 ## 2026-11-14 — codex-hosted-quickstart — README entry path
 
 - Branch/base: local `work` targeting shared `main`, base `17d4cda`.

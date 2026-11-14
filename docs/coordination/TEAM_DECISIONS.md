@@ -6,8 +6,8 @@ records what *our team* decided and why. Update it when a decision changes.
 The [track assessment](../hackathon/TRACK_ASSESSMENT.md) contains research and recommendations;
 it does not change the selections or accepted project recorded here.
 
-Last updated: Saturday, November 14, 2026 (codex-reviewer-docs; clarified references
-and credential handling; roster, track choices, and accepted scope unchanged).
+Last updated: Saturday, November 14, 2026 (codex-docs-continuity; Adam confirmed
+all three teammates are first-time hackathon attendees; track choices and scope unchanged).
 
 ## Team
 
@@ -17,7 +17,7 @@ and credential handling; roster, track choices, and accepted scope unchanged).
 | Gavin Robbins | Grand Valley State University | Member | Checked in |
 | Nolan Drake | Grand Valley State University | Member | Checked in |
 
-We are a beginner team (first hackathon for most of us).
+All three teammates are first-time hackathon attendees, confirmed by Adam.
 
 ## Tracks
 

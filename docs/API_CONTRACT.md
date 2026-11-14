@@ -10,8 +10,8 @@ guidance; current assignments are recorded in agent handoffs. Project rationale 
 ## What the app does
 
 A "conversation gym": pick one of the characters defined in `backend/app/characters.py`,
-talk to it by voice, and try to calm it down. Gemini plays the character and
-moves a **mood meter**; ElevenLabs gives it a voice and transcribes you. At the
+talk to it by voice or typing, and try to calm it down. Gemini plays the character
+and moves a **mood meter**; ElevenLabs gives it a voice and transcribes you. At the
 end a scorecard grades the communication techniques you used.
 
 ## Stack and run
@@ -32,8 +32,8 @@ end a scorecard grades the communication techniques you used.
 
 | Name | Required | Use |
 |---|---|---|
-| `GEMINI_API_KEY` | yes | Gemini REST, header `x-goog-api-key` |
-| `ELEVENLABS_API_KEY` | yes | ElevenLabs REST, header `xi-api-key` |
+| `GEMINI_API_KEY` | for real conversations | Gemini REST, header `x-goog-api-key`; mock mode needs no key |
+| `ELEVENLABS_API_KEY` | for voice features | ElevenLabs REST, header `xi-api-key`; optional for typed conversations |
 | `GEMINI_MODEL` | no | default `gemini-flash-lite-latest` (falls back to `gemini-3.5-flash`) |
 | `VOICE_DAILY_CREDIT_LIMIT` | no | daily ElevenLabs budget in estimated credits; unset/empty = unlimited (local dev); `0` = voice off. Render sets it. |
 
@@ -99,8 +99,8 @@ def character_reply(character: Character, history: History, user_text: str, mood
     """Returns {"reply": str, "mood_delta": int (clamped -25..25),
     "techniques": list[str] (subset of character.techniques used in user_text),
     "note": str (one short coaching hint for the player),
-    "suggestions": list[str] (exactly 2 things the player could say NEXT, each <= 20 words,
-    each using a different technique from character.techniques; [] if the model omits them)}"""
+    "suggestions": list[str] (up to 2 non-empty strings; [] if absent or invalid;
+    word length and technique diversity are not validated)}"""
 
 def score_session(character: Character, history: History, final_mood: int, outcome: str) -> dict:
     """Returns {"score": int 0-100, "summary": str,
@@ -142,7 +142,8 @@ Protects the ElevenLabs free monthly quota on the public deploy. Owned by backen
   simultaneous TTS/STT requests. In-flight calls count against available credits.
   Successful calls keep their charge; failures refund it. A failed call from a
   previous day must not refund credits from the new day.
-- If TTS cannot reserve `len(text)`, skip it (`audio_b64: null`).
+- If TTS cannot reserve `len(text)`, skip it (`opening.audio_b64: null` on creation,
+  `reply_audio_b64: null` on a turn).
 - Audio turn (no `text`) unable to reserve 100 credits → **429** `{"detail": "Today's
   voice limit is reached — type your reply instead."}`; STT is not called.
 - `voice_available` = limit unset, or `used + 100 <= limit` (and key configured).
@@ -161,16 +162,17 @@ Errors use FastAPI's default body `{"detail": "<message>"}`.
 | `GET /api/health` | — | `200 {"status": "ok", "gemini": bool, "elevenlabs": bool, "voice_available": bool, "voice_credits_left_today": int \| null}` (null = unlimited) | — |
 | `GET /api/characters` | — | `200 {"characters": [CharacterPublic]}` | — |
 | `POST /api/sessions` | JSON `{"character_id": str}` | `201 {"session_id", "character": CharacterPublic, "mood", "status": "active", "turn": 0, "max_turns": 8, "opening": {"text", "audio_b64": str \| null, "suggestions": [str]}}` (suggestions = `character.starter_suggestions`) | 404 unknown character |
-| `POST /api/sessions/{id}/turns` | `multipart/form-data`: `audio` file (optional, browser webm/ogg) and/or `text` field (optional); at least one | `200 {"turn", "user_text", "reply_text", "reply_audio_b64": str \| null, "mood", "mood_delta", "techniques": [str], "note", "suggestions": [str], "status", "max_turns"}` (suggestions pass through from Gemini; `[]` when status is not `active`) | 404 session, 409 not active, 422 neither field / empty transcript, 502 Gemini or STT failure |
+| `POST /api/sessions/{id}/turns` | `multipart/form-data`: `audio` file (optional, browser webm/ogg) and/or `text` field (optional); at least one | `200 {"turn", "user_text", "reply_text", "reply_audio_b64": str \| null, "mood", "mood_delta", "techniques": [str], "note", "suggestions": [str], "status", "max_turns"}` (up to 2 suggestions; `[]` when status is not `active`) | 404 session, 409 not active, 422 neither field / empty transcript, 429 voice budget exhausted, 502 Gemini or STT failure |
 | `GET /api/sessions/{id}/scorecard` | — | `200 {"outcome": "ended" \| "won" \| "lost" \| "timeout", "final_mood", "score", "summary", "techniques_used", "best_line", "worst_line", "transcript": [{"role", "text"}]}` | 404 session, 409 zero turns, 502 Gemini failure |
 
-- If `text` is given it wins over `audio` (typed fallback for noisy rooms).
-- TTS failure never fails a request: return `audio_b64: null` and the text.
+- Non-empty `text` after trimming wins over `audio` (typed fallback for noisy rooms).
+- TTS failure never fails a request: return `opening.audio_b64: null` on creation
+  or `reply_audio_b64: null` on a turn, alongside the text.
 - Early scorecards report `ended` ("Ended early") in real and mock modes; the
   read-only GET does not mutate game status. Natural game outcomes stay unchanged.
 - Session creation and turn responses also contain `voice_available: bool` as
   described in the budget section; that field is the UI's microphone availability.
-- **Suggestions (v1.1):** the UI shows the current 2 suggestions as "Try saying" chips under the
+- **Suggestions (v1.1):** the UI shows up to 2 current suggestions as "Try saying" chips under the
   latest character line; clicking one fills the text box (does not auto-send). A "Hints" toggle
   (default on) hides them.
 - Audio is mp3, base64; the frontend plays `data:audio/mpeg;base64,<b64>`.

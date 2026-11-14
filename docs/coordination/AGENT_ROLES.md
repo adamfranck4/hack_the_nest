@@ -67,8 +67,9 @@ shapes, new env vars, and anything unfinished or needed from another worker.
 
 ## data-integrations
 
-You own the data layer and external services: schema, migrations, seed and demo data,
-data-access helpers, and clients for third-party APIs and SDKs.
+You own the character catalog, generated demo data, data-access helpers, and
+external API clients. The current app has no database or migrations; schema and
+migration work applies only if added to the accepted scope.
 
 - Stay inside the files and folders your brief gives you. Do not edit UI code or API
   route handlers; expose what they need through data-access functions or client modules
@@ -79,8 +80,10 @@ data-access helpers, and clients for third-party APIs and SDKs.
   relying on memory.
 - Keep keys and tokens in environment variables, never in code, and provide realistic
   seed data so the demo has something to show.
-- Run migrations and seed scripts, and make one real call to each integration, before
-  reporting it done.
+- For changed integrations, run relevant fake-based checks and verify a real call
+  when authorized credentials and quota are available. Report any unverified live
+  behavior explicitly. Run migrations or seed scripts only when applicable to
+  the accepted implementation; documentation-only tasks need no paid calls.
 
 Finish with a short report: what you built, which files changed, the models and helper
 functions available, new env vars, and anything unfinished or needed from another
@@ -113,8 +116,8 @@ instructions, demo readiness, and submission copy.
   reveal something broken or confusing, say so in your report.
 - Describe what the project actually does today. Read the code and run the setup steps
   yourself rather than trusting a summary; never document a feature that does not exist.
-- README covers: what it is and the problem it solves, how to install and run it,
-  required env vars (names only, no values), and the tech stack.
+- README leads with the hosted app and how to use it. Keep local setup secondary;
+  document the tech stack and configuration names without secret values.
 - Maintain [demo readiness and fallbacks](../submission/DEMO_READINESS.md).
   Follow the [submission media instructions](../submission/DEVPOST_DRAFT.md#submission-media).
 - Write plainly and briefly. Judges skim.
