@@ -1,9 +1,35 @@
+import pytest
+
 from app.characters import get_character, list_characters
 
 
-def test_three_characters():
+IDS = ["toddler", "angry_caller", "upset_friend", "teen", "roommate", "coworker"]
+
+
+def test_six_characters():
     chars = list_characters()
-    assert {c.id for c in chars} == {"toddler", "angry_caller", "upset_friend"}
+    assert [c.id for c in chars] == IDS
+
+
+def test_ids_unique_and_voice_ids_nonempty():
+    chars = list_characters()
+    ids = [c.id for c in chars]
+    assert len(ids) == len(set(ids))
+    for c in chars:
+        assert isinstance(c.voice_id, str) and c.voice_id.strip()
+
+
+@pytest.mark.parametrize("cid", IDS)
+def test_each_character_valid(cid):
+    c = get_character(cid)
+    assert c is not None and c.id == cid
+    assert 16 <= c.start_mood <= 99
+    assert len(c.techniques) > 0 and all(t for t in c.techniques)
+    assert len(c.bad_moves) > 0 and all(b for b in c.bad_moves)
+    assert len(c.starter_suggestions) == 2
+    assert all(s.strip() and len(s.split()) <= 20 for s in c.starter_suggestions)
+    assert isinstance(c.voice_id, str) and c.voice_id.strip()
+    assert c.meter_label and c.meter_label.strip()
 
 
 def test_character_fields_valid():

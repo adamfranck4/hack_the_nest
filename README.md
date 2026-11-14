@@ -14,7 +14,8 @@ idle can take 30-60 seconds to wake up; voice is limited per day, typing always 
 ## The problem
 
 Most of us never rehearse the conversations that matter: calming a toddler
-mid-meltdown, de-escalating an angry customer, apologizing to a hurt friend.
+mid-meltdown, de-escalating an angry customer, apologizing to a hurt friend,
+setting a limit with a teenager, or asking a coworker for credit.
 There is no safe place to try, fail, and try again.
 
 ## What it does
@@ -23,11 +24,15 @@ Pick a character, talk to it, and try to calm it down.
 
 | Character | Situation | Meter |
 |---|---|---|
-| Milo, a toddler | Refuses to put his shoes on | Meltdown |
-| Angry caller | Their order arrived broken for the third time | Anger |
-| Upset friend | You forgot their birthday | Hurt |
+| Milo, a toddler | Refuses to put his shoes on | Meltdown meter |
+| Dana, an angry caller | Her order arrived broken for the third time | Anger meter |
+| Jordan, an upset friend | You forgot their birthday | Hurt meter |
+| Riley, a teenager | You caught them on their phone at 1 AM on a school night | Eye-roll meter |
+| Sam, an annoyed roommate | You keep leaving dirty dishes in the sink | Tension meter |
+| Casey, a credit-taking coworker | They presented your idea as their own in a meeting | Defensiveness meter |
 
-<!-- VERIFY after build: character names, scenarios and meter labels match backend/app/characters.py -->
+While you play, live "Try saying" suggestion chips offer ideas for your next line.
+A Hints toggle turns them off if you want a harder round.
 
 ## How it works
 
@@ -39,7 +44,6 @@ Pick a character, talk to it, and try to calm it down.
 - A scorecard grades your techniques and shows your best line, your worst line,
   and a better alternative for the worst one.
 
-<!-- VERIFY after build: win/lose thresholds, turn limit and scorecard fields in the running UI -->
 
 ## Quick start (Windows)
 
@@ -65,7 +69,8 @@ You need Python 3 and two API keys. No Node.js is required.
    |---|---|---|
    | `GEMINI_API_KEY` | yes | Gemini REST API |
    | `ELEVENLABS_API_KEY` | yes | ElevenLabs text-to-speech and speech-to-text |
-   | `GEMINI_MODEL` | no | Defaults to `gemini-flash-latest` |
+   | `GEMINI_MODEL` | no | Defaults to `gemini-flash-lite-latest` |
+   | `VOICE_DAILY_CREDIT_LIMIT` | no | Daily ElevenLabs budget (estimated credits); empty means unlimited |
 
    Never commit `.env`. It is git-ignored.
 
@@ -77,7 +82,9 @@ You need Python 3 and two API keys. No Node.js is required.
 
 5. Open <http://localhost:8000>. Allow microphone access, or use the text box.
 
-`GET /api/health` reports whether each key is configured.
+`GET /api/health` reports whether each key is configured and how much of the
+daily voice budget is left. When the budget is used up, voice is switched off
+and the app falls back to text only: typing always works.
 
 Run the tests:
 
@@ -109,7 +116,7 @@ See [team decisions](docs/TEAM_DECISIONS.md#tracks).)
 
 ## What's next
 
-More scenario packs (teen, relative with dementia, de-escalation training),
+More scenario packs (relative with dementia, de-escalation training),
 custom characters, difficulty levels, and progress history. Use cases: new
 parents, babysitters, customer-service training, education and nursing students.
 

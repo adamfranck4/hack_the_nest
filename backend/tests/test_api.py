@@ -3,7 +3,7 @@ import base64
 import pytest
 
 PUBLIC = {"id", "name", "emoji", "title", "scenario", "goal", "meter_label", "start_mood"}
-IDS = ["toddler", "angry_caller", "upset_friend"]
+IDS = ["toddler", "angry_caller", "upset_friend", "teen", "roommate", "coworker"]
 
 
 def turn(client, sid, text="hello"):
@@ -23,7 +23,7 @@ def test_characters_public_only(client):
     r = client.get("/api/characters")
     assert r.status_code == 200
     chars = r.json()["characters"]
-    assert len(chars) == 3
+    assert [c["id"] for c in chars] == IDS
     for c in chars:
         assert set(c) == PUBLIC
     assert "persona_prompt" not in r.text and "voice_id" not in r.text
@@ -279,7 +279,7 @@ def test_starter_suggestions_on_character(cid):
     c = characters.get_character(cid)
     ss = c.starter_suggestions
     assert len(ss) == 2
-    assert all(isinstance(s, str) and s.strip() for s in ss)
+    assert all(isinstance(s, str) and s.strip() and len(s.split()) <= 20 for s in ss)
 
 
 @pytest.mark.parametrize("cid", IDS)

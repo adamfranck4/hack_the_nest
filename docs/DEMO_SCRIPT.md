@@ -19,12 +19,12 @@ are a plan written before the build finished.
 
 | Time | What you do | What you say |
 |---|---|---|
-| 0:00-0:20 | Hook. Landing screen with the three characters. | "Pilots practice in simulators. Why do we practice hard conversations for the first time on real people? Talk It Out is a conversation gym: you talk to an AI character by voice and try to calm them down." |
+| 0:00-0:20 | Hook. Landing screen with the six characters. | "Pilots practice in simulators. Why do we practice hard conversations for the first time on real people? Talk It Out is a conversation gym: you talk to an AI character by voice and try to calm them down." |
 | 0:20-1:10 | Pick Milo (toddler). Let him speak his opening line. Play the calming lines below, one per turn, pointing at the Meltdown meter as it drops. | "Milo is refusing to put his shoes on. Watch the meter. Gemini plays him and moves it based on what I say." |
 | 1:10-1:35 | Restart Milo. Say the bad line. Meter spikes. | "Now what most of us do under stress." Then: "It jumped. The app knows the difference between a technique and a reaction." |
 | 1:35-2:05 | Finish a round (win or time out) and open the scorecard. | "At the end you get a scorecard: techniques used, your best line, your worst line, and a better thing you could have said." |
-| 2:05-2:35 | Switch to the angry caller. One or two turns only, show the Anger meter. | "Same engine, real-world use: a customer whose order arrived broken for the third time. This is customer-service de-escalation practice with no real customer at risk." |
-| 2:35-3:00 | Close. | "Built by three people from Grand Valley, mostly first hackathon. Gemini plays and scores the character, ElevenLabs voices it and transcribes you. Next: teen and dementia-care scenarios, custom characters, difficulty levels, and progress tracking, for new parents, babysitters, support teams and nursing students. Thank you." |
+| 2:05-2:35 | Switch to Dana, the angry caller. One or two turns only, show the Anger meter. Mention the rest. | "Same engine, real-world use: a customer whose order arrived broken for the third time. This is customer-service de-escalation practice with no real customer at risk. There are six scenarios in all: a teen caught on their phone at 1 AM, a roommate fed up with dishes, a coworker who took credit for your idea, and an upset friend." |
+| 2:35-3:00 | Close. | "Built by three people from Grand Valley, mostly first hackathon. Gemini plays and scores the character, ElevenLabs voices it and transcribes you. Next: dementia-care and de-escalation scenarios, custom characters, difficulty levels, and progress tracking, for new parents, babysitters, support teams and nursing students. Thank you." |
 
 ### Lines to say to Milo (toddler)
 
@@ -50,7 +50,20 @@ Expected: the meter spikes. If it does not move much, say a second one:
 1. "I'm so sorry. Three broken orders is not acceptable, and that's on us."
 2. "I can send a replacement today and refund the shipping. Which would you prefer?"
 
-<!-- VERIFY after build: caller scenario text and opening line match the character data -->
+Dana's opening line in the app: "This is the THIRD time my order showed up smashed!
+What kind of company are you running?" Tip: the "Try saying" chips under the input
+show suggested lines; keep the Hints toggle on for a smoother demo.
+
+### Alternate round: coworker Casey (for a professional-minded judge)
+
+Casey presented your project idea as their own in today's meeting. Meter:
+Defensiveness. Opening line: "Look, if this is about the meeting, I really don't have
+time for drama right now." Two calm lines:
+
+1. "Thanks for taking a minute. In the meeting, the idea you presented was one I shared with you last week."
+2. "I would like to assume this was a mix-up. Can we correct the record together at the next standup?"
+
+Say: "Same engine, workplace stakes: you practice asking for credit without wrecking the relationship."
 
 ## Fallbacks
 
@@ -62,6 +75,7 @@ Expected: the meter spikes. If it does not move much, say a second one:
 | Gemini error or slow reply | Retry once. If it fails again, switch to the backup video immediately. |
 | Wi-Fi down | Switch to the backup video. The app needs internet for both APIs. |
 | Server crashed | Restart the uvicorn command above. Sessions are in memory, so start a new round. |
+| Public site voice limit reached | The live site has a daily voice budget. When it is used up the app tells you to type your reply; typing always works. Use the local server for a voiced demo. |
 | Anything else | Play the pre-recorded screen video and narrate over it. Do not debug at the table. |
 
 Record the backup video before the final deadline: one clean full run, with audio,
@@ -74,11 +88,11 @@ Record the screen plus system audio and a voiceover. Keep it under 2:00.
 | Time | Shot | Voiceover |
 |---|---|---|
 | 0:00-0:10 | Title card "Talk It Out". | "Pilots practice in simulators. Why do we practice hard conversations for the first time on real people?" |
-| 0:10-0:20 | Character select screen, hover over the three cards. | "Talk It Out is a conversation gym. Pick a character, talk to them by voice, and try to calm them down." |
+| 0:10-0:20 | Character select screen, hover over the six cards. | "Talk It Out is a conversation gym. Pick a character, talk to them by voice, and try to calm them down." |
 | 0:20-0:55 | Milo round, mic visible, meter dropping as the calming lines are spoken. | "Gemini plays a toddler refusing his shoes. ElevenLabs gives him a voice and transcribes me. The meltdown meter moves based on the techniques I use: naming feelings, offering choices, apologizing sincerely." |
 | 0:55-1:10 | Bad line, meter spikes. | "Threaten him and the meter jumps." |
 | 1:10-1:30 | Scorecard: techniques, best line, worst line with better alternative. | "At the end, a scorecard grades my techniques and suggests a better line." |
-| 1:30-1:45 | Angry caller and upset friend, a few seconds each. | "Same engine, other situations: an angry customer, a hurt friend." |
+| 1:30-1:45 | Dana the angry caller and a quick glimpse of the other characters, a few seconds each. | "Same engine, other situations: an angry customer, a hurt friend, a teenager, a roommate, a coworker." |
 | 1:45-2:00 | Closing card with team and "What's next" list. | "Built by three first-time-hackers from Grand Valley State. Next: more scenarios, custom characters, difficulty levels, and progress history." |
 
 Tips: record at 1080p, close other tabs, mute notifications, rehearse once before

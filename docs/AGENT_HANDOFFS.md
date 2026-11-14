@@ -22,7 +22,7 @@ In a shared checkout, the coordinator serializes entries from its workers.
   meter +20; UI checked in browser (picker, meter, typed turn, no console
   errors). Default Gemini model changed to `gemini-flash-lite-latest`
   (`gemini-flash-latest` timed out). Not yet verified: live microphone input,
-  phone layout. Docs contain `VERIFY after build` markers still to review.
+  phone layout. Docs keep a few `VERIFY after build` markers for items needing a live rehearsal. v1.3 adds teen, roommate and coworker scenarios (6 total).
 - Blockers: none. Note: `google-genai`/`elevenlabs` SDKs can't install on this
   machine (no `cryptography` wheel for Python 3.14 ARM64); REST via `httpx` instead.
 

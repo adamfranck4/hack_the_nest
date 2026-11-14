@@ -64,7 +64,7 @@ Workers do not run `git add/commit/push/checkout`; the coordinator does.
 ```python
 @dataclass(frozen=True)
 class Character:
-    id: str            # "toddler" | "angry_caller" | "upset_friend"
+    id: str            # "toddler" | "angry_caller" | "upset_friend" | "teen" | "roommate" | "coworker"
     name: str          # e.g. "Milo"
     emoji: str
     title: str         # e.g. "Toddler"

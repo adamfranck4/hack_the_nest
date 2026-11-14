@@ -21,7 +21,7 @@ A conversation gym: practice hard conversations by voice with AI characters, cal
 
 Pilots practice in simulators. Why do we practice hard conversations for the
 first time on real people? Calming a toddler, de-escalating an angry customer, or
-apologizing to a hurt friend are skills, but there is nowhere safe to rehearse
+apologizing to a hurt friend, or setting a limit with a teenager are skills, but there is nowhere safe to rehearse
 them. We wanted a place to fail privately and try again.
 
 ## What it does
@@ -31,14 +31,19 @@ character in real time. ElevenLabs gives it a voice and transcribes you. A live
 mood meter moves based on the communication techniques you use, such as naming
 feelings, offering choices, sincere apology, and taking ownership.
 
-- Characters: Milo the toddler refusing his shoes (Meltdown meter), an angry
-  customer whose order arrived broken for the third time (Anger meter), and a
-  friend whose birthday you forgot (Hurt meter).
+- Six characters, each with its own meter: Milo the toddler refusing his shoes
+  (Meltdown meter), Dana the angry customer whose order arrived broken for the
+  third time (Anger meter), Jordan the friend whose birthday you forgot (Hurt
+  meter), Riley the teenager caught on their phone at 1 AM (Eye-roll meter), Sam
+  the roommate fed up with your dirty dishes (Tension meter), and Casey the
+  coworker who presented your idea as theirs in a meeting (Defensiveness meter).
+- Live "Try saying" suggestion chips help when you are stuck; a Hints toggle
+  turns them off.
+- A daily voice budget protects the public demo: when it runs out, characters
+  go text-only and typing always works.
 - Win by getting the meter to 15 or below. Lose at 100. You have 8 turns.
 - A scorecard shows a score, which techniques you used, your best line, your
   worst line, and a better alternative for the worst one.
-
-<!-- VERIFY after build: characters, meters, thresholds, turn limit, scorecard contents -->
 
 ## How we built it
 
@@ -86,7 +91,7 @@ feelings, offering choices, sincere apology, and taking ownership.
 
 ## What's next for Talk It Out
 
-- More scenario packs: a teen, a relative with dementia, de-escalation training.
+- More scenario packs: a relative with dementia, de-escalation training.
 - Custom characters you design yourself.
 - Difficulty levels.
 - Progress history so you can see yourself improve.
