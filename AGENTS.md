@@ -36,6 +36,33 @@ Keep event research there rather than duplicating it in agent instructions.
     noon Eastern (`America/Detroit`)**, the final submission deadline. The draft
     is due at the start of that Sunday, **12:00 AM**, on Devpost and the event app.
 
+## Required GitHub synchronization — both agents
+
+- Before starting any task or resuming edits, inspect Git status, branch, staged
+  changes, and recent history, then `git fetch origin`. Synchronize with the
+  intended remote branch before doing substantive work. For shared work that
+  branch is `origin/main`; for a coordinated feature branch, synchronize with its
+  upstream and account for new changes on `origin/main`.
+- With a clean checkout and compatible history, use a fast-forward-only merge
+  (for example, `git merge --ff-only origin/main` for shared work). If history
+  diverges or another agent has uncommitted changes, inspect and coordinate a
+  non-destructive integration before proceeding with affected work. Do not
+  automatically stash another agent's work, reset, clean, or force-push.
+- Commit completed, relevant changes in focused commits and **push them to
+  GitHub before reporting completion or handing off**. Do not leave completed
+  work only in the cloud checkout. Fetch again before pushing and incorporate
+  remote changes safely; if a concurrent push rejects yours, fetch, reconcile,
+  rerun affected checks, and retry without force.
+- Use an explicit destination when the local and remote branch names differ
+  (for example, local `work` targeting shared `main`:
+  `git push origin HEAD:refs/heads/main`). For feature work, push the agreed feature branch and
+  identify it in the handoff; do not imply it is already merged into `main`.
+- Verify the intended remote branch contains the pushed commit and report the
+  branch and commit link. If authentication, conflicts, or branch protection
+  block synchronization, report the exact blocker and preserve all work; do not
+  claim that GitHub is synchronized. These rules apply equally to Codex and
+  Claude Code.
+
 ## Scope and handoff
 
 Follow the user's current task scope. Context/documentation work alone does not

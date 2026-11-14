@@ -4,6 +4,13 @@ Read [AGENTS.md](AGENTS.md) and
 [docs/HACKATHON_CONTEXT.md](docs/HACKATHON_CONTEXT.md). Follow the shared
 collaboration rules and preserve the event reference's verification labels.
 
+**Required on Claude's side as well as Codex's:** Before starting any task or
+resuming edits, inspect Git state, fetch from GitHub, and synchronize with the
+intended remote branch as described in AGENTS.md. Commit and push completed work
+before every completion report or handoff, and verify the remote contains it.
+Fetch again before pushing; safely reconcile concurrent changes without
+overwriting work or force-pushing. Report any synchronization blocker explicitly.
+
 Codex may be editing this repository simultaneously. Inspect Git state before
 changes, agree on file ownership and shared interfaces, and avoid overwriting
 files being edited by Codex. Coordinate branch switches in a shared checkout;
