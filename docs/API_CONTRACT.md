@@ -144,3 +144,13 @@ Errors use FastAPI's default body `{"detail": "<message>"}`.
   latest character line; clicking one fills the text box (does not auto-send). A "Hints" toggle
   (default on) hides them.
 - Audio is mp3, base64; the frontend plays `data:audio/mpeg;base64,<b64>`.
+
+## Deploy (Render free tier)
+
+`render.yaml` at the repo root is a Render Blueprint: one long-running Python web
+service (not serverless — sessions live in memory, so the app must be a single
+process). Render runs `pip install -r backend/requirements.txt` and
+`uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port $PORT`, health check
+`/api/health`, auto-deploys on every push to `main`. `GEMINI_API_KEY` and
+`ELEVENLABS_API_KEY` are entered in the Render dashboard (`sync: false`), never
+committed. Free instances sleep after ~15 min idle; first request takes ~30-60 s.

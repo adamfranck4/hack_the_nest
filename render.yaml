@@ -1,0 +1,21 @@
+# Render Blueprint for Talk It Out (free web service).
+# Deploy: render.com -> New -> Blueprint -> pick this repo.
+# Key values are entered in the Render dashboard, never in this file.
+services:
+  - type: web
+    name: talk-it-out
+    runtime: python
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ELEVENLABS_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-flash-lite-latest
