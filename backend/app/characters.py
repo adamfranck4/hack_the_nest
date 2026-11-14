@@ -17,6 +17,7 @@ class Character:
     persona_prompt: str
     techniques: tuple[str, ...]
     bad_moves: tuple[str, ...]
+    starter_suggestions: tuple[str, ...]
 
 
 _RULES = (
@@ -58,6 +59,10 @@ _CHARACTERS = (
             "Labeled praise",
         ),
         bad_moves=("Yelling", "Threats", "Bribes", "Because I said so", "Long lectures"),
+        starter_suggestions=(
+            "Milo, you are really sad about the shoes. Do you want the red ones or the blue ones?",
+            "First we put on shoes, then you can bring your dinosaur to the car.",
+        ),
     ),
     Character(
         id="angry_caller",
@@ -89,6 +94,10 @@ _CHARACTERS = (
             "Setting expectations",
         ),
         bad_moves=("Blaming the customer", "Policy-speak", "Interrupting", "Dismissing", "Saying calm down"),
+        starter_suggestions=(
+            "I am so sorry, Dana. Three broken orders is completely unacceptable. Tell me what happened.",
+            "I will personally send a replacement today and email you the tracking number within the hour.",
+        ),
     ),
     Character(
         id="upset_friend",
@@ -119,6 +128,10 @@ _CHARACTERS = (
             "Making amends",
         ),
         bad_moves=("Excuses", "Minimizing", "Defensiveness", "Changing the subject"),
+        starter_suggestions=(
+            "I forgot your birthday, and I am really sorry. That was not okay, and it is on me.",
+            "You have every right to be hurt. Can I take you out for dinner this weekend to make it up?",
+        ),
     ),
 )
 

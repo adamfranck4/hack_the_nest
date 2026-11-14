@@ -19,6 +19,7 @@ class Fakes:
         self.techniques = []
         self.note = "try validating first"
         self.reply = "fake reply"
+        self.suggestions = ["Tell me more", "That sounds hard"]
         self.stt_text = "transcribed words"
         self.calls = {"reply": [], "score": [], "tts": [], "stt": []}
         self.gemini_error = False
@@ -37,8 +38,11 @@ def fakes(monkeypatch):
         f.calls["reply"].append((character.id, list(history), user_text, mood))
         if f.gemini_error:
             raise IntegrationError("gemini down")
-        return {"reply": f.reply, "mood_delta": f.delta,
-                "techniques": list(f.techniques), "note": f.note}
+        out = {"reply": f.reply, "mood_delta": f.delta,
+               "techniques": list(f.techniques), "note": f.note}
+        if f.suggestions is not None:  # None => key missing from result
+            out["suggestions"] = list(f.suggestions)
+        return out
 
     def score_session(character, history, final_mood, outcome):
         f.calls["score"].append((character.id, list(history), final_mood, outcome))

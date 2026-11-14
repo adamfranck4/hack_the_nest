@@ -74,7 +74,7 @@ const mockApi = {
     mockSessions[id] = { character, mood: character.start_mood, turn: 0, status: "active", transcript: [] };
     return {
       session_id: id, character, mood: character.start_mood, status: "active", turn: 0, max_turns: 8,
-      opening: { text: `*sniffle* ${character.name} here... everything is going wrong today!`, audio_b64: null },
+      opening: { text: `*sniffle* ${character.name} here... everything is going wrong today!`, audio_b64: null, suggestions: ["I can tell this is really upsetting. Tell me what happened.", "I'm sorry that happened, and I want to help fix it."] },
     };
   },
   async sendTurn(sessionId, payload) {
@@ -96,6 +96,9 @@ const mockApi = {
       turn: s.turn, user_text: text, reply_text: reply, reply_audio_b64: null, mood: s.mood, mood_delta: delta,
       techniques: calm ? ["Validation", "Empathy"] : [],
       note: calm ? "Nice: naming their feeling lowers the temperature." : "Try acknowledging how they feel first.",
+      suggestions: s.status === "active" ? (calm
+        ? ["What would help you feel better right now?", "Thanks for telling me, I'm here and I'm listening."]
+        : ["I hear you, that sounds really frustrating.", "I'm sorry, let me understand what went wrong."]) : [],
       status: s.status, max_turns: 8,
     };
   },

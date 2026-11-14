@@ -270,3 +270,56 @@ def test_scorecard_gemini_failure_502(client, fakes, new_session):
     turn(client, s["session_id"])
     fakes.score_error = True
     assert client.get(f"/api/sessions/{s['session_id']}/scorecard").status_code == 502
+
+
+# 6. reply suggestions
+@pytest.mark.parametrize("cid", IDS)
+def test_starter_suggestions_on_character(cid):
+    from app import characters
+    c = characters.get_character(cid)
+    ss = c.starter_suggestions
+    assert len(ss) == 2
+    assert all(isinstance(s, str) and s.strip() for s in ss)
+
+
+@pytest.mark.parametrize("cid", IDS)
+def test_opening_suggestions_match_character(client, new_session, cid):
+    from app import characters
+    s = new_session(cid)
+    assert s["opening"]["suggestions"] == list(characters.get_character(cid).starter_suggestions)
+    assert len(s["opening"]["suggestions"]) == 2
+
+
+def test_turn_suggestions_passthrough(client, fakes, new_session):
+    s = new_session()
+    fakes.suggestions = ["A one", "B two"]
+    assert turn(client, s["session_id"]).json()["suggestions"] == ["A one", "B two"]
+
+
+def test_turn_suggestions_max_two(client, fakes, new_session):
+    s = new_session()
+    fakes.suggestions = ["a", "b", "c"]
+    assert len(turn(client, s["session_id"]).json()["suggestions"]) <= 2
+
+
+def test_turn_suggestions_missing_key_is_empty(client, fakes, new_session):
+    s = new_session()
+    fakes.suggestions = None
+    r = turn(client, s["session_id"])
+    assert r.status_code == 200
+    assert r.json()["suggestions"] == []
+
+
+@pytest.mark.parametrize("delta,final", [(-25, "won"), (25, "lost"), (0, "timeout")])
+def test_turn_suggestions_empty_when_game_over(client, fakes, new_session, delta, final):
+    s = new_session()
+    fakes.delta = delta
+    fakes.suggestions = ["x", "y"]
+    b = {}
+    for _ in range(8):
+        b = turn(client, s["session_id"]).json()
+        if b["status"] != "active":
+            break
+        assert b["suggestions"] == ["x", "y"]
+    assert b["status"] == final
+    assert b["suggestions"] == []

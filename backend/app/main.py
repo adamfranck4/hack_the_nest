@@ -77,6 +77,7 @@ def create_session(body: SessionCreate):
         "opening": {
             "text": character.opening_line,
             "audio_b64": tts_b64(character.opening_line, character.voice_id),
+            "suggestions": list(getattr(character, "starter_suggestions", ())),
         },
     }
 
@@ -134,6 +135,12 @@ def take_turn(
     session.history.append({"role": "character", "text": reply_text})
     session.mood, session.turn, session.status = new_mood, new_turn, status
 
+    suggestions: list[str] = []
+    if status == "active":
+        raw = result.get("suggestions") or []
+        if isinstance(raw, (list, tuple)):
+            suggestions = [s.strip() for s in raw if isinstance(s, str) and s.strip()][:2]
+
     return {
         "turn": new_turn,
         "user_text": user_text,
@@ -143,6 +150,7 @@ def take_turn(
         "mood_delta": delta,
         "techniques": list(result.get("techniques") or []),
         "note": result.get("note", ""),
+        "suggestions": suggestions,
         "status": status,
         "max_turns": sessions.MAX_TURNS,
     }

@@ -11,6 +11,14 @@ const END_BANNERS = {
   timeout: { cls: "timeout", text: "⏱️ Out of turns. Let's see how you did." },
 };
 
+function readHints() {
+  try {
+    return localStorage.getItem("talk_hints") !== "off";
+  } catch (e) {
+    return true;
+  }
+}
+
 export function Conversation({ session, onFinish, onQuit }) {
   const { character } = session;
   const [mood, setMood] = useState(session.mood);
@@ -27,6 +35,9 @@ export function Conversation({ session, onFinish, onQuit }) {
   const [recording, setRecording] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const [draft, setDraft] = useState("");
+  const [suggestions, setSuggestions] = useState(session.opening.suggestions || []);
+  const [hints, setHints] = useState(readHints);
+  const inputRef = useRef(null);
   const recorderRef = useRef(null);
   const chunksRef = useRef([]);
   const endRef = useRef(null);
@@ -46,7 +57,18 @@ export function Conversation({ session, onFinish, onQuit }) {
     if (endRef.current && endRef.current.scrollIntoView) {
       endRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
     }
-  }, [messages, busy, error]);
+  }, [messages, busy, error, suggestions, hints]);
+
+  function toggleHints() {
+    const next = !hints;
+    setHints(next);
+    try { localStorage.setItem("talk_hints", next ? "on" : "off"); } catch (e) { /* ignore */ }
+  }
+
+  function pickSuggestion(text) {
+    setDraft(text);
+    if (inputRef.current) inputRef.current.focus();
+  }
 
   function speak(b64) {
     if (!b64) return;
@@ -69,6 +91,7 @@ export function Conversation({ session, onFinish, onQuit }) {
       setMood(r.mood);
       setTurn(r.turn);
       setStatus(r.status);
+      setSuggestions(r.suggestions || []);
       setDelta({ value: r.mood_delta, key: r.turn });
       setLastPayload(null);
       speak(r.reply_audio_b64);
@@ -128,6 +151,9 @@ export function Conversation({ session, onFinish, onQuit }) {
     <main class="page convo">
       <div class="convo-top">
         <button class="link-btn" onClick=${onQuit}>← Back</button>
+        <label class="hints-toggle">
+          <input type="checkbox" checked=${hints} onChange=${toggleHints} /> Hints
+        </label>
         <span class="turns">Turn ${Math.min(turn + (active ? 1 : 0), session.max_turns)} / ${session.max_turns}</span>
       </div>
 
@@ -153,6 +179,13 @@ export function Conversation({ session, onFinish, onQuit }) {
           </div>`)}
         ${pendingText && html`<div class="bubble-row user"><div class="bubble pending">${pendingText}</div></div>`}
         ${busy && html`<div class="bubble-row character"><div class="bubble thinking">${character.name} is thinking<span class="dots"></span></div></div>`}
+        ${hints && active && !busy && suggestions.length > 0 && html`
+          <div class="suggest" aria-label="Suggested replies">
+            <span class="suggest-label">💡 Try saying:</span>
+            <div class="chips">
+              ${suggestions.map((t) => html`<button key=${t} type="button" class="chip suggest-chip" onClick=${() => pickSuggestion(t)}>${t}</button>`)}
+            </div>
+          </div>`}
         <div ref=${endRef}></div>
       </section>
 
@@ -176,7 +209,7 @@ export function Conversation({ session, onFinish, onQuit }) {
           </button>
           ${recording && html`<span class="rec-note"><span class="rec-dot"></span> Recording… tap again to send</span>`}
           <form class="typed" onSubmit=${sendText}>
-            <input type="text" value=${draft} onInput=${(e) => setDraft(e.target.value)} disabled=${inputsOff || recording}
+            <input type="text" ref=${inputRef} value=${draft} onInput=${(e) => setDraft(e.target.value)} disabled=${inputsOff || recording}
               placeholder="…or type what you would say" aria-label="Type your message" />
             <button class="btn" type="submit" disabled=${inputsOff || recording || !draft.trim()}>Send</button>
           </form>

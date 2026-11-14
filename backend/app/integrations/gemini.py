@@ -104,8 +104,9 @@ def character_reply(character, history: History, user_text: str, mood: int) -> d
             "mood_delta": {"type": "integer"},
             "techniques": {"type": "array", "items": {"type": "string"}},
             "note": {"type": "string"},
+            "suggestions": {"type": "array", "items": {"type": "string"}},
         },
-        "required": ["reply", "mood_delta", "techniques", "note"],
+        "required": ["reply", "mood_delta", "techniques", "note", "suggestions"],
     }
     out = _call(system, prompt, schema)
     reply = str(out.get("reply") or "").strip()
@@ -117,11 +118,16 @@ def character_reply(character, history: History, user_text: str, mood: int) -> d
         canon = allowed.get(str(t).strip().lower())
         if canon and canon not in techs:
             techs.append(canon)
+    raw = out.get("suggestions")
+    suggestions = []
+    if isinstance(raw, list):
+        suggestions = [x.strip() for x in raw if isinstance(x, str) and x.strip()][:2]
     return {
         "reply": reply,
         "mood_delta": _int(out.get("mood_delta"), -25, 25),
         "techniques": techs,
         "note": str(out.get("note") or "").strip(),
+        "suggestions": suggestions,
     }
 
 
