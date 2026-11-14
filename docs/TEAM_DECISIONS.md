@@ -6,8 +6,8 @@ records what *our team* decided and why. Update it when a decision changes.
 The [track assessment](TRACK_ASSESSMENT.md) contains research and recommendations;
 it does not change the selections or accepted project recorded here.
 
-Last updated: Saturday, November 14, 2026 (codex-review-fixes; aligned status with
-the accepted project and six implemented scenarios; roster/track choices unchanged).
+Last updated: Saturday, November 14, 2026 (codex-reviewer-docs; clarified references
+and credential handling; roster, track choices, and accepted scope unchanged).
 
 ## Team
 
@@ -71,12 +71,13 @@ step. This originally accommodated a build machine without Node; Node is optiona
 for frontend regression checks, not required to run the app. Full contract and
 ownership: [API_CONTRACT.md](API_CONTRACT.md).
 
-API keys: Gemini (AI Studio, free tier) and ElevenLabs (restricted key, 8,000-credit
-usage cap, no expiry) are stored in Adam's git-ignored `.env`; teammates need their own copy
-shared privately.
+Configure live services using the [setup instructions](../README.md#2-configure-live-services)
+and follow the [shared secret-handling rules](../AGENTS.md#collaboration-and-safety).
+Keep credentials out of the repository.
 
-## Open items
+## Scope and references
 
 - Implemented scope: six scenarios; the catalog lives in
-  `backend/app/characters.py`. Custom characters and difficulty levels remain stretch goals.
+  [the character definitions](../backend/app/characters.py).
+- Custom characters and difficulty levels remain stretch goals, not current features.
 - Submission deadlines: see [the event schedule](HACKATHON_CONTEXT.md#critical-deadlines).

@@ -1,132 +1,95 @@
-# Devpost draft: Talk It Out
+# Devpost submission copy
 
-**DRAFT. Fill in and verify after the build.**
-
-Submit through [the official event](https://hack-the-nest.devpost.com/).
-Requirements and deadlines are authoritative in
-[event context](HACKATHON_CONTEXT.md#verified-devpost-submission-requirements).
-The video is required and must be **three minutes or less**; the two-minute
-shot list is a suggested target. Add every teammate and disclose AI tool use.
-
-Everything marked `VERIFY` must be checked against the running app before pasting.
+Prepared project text for the team's final review; this document does not mean
+an entry has been submitted. Submit through the
+[official event](https://hack-the-nest.devpost.com/) using the
+[verified requirements](HACKATHON_CONTEXT.md#verified-devpost-submission-requirements).
+The required video is managed separately from GitHub.
 
 ## Project name
 
 Talk It Out
 
-## Tagline (under 200 characters)
+## Tagline
 
-A conversation gym: practice hard conversations by voice with AI characters, calm them down, and get a scorecard on the techniques you used.
+A conversation gym: practice difficult conversations with AI characters and
+review feedback on the communication techniques you used.
 
 ## Inspiration
 
-Pilots practice in simulators. Why do we practice hard conversations for the
-first time on real people? Calming a toddler, de-escalating an angry customer, or
-apologizing to a hurt friend, or setting a limit with a teenager are skills, but there is nowhere safe to rehearse
-them. We wanted a place to fail privately and try again.
+Difficult conversations often happen before we have practiced them. Talk It Out
+provides a low-stakes place to rehearse an apology, a disagreement, or a clear
+request, then review what to try differently.
 
 ## What it does
 
-You pick a character and talk to it by mic (or typing). Gemini plays the
-character in real time. ElevenLabs gives it a voice and transcribes you. A live
-mood meter moves based on the communication techniques you use, such as naming
-feelings, offering choices, sincere apology, and taking ownership.
+Choose one of six scenarios, speak or type a reply, and see how the AI character
+responds. A mood meter tracks the interaction, optional hints suggest replies,
+and a scorecard summarizes techniques, examples, and alternatives. The transcript
+lets the learner review the exchange before another attempt.
 
-- Six characters, each with its own meter: Milo the toddler refusing his shoes
-  (Meltdown meter), Dana the angry customer whose order arrived broken for the
-  third time (Anger meter), Jordan the friend whose birthday you forgot (Hurt
-  meter), Riley the teenager caught on their phone at 1 AM (Eye-roll meter), Sam
-  the roommate fed up with your dirty dishes (Tension meter), and Casey the
-  coworker who presented your idea as theirs in a meeting (Defensiveness meter).
-- Live "Try saying" suggestion chips help when you are stuck; a Hints toggle
-  turns them off.
-- A daily voice budget protects the public demo: when it runs out, characters
-  go text-only and typed input remains available.
-- Win by getting the meter to 15 or below. Lose at 100. You have 8 turns.
-- A scorecard shows a score, which techniques you used, your best line, your
-  worst line, and a better alternative for the worst one.
+The live scenario definitions are maintained in
+[the character catalog](../backend/app/characters.py). Sessions have bounded
+turns and explicit outcomes, including an early-ending report. Voice requests
+share an atomic estimated-credit budget; typed input remains available when
+voice is paused.
 
-## How we built it
+## How it is built
 
-- Python FastAPI backend serving both the API and the frontend from one origin.
-- Gemini REST API plays the character and returns the reply, a mood change, the
-  techniques detected, and a coaching note each turn. A second call writes the
-  scorecard.
-- ElevenLabs REST API for text-to-speech (character voice) and speech-to-text
-  (your microphone).
-- React 18 loaded from a CDN with `htm` templates, so there is no build step.
-- Sessions held in memory. Typed input is a fallback for noisy rooms.
-- Tests with pytest.
+- React browser modules with `htm` templates; no frontend build step.
+- Python FastAPI serving both the interface and API from one origin.
+- Gemini REST calls for dialogue, mood changes, suggestions, and scorecards.
+- ElevenLabs REST calls for transcription and character speech.
+- In-memory session state and daily voice-credit reservations.
+- Automated API, game-rule, concurrency, and mock/live catalog regression checks.
 
-<!-- VERIFY after build: pytest suite exists and passes; typed fallback works -->
+See the [architecture and code map](../README.md#architecture-and-code-map) for
+source entry points and the [API contract](API_CONTRACT.md) for interfaces.
 
-## Challenges we ran into
+## Engineering choices
 
-- The Google and ElevenLabs Python SDKs would not install on Python 3.14 on
-  Windows ARM64 (a dependency had no wheel), so we call both REST APIs directly
-  with `httpx`.
-- Node was not installed, so we built the React frontend with no build step,
-  using ES modules from a CDN and `htm` instead of JSX.
-- Designing believable mood scoring. The model had to reward real techniques,
-  punish threats and dismissiveness, and not swing wildly from turn to turn.
-- Getting browser microphone audio, transcription and playback to work together
-  in a smooth turn-by-turn loop.
+The original Windows ARM64 environment could not install the provider SDKs, so
+both integrations use REST through `httpx`. Browser modules avoided a required
+Node build toolchain. A generated demo catalog prevents scenario data from
+splitting between mock and live modes. Atomic credit reservations prevent
+simultaneous voice requests from overspending the estimated daily budget.
 
-<!-- VERIFY after build: add any real challenges that came up during the build (latency, audio format, prompt tuning) and remove any that did not -->
+## Validation and limitations
 
-## Accomplishments that we're proud of
+The [handoffs](AGENT_HANDOFFS.md) record automated and live checks separately.
+Automated tests use fake integrations and do not validate paid services. A real
+typed Gemini round and scorecard were verified; the team still needs to confirm
+microphone capture/transcription and its recording setup on the actual device.
 
-- A working end-to-end voice loop: you speak, the character answers aloud, and
-  the meter moves.
-- Most of us had never done a hackathon before.
-- The scorecard turns a fun game into feedback you can actually learn from.
-
-<!-- VERIFY after build: confirm the voice loop works end to end; add real numbers (rounds played, latency) if we have them -->
-
-## What we learned
-
-- How to call REST APIs directly when SDKs are not an option.
-- How to prompt an LLM to act as a character and also produce structured scoring.
-- Keeping scope small and getting one flow working beats building many features.
-- Working as a team of three with shared documents and clear file ownership.
-
-## What's next for Talk It Out
-
-- More scenario packs: a relative with dementia, de-escalation training.
-- Custom characters you design yourself.
-- Difficulty levels.
-- Progress history so you can see yourself improve.
-- Who it is for: new parents, babysitters, customer-service training, and
-  education and nursing students.
-
-## Built with
-
-python, fastapi, uvicorn, httpx, gemini-api, google-gemini, elevenlabs, react, htm, javascript, html5, css3, pytest, web-audio
-
-<!-- VERIFY after build: trim this list to what the final code actually uses -->
+Sessions and counters reset on restart. Feedback is generated from the transcript,
+not vocal tone, and scores are not validated measures of learning. Mock mode is
+an explicitly labeled simulator with no real AI or speech calls.
 
 ## AI tools and contributions
 
 Claude Code and OpenAI Codex assisted with implementation, documentation, tests,
-review and debugging. Gemini powers in-app character responses and scoring;
-ElevenLabs provides speech transcription and synthesis. Before submission, the
-team should confirm this account and add what each human contributed/learned.
-Do not include prompts containing private data, credentials, or secret values.
+review, and debugging. Gemini and ElevenLabs are runtime services with the roles
+listed above. The team should confirm this account and provide each person's
+actual contribution and learning before submission. No private prompts, key
+values, credential files, or sensitive logs belong in the entry.
 
-## Tracks
+## Team and tracks
 
-AI/ML, Best Beginner, Best use of ElevenLabs are selected in the event app per
-[team decisions](TEAM_DECISIONS.md#tracks). Enter the corresponding main/partner/
-event-wide awards in Devpost. Confirm any additional MLH Gemini entry and the
-AI/ML-to-Future-of-Intelligence mapping with the organizer.
+The [team record](TEAM_DECISIONS.md) contains the roster and confirmed app
+selections. Enter the corresponding main-track and applicable award entries in
+Devpost. Provider conditions for AI/ML and any additional MLH entry remain
+organizer-confirmation items; selection alone does not establish eligibility.
 
-## Team
+## Possible next steps
 
-Adam Franck (captain), Gavin Robbins, Nolan Drake. Grand Valley State University.
+Custom scenarios, difficulty options, and practice history are possible future
+work, not current features. Product recommendations are kept separately in
+[the track assessment](TRACK_ASSESSMENT.md#product-priorities-recommendations-not-an-implementation-request).
 
-## Links to add
+## Links
 
-- Live demo (Try it out): <https://talk-it-out-0dzk.onrender.com>
-- Code: <https://github.com/adamfranck4/hack_the_nest>
-- Demo video: TODO after recording (shot list in [DEMO_SCRIPT.md](DEMO_SCRIPT.md))
-- Screenshots: TODO (character select, meter mid-round, scorecard)
+- [Live app](https://talk-it-out-0dzk.onrender.com/)
+- [Public repository](https://github.com/adamfranck4/hack_the_nest)
+
+The video URL and any media fields are entered directly in the submission form.
+Use only actual, checked media; no placeholder video links are kept here.

@@ -96,6 +96,9 @@ Before delivering each batch, review the affected files and their references:
 
 - Keep one authoritative location per fact, decision, rule, or role responsibility;
   link to it instead of copying prose, rosters, deadlines, or prize tables.
+- Keep the root README focused on the product, architecture, setup, and checks.
+  Use the [documentation index](docs/README.md) for contributor/research records;
+  do not turn the reviewer overview into an operational log.
 - Extend the appropriate existing file before creating a new one. New files need
   a distinct purpose and an index/reference link; avoid duplicate context files.
 - Keep platform entries thin: retain required metadata and runtime-specific

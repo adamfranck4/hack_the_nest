@@ -1,163 +1,155 @@
 # Talk It Out
 
-A conversation gym. Practice hard conversations by voice with AI characters
-before you have them with real people.
+Practice hard conversations with AI characters, then review what you said and
+what you could try differently. Built at Hack The Nest 2026, Eastern Michigan
+University, November 14–15.
 
-Built at Hack The Nest 2026 (Eastern Michigan University, November 14-15, 2026).
+[**Live app**](https://talk-it-out-0dzk.onrender.com/) ·
+[**Simulated demo — no API keys**](https://talk-it-out-0dzk.onrender.com/?mock=1)
 
-**Live demo:** <https://talk-it-out-0dzk.onrender.com> (free hosting: the first visit after
-idle can take 30-60 seconds to wake up; voice is limited per day, typed input remains available).
+Free hosting may take 30–60 seconds to wake after inactivity. Voice has a daily
+budget; typed input remains available when it runs out. The judges' video is
+submitted separately.
 
-> Pilots practice in simulators. Why do we practice hard conversations for the
-> first time on real people?
+## The experience
 
-## The problem
+Choose a toddler, angry caller, upset friend, teenager, roommate, or coworker.
+Speak or type a reply, watch the character's mood change, and review coaching
+notes. Optional **Try saying** hints help you get started; turn them off to
+practice independently. Finish the round or choose **End & score** to see a
+scorecard and transcript, then try again.
 
-Most of us never rehearse the conversations that matter: calming a toddler
-mid-meltdown, de-escalating an angry customer, apologizing to a hurt friend,
-setting a limit with a teenager, or asking a coworker for credit.
-There is no safe place to try, fail, and try again.
+## Architecture and code map
 
-## What it does
+One FastAPI service serves the React interface and API. React loads as browser
+ES modules, so running the app requires no Node.js or frontend build step.
 
-Pick a character, talk to it, and try to calm it down.
+```mermaid
+flowchart LR
+    UI["Browser · React UI"] -->|"Text or recorded audio"|API["FastAPI"]
+    API -->|"Roleplay and coaching"|G["Gemini REST API"]
+    API -->|"Transcription and speech"|E["ElevenLabs REST API"]
+    API <-->|"Game state"|S["In-memory sessions"]
+    API -->|"Voice-credit reservations"|B["Daily budget"]
+    API -->|"Response, feedback, optional audio"|UI
+```
 
-| Character | Situation | Meter |
-|---|---|---|
-| Milo, a toddler | Refuses to put his shoes on | Meltdown meter |
-| Dana, an angry caller | Her order arrived broken for the third time | Anger meter |
-| Jordan, an upset friend | You forgot their birthday | Hurt meter |
-| Riley, a teenager | You caught them on their phone at 1 AM on a school night | Eye-roll meter |
-| Sam, an annoyed roommate | You keep leaving dirty dishes in the sink | Tension meter |
-| Casey, a credit-taking coworker | They presented your idea as their own in a meeting | Defensiveness meter |
+Gemini generates the dialogue, suggested mood change, hints, and scorecard.
+Python validates the supported technique names and bounds, applies the game
+rules, and reserves estimated voice credits before external speech calls.
 
-While you play, live "Try saying" suggestion chips offer ideas for your next line.
-A Hints toggle turns them off if you want a harder round.
+| Start here | Responsibility |
+|---|---|
+| [API routes](backend/app/main.py) | Sessions, turns, scorecards, health, and frontend serving |
+| [Game state](backend/app/sessions.py) | In-memory storage, turn limits, and outcome rules |
+| [Characters](backend/app/characters.py) | Personas and the authoritative scenario catalog |
+| [Gemini client](backend/app/integrations/gemini.py) | Structured replies and scoring |
+| [ElevenLabs client](backend/app/integrations/elevenlabs.py) | Speech transcription and MP3 generation |
+| [Voice budget](backend/app/budget.py) | Atomic reservations, refunds, and daily rollover |
+| [Frontend](frontend/app.js) · [components](frontend/components/) | Character picker, conversation, meter, and scorecard |
+| [API client and simulator](frontend/api.js) | Real requests and clearly labeled mock behavior |
+| [Backend tests](backend/tests/) · [frontend tests](frontend/tests/) | API, game, budget, and demo regression checks |
 
-## How it works
-
-- You speak into your mic (or type). ElevenLabs transcribes your voice.
-- Gemini plays the character and replies in character. ElevenLabs speaks the reply aloud.
-- Each turn Gemini moves a live mood meter based on the techniques you used:
-  naming feelings, offering choices, a sincere apology, taking ownership, and so on.
-- Calm the character to 15 or below to win. At 100 you lose. You get 8 turns.
-- A scorecard grades your techniques and shows your best line, your worst line,
-  and a better alternative for the worst one.
-
+Payloads, environment variables, and deployment behavior are documented in the
+[API contract](docs/API_CONTRACT.md).
 
 ## Quick start
 
-Use the repository root. Python is required; Node.js is not required to run the
-app. Preserve an existing `.env`; otherwise copy `.env.example` using the commands
-below. For real conversations, enter `GEMINI_API_KEY` and `ELEVENLABS_API_KEY`
-privately. Optional settings and defaults are in
-[the build contract](docs/API_CONTRACT.md#env-vars-repo-root-env-git-ignored-names-only-here).
-Get keys from [Google AI Studio](https://aistudio.google.com) and
-[ElevenLabs](https://elevenlabs.io); never commit their values.
+**Prerequisites:** Python 3.12 is verified. Internet access is needed for browser
+modules and live AI services. Node 22+ is needed only for the optional frontend
+regression checks.
 
-### Windows (PowerShell)
+Run commands from the repository root. Choose your platform below.
 
-```powershell
-python -m venv backend/.venv
-backend/.venv/Scripts/python -m pip install -r backend/requirements.txt
-if (!(Test-Path .env)) { Copy-Item .env.example .env }
-backend/.venv/Scripts/python -m uvicorn app.main:app --app-dir backend --reload --port 8000
-```
+### 1. Install dependencies and prepare local configuration
 
-### macOS / Linux
+**macOS / Linux**
 
 ```bash
 python3 -m venv backend/.venv
 backend/.venv/bin/python -m pip install -r backend/requirements.txt
 test -f .env || cp .env.example .env
+```
+
+**Windows PowerShell**
+
+```powershell
+python -m venv backend/.venv
+backend/.venv/Scripts/python -m pip install -r backend/requirements.txt
+if (!(Test-Path .env)) { Copy-Item .env.example .env }
+```
+
+### 2. Configure live services
+
+Before starting the server, edit `.env` and set `GEMINI_API_KEY` and
+`ELEVENLABS_API_KEY`. The copy commands above preserve an existing `.env`.
+Approved environment secret storage can be used instead. Never commit key values.
+See the [configuration reference](docs/API_CONTRACT.md#env-vars-repo-root-env-git-ignored-names-only-here)
+for optional settings and defaults. Provider accounts:
+[Google AI Studio](https://aistudio.google.com/) and [ElevenLabs](https://elevenlabs.io/).
+
+To explore only the simulated demo, leave keys unset and use `?mock=1`.
+
+### 3. Start and open the app
+
+**macOS / Linux**
+
+```bash
 backend/.venv/bin/python -m uvicorn app.main:app --app-dir backend --reload --port 8000
 ```
 
-Open <http://localhost:8000>. Allow microphone access or type your reply. Keep the
-terminal running; Ctrl+C stops the server. Health/key-presence and voice-budget
-status are available at `/api/health` (key presence does not verify API access).
-If the voice budget runs out, typed input remains available.
+**Windows PowerShell**
 
-### Simulated demo (no keys)
+```powershell
+backend/.venv/Scripts/python -m uvicorn app.main:app --app-dir backend --reload --port 8000
+```
 
-Use `?mock=1` on the local or live URL. It simulates replies and scorecards without
-calling Gemini or ElevenLabs; it does not provide real speech transcription or
-spoken replies. Add `&novoice=1` to exercise the exhausted-voice UI. The demo uses
-the same scenario catalog, opening lines, hints, and early-ending labels as the
-real app. Ending a round early displays **Ended early**, not Out of turns.
+Open <http://localhost:8000> for live conversations, or
+<http://localhost:8000/?mock=1> for the simulator. Keep the terminal running;
+Ctrl+C stops the server. `/api/health` reports configured-key presence and budget
+availability, not successful authentication with the providers.
 
 ## Validation and demo data
 
-Run the backend suite with your virtual environment's interpreter:
+Backend checks use fake integrations and need no API keys:
 
 ```bash
 backend/.venv/bin/python -m pytest backend/tests
 ```
 
-On Windows, use `backend/.venv/Scripts/python` instead. Frontend API regression
-checks use Node 22+ and its built-in runner (Node is optional for app use):
+On Windows, use `backend/.venv/Scripts/python` instead. Optional frontend checks:
 
 ```bash
 node --test frontend/tests/api.test.mjs
 ```
 
-Character definitions are authoritative in `backend/app/characters.py`. After
-changing them, regenerate the committed static demo catalog:
+`frontend/characters.json` is generated from the live character definitions. After
+changing those definitions, regenerate it with the appropriate Python interpreter:
 
 ```bash
 python3 backend/scripts/export_demo_characters.py
 ```
 
-On Windows, use `python` instead. Do not edit `frontend/characters.json` manually.
-The backend suite checks catalog parity; no build step or API keys are needed
-for export or the mocked tests. Live API and microphone checks must be reported
-separately from these automated checks.
+On Windows, use `python` instead. Do not edit the JSON manually; the backend
+suite checks that the static demo catalog matches the live catalog. Test outcomes
+and live checks are recorded in [agent handoffs](docs/AGENT_HANDOFFS.md).
 
-## Tech stack
+## Current boundaries
 
-- Backend: Python, FastAPI, Uvicorn, `httpx`
-- AI: Gemini (REST) for character, mood scoring and scorecard
-- Voice: ElevenLabs (REST) for text-to-speech and speech-to-text
-- Frontend: React 18 loaded from a CDN with `htm` templates, no build step
-- State: in-memory sessions (reset on server restart)
+- Sessions and voice-budget counters live in one server process and reset on
+  restart. There are no accounts, database, or saved practice history.
+- Voice is recorded and sent in turns. Scoring uses the transcript, not vocal
+  tone or volume. Generated scores are coaching feedback, not validated learning measures.
+- Mock mode uses matching scenario data but simulated replies and scorecards;
+  it does not call Gemini/ElevenLabs or provide real transcription/playback.
+  `?mock=1&novoice=1` exercises the text fallback.
+- Automated tests and a live typed Gemini round were verified. Real microphone
+  capture/transcription still needs team verification on the recording/judging device.
 
-We call both APIs directly over REST because the Google and ElevenLabs Python
-SDKs would not install on our Python 3.14 ARM64 machine.
+## Documentation
 
-## Team and tracks
+[API contract](docs/API_CONTRACT.md) · [Team and selected tracks](docs/TEAM_DECISIONS.md) ·
+[Documentation index](docs/README.md)
 
-Roster and confirmed/pending track choices are maintained in
-[team decisions](docs/TEAM_DECISIONS.md). Event category and eligibility details
-remain in [the event reference](docs/HACKATHON_CONTEXT.md).
-
-## What's next
-
-More scenario packs (relative with dementia, de-escalation training),
-custom characters, difficulty levels, and progress history. Use cases: new
-parents, babysitters, customer-service training, education and nursing students.
-
-## Demo and submission
-
-- [Demo script](docs/DEMO_SCRIPT.md): 3-minute table demo and 2-minute video shot list
-- [Devpost draft](docs/DEVPOST_DRAFT.md): submission text
-
-## Shared references
-
-| Document | Contents |
-|---|---|
-| [Hackathon context](docs/HACKATHON_CONTEXT.md) | Rules, deadlines, tracks, prizes, logistics, verification status |
-| [Team decisions](docs/TEAM_DECISIONS.md) | Team roster, selected tracks, rationale, open decisions |
-| [Build contract](docs/API_CONTRACT.md) | App API, module interfaces, folder ownership, run commands |
-| [Agent handoffs](docs/AGENT_HANDOFFS.md) | Current ownership, input/status history, blockers |
-| [Shared agent instructions](AGENTS.md) | Mandatory workflow and organization rules for all agents/accounts |
-| [Agent roles](docs/AGENT_ROLES.md) | Manager and worker responsibilities |
-| [Claude guidance](CLAUDE.md) / [Gemini guidance](GEMINI.md) | Platform entry points |
-
-## Agent entry points
-
-Claude Code selects its manager through `.claude/settings.json` and defines
-roles in `.claude/agents/`. Codex role files are in `.codex/agents/`; their
-registration/activation in the current runtime is unverified. Gemini is a
-possible future participant, not a confirmed connection. These files share
-responsibilities through the role reference rather than maintaining separate
-copies of team policy.
+The index separates technical references, submission preparation, research, and
+agent coordination. All contributors and agents follow [AGENTS.md](AGENTS.md).

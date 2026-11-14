@@ -9,6 +9,38 @@ In a shared checkout, the coordinator serializes entries from its workers.
 Apply the [shared transparency requirements](../AGENTS.md#required-transparency-for-every-agent)
 to operational actions and push/deployment status as well as code changes.
 
+## 2026-11-14 — codex-reviewer-docs — repository presentation
+
+- Branch/base: local `work` targeting shared `main`, base `f4db393`.
+- Input: implement the architecture/code map, accurate final documentation,
+  clearer tested setup, and concise contributor navigation. Video is submitted
+  separately; do not save the private recording script or video in GitHub.
+- Ownership: README, documentation index, demo/submission notes, team records,
+  and documentation navigation only. App code, dependencies, CI, and settings
+  remain outside this task.
+- Outcome: README now leads with the product, architecture diagram/code map,
+  staged setup, checks, and current boundaries. Added a documentation index;
+  shortened submission copy and replaced old demo narration/placeholders with
+  readiness/fallback checks. Preserved team choices, shared instructions, and
+  dated evidence; replaced a credential-sharing note with canonical setup/safety
+  links. No private recording script or video was added.
+- Validation: 89 backend tests and 4 frontend tests passed; all 20 Markdown
+  files' local links/anchors, Codex TOML syntax, and whitespace checks passed.
+  Fresh Python 3.12 dependency installation and `pip check` succeeded. POSIX
+  configuration-copy checks verified both creation and preservation; a short-lived
+  Uvicorn process served health, live/mock entry pages, the six-character API,
+  and static catalog without API keys or paid requests. Windows commands were
+  reviewed but not executed. The existing Starlette TestClient deprecation warning
+  remains; actual-device microphone verification is still pending.
+- Operations: dependencies installed only in `/tmp/talk-it-out-docs-venv`;
+  temporary copy checks used disposable files, and the smoke-test server was
+  stopped. No repository `.env`, application code, dependency declarations,
+  CI, hosting settings, or accepted product scope changed.
+- Delivery: this documentation batch targets GitHub `main`; the commit containing
+  this entry identifies it. A successful push is verified against `origin/main`
+  and reported with its commit link. Render may auto-deploy on that push;
+  deployment status is unverified and no live-service retest is claimed.
+
 ## 2026-11-14 — codex-product-submission — product focus and verified rules
 
 - Branch/base: local `work` to shared `main`, base `b47e897`.
