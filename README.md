@@ -95,7 +95,7 @@ backend/.venv/bin/python -m pytest backend/tests
 ```
 
 On Windows, use `backend/.venv/Scripts/python` instead. Frontend API regression
-checks use Node's built-in runner (Node is optional for app use):
+checks use Node 22+ and its built-in runner (Node is optional for app use):
 
 ```bash
 node --test frontend/tests/api.test.mjs

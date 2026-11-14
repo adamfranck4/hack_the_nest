@@ -33,6 +33,22 @@ to operational actions and push/deployment status as well as code changes.
   Deployment/site checks will follow the push; they are not established by local
   tests or by this handoff. GitHub commit link and observed deployment outcome
   are reported separately to the user, without including private credentials.
+- Verified delivery: [33b4428](https://github.com/adamfranck4/hack_the_nest/commit/33b442832d61bc856f0161a4bcf01eb93e2ebff0)
+  reached GitHub `main`. The public Render site then served byte-identical copies
+  of the pushed API module, generated catalog, and scorecard component.
+- Post-push browser checks: desktop/mobile homepage; all six mock openings/hints;
+  hint toggle; typed mock round and Ended early scorecard; exhausted-voice typed
+  fallback. No horizontal overflow in checked mobile screens, page errors, or
+  failed requests. Browser requests used a TLS-verifying HTTP client to bridge
+  this environment's Chromium trust-store mismatch; verification was not disabled.
+- Live service check: one short real typed Gemini round and an early scorecard
+  succeeded (85/100). Session creation/reply may use ElevenLabs TTS credits;
+  no concurrent paid budget stress test or microphone/STT call was performed.
+- Remaining limits: budget and sessions remain process-local and reset on
+  restart; service-key usage limits remain the hard cap. Live microphone input
+  is untested. No environment/deployment settings or secret values were changed.
+- This follow-up records test evidence and the optional Node 22+ test prerequisite
+  only; it does not alter app code. A further `main` push may auto-deploy again.
 
 ## 2026-11-14 — claude-manager — Talk It Out MVP build
 
