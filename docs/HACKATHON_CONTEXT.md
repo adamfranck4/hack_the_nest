@@ -5,13 +5,12 @@
 This reference concerns **Hack The Nest at Eastern Michigan University, November
 14–15, 2026**, only. Other events named Hack The Nest are unrelated.
 
-Recorded November 14, 2026. Event details below were explicitly supplied by the
-team in the documentation task. Independent retrieval of the official website,
-tracks page, and schedule page was attempted on that date; all returned proxy
-`403 Forbidden` errors. These details are therefore **team-supplied, not
-independently verified in this update**. Official links below are reference
-destinations, not claims that their contents were retrieved. Historical sponsor
-examples have a separate confirmation status below.
+Recorded November 14, 2026. Initial retrieval of the website, tracks, and schedule
+returned proxy `403 Forbidden` errors. Later research that day successfully
+retrieved the official website and its public track descriptions. The verified
+subset is identified below; other event details remain team-supplied unless
+explicitly marked. Historical sponsor examples retain their separate confirmation
+status. Reference links alone do not establish that all their contents were checked.
 
 ## Event and official references
 
@@ -25,6 +24,22 @@ examples have a separate confirmation status below.
 | Official app | <https://app.hackthenest.tech/> |
 | Selectable tracks | <https://app.hackthenest.tech/tracks> |
 | Schedule | <https://app.hackthenest.tech/schedule> |
+
+## Independently checked track descriptions
+
+On November 14, the [official website's track cards](https://hackthenest.tech/#tracks)
+published these statements. They do not provide numerical judging weights.
+
+| Track | Verified wording / information |
+|---|---|
+| Future of Intelligence (OpenAI + Exa) | Encourages building on OpenAI models and Exa search so projects reason over the live web, and building/polishing an agent, app, or tool. |
+| Best Beginner | Teams where most members are first-timers; explicitly "Judged on how far you came and what you learned, not on polish." |
+| Best Use of ElevenLabs | Describes ideas that talk, listen, and sound alive; includes TTS, conversational agents, STT, custom voices, and sound effects. Lists a free month of Creator for participants and Scale/Pro prize plans. |
+
+The provider requirements for the app's differently named **AI/ML** award remain
+unconfirmed. The website's OpenAI/Exa language does not by itself establish
+whether Gemini-only projects qualify for that app selection. No exact weighting
+or confirmed additional sponsor requirements were found in the reviewed cards.
 
 ## Competition rules and submission
 

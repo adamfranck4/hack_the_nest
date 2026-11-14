@@ -3,6 +3,8 @@
 Team choices and strategy for Hack The Nest 2026. Event facts (rules, deadlines,
 prize lists) live in [HACKATHON_CONTEXT.md](HACKATHON_CONTEXT.md); this file
 records what *our team* decided and why. Update it when a decision changes.
+The [track assessment](TRACK_ASSESSMENT.md) contains research and recommendations;
+it does not change the selections or accepted project recorded here.
 
 Last updated: Saturday, November 14, 2026 (codex-review-fixes; aligned status with
 the accepted project and six implemented scenarios; roster/track choices unchanged).
