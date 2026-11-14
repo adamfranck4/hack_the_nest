@@ -1,141 +1,108 @@
 # Shared development guidance
 
-## Shared context
+## Scope and reference map
 
-Multiple Codex agents, including agents from different accounts, and Claude Code
-may work simultaneously on this repository. Gemini may also join in the future;
-its connection is not yet confirmed. These shared instructions apply to every
-participating agent, account, and session. When event context is relevant, read
-[docs/HACKATHON_CONTEXT.md](docs/HACKATHON_CONTEXT.md).
-It is the shared event reference; preserve its source and verification labels.
-Keep event research there rather than duplicating it in agent instructions.
-Also read [docs/TEAM_DECISIONS.md](docs/TEAM_DECISIONS.md) for current team
-choices and [docs/AGENT_HANDOFFS.md](docs/AGENT_HANDOFFS.md) for cross-session
-status. The mandatory workflow below applies after every new user input.
+These rules apply to every Codex session/account, Claude Code, and any other
+agent working on [the shared repository](https://github.com/adamfranck4/hack_the_nest).
+Gemini may join later; no connection is confirmed. Different sessions may have
+separate memory, checkouts, tools, and permissions. Never assume shared chat history.
 
-## Mandatory workflow for every input and action
+| Document | Authoritative content |
+|---|---|
+| [Hackathon context](docs/HACKATHON_CONTEXT.md) | Event facts, deadlines, sources, verification status |
+| [Team decisions](docs/TEAM_DECISIONS.md) | Roster, accepted choices, proposals, unresolved decisions |
+| [Agent handoffs](docs/AGENT_HANDOFFS.md) | Per-input status, ownership, outcomes, blockers |
+| [Agent roles](docs/AGENT_ROLES.md) | Manager and worker responsibilities |
+| This file | Shared workflow, safety, organization rules |
 
-1. **Sync before acting.** On every user input, before substantive research,
-   documentation, coding, delegation, or a repository-based answer, inspect Git
-   state, fetch, safely integrate the intended remote branch, and reread changed
-   instructions and shared context. Repeat before resuming work after an
-   interruption and before each new substantive action or work batch. Git safety
-   inspection and synchronization commands are the prerequisites to this rule.
-2. **Update shared context after every input.** Persist new facts, decisions,
-   constraints, corrections, ownership, and blockers before dependent work.
-   Event facts go in `docs/HACKATHON_CONTEXT.md`; team/project decisions go in
-   `docs/TEAM_DECISIONS.md`; collaboration rules go in these instructions.
-   Preserve facts versus proposals, approval status, and verification labels.
-   Record a concise input/status handoff in `docs/AGENT_HANDOFFS.md`, even when
-   the input adds no new decision. Do not copy whole chats or secrets into docs.
-3. **Work in the shared repository.** Keep authorized work, documentation,
-   context, and handoffs in the existing checkout of
-   `github.com/adamfranck4/hack_the_nest`. Separate accounts may use their own
-   checkouts of this same repository; publish to its agreed branches, not an
-   unrelated repository, private fork, or disconnected project copy. Do not keep
-   the only copy of completed work in chat, scratch files, or a local branch.
-4. **Sync and publish after acting.** After each completed substantive action or
-   work batch, and before any completion report, handoff, or final response,
-   update context with the outcome, fetch and reconcile concurrent changes,
-   validate affected work, commit only your intended changes, and push to the
-   agreed GitHub branch. Fetch again and verify that the remote branch contains
-   your commit. A Git commit is initially local by design; it counts as shared
-   delivery only after a verified push. No local-only completion claims.
-5. **Draft exception.** Only material explicitly pending user approval may
-   remain a draft outside published repository work. Mark it as a draft and do
-   not treat it as an accepted decision or implementation. Record its existence
-   and pending status in the shared handoff without publishing the draft itself
-   if it is meant to stay private. Once approved, integrate it into the shared
-   repository, commit, push, and verify. Do not invent approval gates for routine
-   work already authorized by the user.
+Read team decisions and current handoffs before work; consult event context when
+relevant and role responsibilities when assigned a role. Platform entry files
+(`CLAUDE.md`, `GEMINI.md`, `.claude/agents/`, `.codex/agents/`) refer here rather
+than restating shared policy.
 
-If sync, context updates, or publication are blocked, preserve all work, finish
-unaffected work where safe, and report the exact blocker and unpublished state.
-Never overwrite another agent's changes, force-push, expose secrets, or claim a
-successful sync to satisfy this workflow. Shared-checkout workers send context
-and completion deltas to their coordinator, who serializes updates and pushes;
-they must not concurrently edit common handoff files or switch the shared branch.
+## Mandatory workflow
 
-## Collaboration rules
+A **work batch** is one coherent action such as research, editing, testing,
+delegation, or preparing a repository-based answer. Every new input, interruption,
+or resumed task starts a new batch. Sync before and after each batch; Git safety
+inspection and synchronization commands are prerequisites, not recursive batches.
 
-1. All participating agents share this repository. Establish the files each agent
-   owns for the current task before overlapping work.
-2. Inspect the current Git branch, status, diffs, staged changes, and recent
-   commits before changes. Recheck before staging or committing.
-3. Do not discard or overwrite another agent's work or uncommitted changes. Do
-   not reset, revert, clean, or force-push to resolve overlapping work.
-4. Prefer separate branches and focused commits. In a shared checkout, branch
-   switches affect everyone using it: coordinate first. Use existing isolated checkouts
-   where available; do not create a Git worktree unless explicitly requested.
-   Stage only files intentionally changed for your task; do not use blanket
-   staging that can capture another agent's changes.
-5. Coordinate shared API contracts and interfaces before implementation: routes,
-   methods, payloads, data models, and environment-variable names. Communicate
-   necessary contract changes before editing dependent components.
-6. Avoid editing files actively owned by another agent. If ownership overlaps or
-   unexpected edits appear, coordinate and reconcile rather than replacing them.
-7. Preserve existing project conventions, application behavior, and architecture.
-   Preserve existing documentation and Claude-specific instructions under
-   `.claude/`; these shared rules complement their role and ownership guidance.
-8. Run relevant tests when changing application code. Report commands and actual
-   outcomes, including failed or unrun checks; do not claim unexecuted validation.
-9. Do not expose or commit API keys, tokens, credentials, or other secrets. Keep
-   values in approved local/environment secret storage; document names only.
-10. Prioritize maintaining a working project before **Sunday, November 15, 2026,
-    noon Eastern (`America/Detroit`)**, the final submission deadline. The draft
-    is due at the start of that Sunday, **12:00 AM**, on Devpost and the event app.
+1. **Sync before acting.** Inspect branch, status, diffs, staged changes, and
+   recent commits; `git fetch origin`, safely integrate the intended remote
+   branch, and reread changed instructions/context. Shared work targets
+   `origin/main`; coordinated feature work targets its upstream and accounts for
+   changes on `origin/main`. With a clean checkout and compatible history, use
+   `git merge --ff-only origin/main` for shared work. If history diverges or
+   another agent has uncommitted work, coordinate non-destructive integration
+   before proceeding with affected work.
+2. **Update context after every input.** Persist new facts, choices, constraints,
+   corrections, and ownership in the document identified above before dependent
+   work. Preserve fact/proposal, approval, and verification labels. Record a
+   concise handoff even if no decisions changed; update its outcome before
+   responding. Never copy entire chats or secrets into context.
+3. **Work in this repository.** Use an existing checkout of the shared GitHub
+   repository and its agreed branches. Different accounts may use separate
+   checkouts of that same repository. Do not keep the only copy of authorized
+   work in chat, scratch files, disconnected projects, private forks, or local
+   branches. Follow the current task scope; documentation work alone does not
+   authorize application features or architecture/dependency changes.
+4. **Sync and deliver after acting.** Update the outcome, perform the consistency
+   check below and relevant validation, fetch/reconcile concurrent changes, then
+   commit only intended changes and push before completion, handoff, or a final
+   response. If a concurrent push rejects yours, reconcile and rerun affected
+   checks before retrying. Fetch again and verify the remote contains the commit.
+   Git creates commits locally first; delivery requires a verified push. Use an
+   explicit destination when names differ, e.g. local `work` to shared `main`:
+   `git push origin HEAD:refs/heads/main`. Feature-branch delivery is not a merge
+   into `main`; report the destination and commit link accurately.
+5. **Keep only approval-pending drafts unpublished.** Mark explicit drafts and
+   record their pending status without publishing private draft content or
+   treating it as accepted. After approval, integrate, commit, push, and verify.
+   Do not invent approval gates for already authorized routine work.
 
-## Agent identity and coordination across accounts
+If synchronization or publication is blocked, preserve all work, continue safe
+independent work, and report the exact blocker and unpublished state. Never claim
+unverified completion.
 
-- Do not assume “Codex” identifies a single agent. Use a distinct, non-sensitive
-  session label in task briefs and handoffs, together with the working branch,
-  base commit, and files owned. Distinguish separate Codex sessions even when
-  they use the same model or local branch name.
-- Separate accounts or sessions may have different checkouts, memory, tools,
-  and GitHub permissions. Do not assume another agent has read this chat or
-  received an instruction until it is available in the shared repository.
-- Coordinate through shared repository instructions and GitHub-visible handoffs
-  (such as commit or PR descriptions). Report the branch, commit link, changes,
-  and outstanding ownership or interface issues so other sessions can resume.
-  Never share account credentials to enable collaboration.
+## Collaboration and safety
 
-## Required GitHub synchronization — all agents
+- Use a distinct, non-sensitive session label, branch/base commit, and file
+  ownership in briefs/handoffs; “Codex” or a local branch name alone is ambiguous.
+  Share decisions through repository documents and GitHub-visible handoffs.
+- Agree on ownership and shared interfaces (routes, methods, payloads, data models,
+  variable names) before overlapping work. Coordinate contract changes before
+  editing dependent components; avoid files actively owned by another agent.
+- Preserve other agents' work, project conventions, behavior, and architecture.
+  Do not reset, revert, clean, force-push, or automatically stash another agent's
+  work. Prefer focused commits and coordinated separate branches; do not create
+  a Git worktree unless explicitly requested. Recheck and stage only owned files.
+- In a shared checkout, one coordinator serializes Git and common context updates
+  (the manager for its workers). Workers provide deltas to that coordinator, who
+  fulfills the workflow for their completed changes. Never switch a shared branch
+  while others edit, concurrently edit shared handoff files, or stage unfinished
+  work belonging to someone else.
+- Run relevant tests for application changes and report actual outcomes, including
+  failed or unrun checks. Prioritize a working project before the final submission
+  deadline in [the event schedule](docs/HACKATHON_CONTEXT.md#critical-deadlines).
+- Never expose or commit keys, tokens, credentials, or other secrets. Use approved
+  environment secret storage or ignored local configuration; document names only.
+  Never share account credentials between agents.
 
-- Before every input-driven action or resumed work batch, inspect Git status, branch, staged
-  changes, and recent history, then `git fetch origin`. Synchronize with the
-  intended remote branch before doing substantive work. For shared work that
-  branch is `origin/main`; for a coordinated feature branch, synchronize with its
-  upstream and account for new changes on `origin/main`. Repeat synchronization
-  after work as required by the mandatory workflow above.
-- With a clean checkout and compatible history, use a fast-forward-only merge
-  (for example, `git merge --ff-only origin/main` for shared work). If history
-  diverges or another agent has uncommitted changes, inspect and coordinate a
-  non-destructive integration before proceeding with affected work. Do not
-  automatically stash another agent's work, reset, clean, or force-push.
-- Commit completed, relevant changes in focused commits and **push them to
-  GitHub before reporting completion or handing off**. Do not leave completed
-  work only in the cloud checkout. Fetch again before pushing and incorporate
-  remote changes safely; if a concurrent push rejects yours, fetch, reconcile,
-  rerun affected checks, and retry without force.
-- Use an explicit destination when the local and remote branch names differ
-  (for example, local `work` targeting shared `main`:
-  `git push origin HEAD:refs/heads/main`). For feature work, push the agreed feature branch and
-  identify it in the handoff; do not imply it is already merged into `main`.
-- Verify the intended remote branch contains the pushed commit and report the
-  branch and commit link. If authentication, conflicts, or branch protection
-  block synchronization, report the exact blocker and preserve all work; do not
-  claim that GitHub is synchronized. These rules apply equally to every Codex
-  session/account, Claude Code, and any Gemini or other agent that joins.
-- When delegated workers share a checkout, serialize Git synchronization,
-  staging, commits, and pushes through one coordinator (the Claude manager for
-  its workers). Workers read these instructions and coordinate synchronization
-  before work; the coordinator fulfills the push and verification requirements
-  for their completed changes before handoff. Do not switch the shared branch
-  while workers are editing or include another worker's unfinished changes.
+## Required organization check after changes
 
-## Scope and handoff
+Before delivering each batch, review the affected files and their references:
 
-Follow the user's current task scope. Context/documentation work alone does not
-authorize choosing a project, developing application features, or changing
-dependencies, configuration, or architecture. Report files changed, validation,
-unresolved coordination issues, branch/commit status, and whether work was pushed.
+- Keep one authoritative location per fact, decision, rule, or role responsibility;
+  link to it instead of copying prose, rosters, deadlines, or prize tables.
+- Extend the appropriate existing file before creating a new one. New files need
+  a distinct purpose and an index/reference link; avoid duplicate context files.
+- Keep platform entries thin: retain required metadata and runtime-specific
+  instructions, and point to the shared rules/roles. Keep counterpart entry
+  formats uniform without copying platform-specific tools or models across agents.
+- Use consistent terminology, headings, links, and concise formatting. Update
+  stale references/placeholders; label assumptions and pending approvals. Preserve
+  meaningful history and uncertainty instead of silently changing team decisions.
+- Check affected links/anchors, role-file syntax, and diffs; remove only redundant
+  material within the authorized scope. Record checks, remaining issues, branch,
+  commit link, and push status in the handoff/report. Do not claim role activation
+  or runtime behavior from file presence alone.

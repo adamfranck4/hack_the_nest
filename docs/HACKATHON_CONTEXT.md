@@ -60,8 +60,6 @@ at the start of November 15; 12:00 PM Sunday is noon.**
 | Sunday, Nov 15, 3:00 PM | Awards ceremony |
 | Sunday, Nov 15, 4:00 PM | Event ends |
 
-Schedule reference: <https://app.hackthenest.tech/schedule>.
-
 ## Saturday workshops
 
 All times are Eastern on Saturday, November 14, 2026.
@@ -81,8 +79,6 @@ All times are Eastern on Saturday, November 14, 2026.
 | 8:15 PM | g.tec session | Student Center, Room 300 |
 | 9:00 PM | Devpost draft workshop | Student Center, Room 310AB |
 
-Schedule reference: <https://app.hackthenest.tech/schedule>.
-
 ## Selectable tracks in the official app
 
 The supplied live-app list is:
@@ -99,12 +95,10 @@ The supplied live-app list is:
 10. GameAbove College of Engineering
 11. Computer Science Department
 
-The app permits selection of **up to three**. These names differ from earlier
-published website track names. Website sponsor challenges are not necessarily
+The selection limit is recorded in [competition rules](#competition-rules-and-submission).
+These names differ from earlier published website track names. Website sponsor challenges are not necessarily
 separately selectable tracks. The supplied information does not establish a
 one-to-one mapping or prize details for every app entry.
-
-Track reference: <https://app.hackthenest.tech/tracks>.
 
 ## Original website tracks, sponsors, resources, and prizes
 
@@ -112,7 +106,7 @@ These are the originally reported website categories and awards, distinct from
 the app selection list. “Coming soon” and unspecified terms describe the supplied
 listing, not an independently checked current status. Unless explicitly stated,
 the supplied information does not establish whether an award is per member or
-per team. Website reference: <https://hackthenest.tech/>.
+per team. Official links are listed in [event references](#event-and-official-references).
 
 | Category / sponsor | Subject or resources | Originally listed prizes / terms |
 |---|---|---|
@@ -186,9 +180,6 @@ unestablished. No award status should be inferred from inclusion here.
 
 ## Outstanding factual confirmations
 
-- Current official rules, deadlines, workshop schedule, logistics, credits, and
-  prize availability could not be independently checked because official-page
-  requests were blocked.
 - Whether multiple separate projects may be submitted remains unestablished.
 - The exact event Devpost URL and full submission requirements were not supplied.
 - Website categories and app tracks differ; their complete mapping is unconfirmed.

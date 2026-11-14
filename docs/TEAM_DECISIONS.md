@@ -4,7 +4,8 @@ Team choices and strategy for Hack The Nest 2026. Event facts (rules, deadlines,
 prize lists) live in [HACKATHON_CONTEXT.md](HACKATHON_CONTEXT.md); this file
 records what *our team* decided and why. Update it when a decision changes.
 
-Last updated: Saturday, November 14, 2026 (Claude Code manager session).
+Last updated: Saturday, November 14, 2026 (codex-context-sync; wording clarified,
+existing roster and track decisions preserved).
 
 ## Team
 
@@ -16,7 +17,10 @@ Last updated: Saturday, November 14, 2026 (Claude Code manager session).
 
 We are a beginner team (first hackathon for most of us).
 
-## Tracks (app allows up to 3)
+## Tracks
+
+Selection rules and prizes are recorded in
+[the event reference](HACKATHON_CONTEXT.md#selectable-tracks-in-the-official-app).
 
 | # | Track | Status |
 |---|---|---|
@@ -26,35 +30,32 @@ We are a beginner team (first hackathon for most of us).
 
 ### Why ElevenLabs for the third track
 
-- Stacks with AI/ML: one project can qualify for both (voice AI is AI).
-- Beginner-friendly: one API call adds text-to-speech, speech-to-text or a voice
-  agent, leaving time for the core app.
-- Demos well: a talking/listening app stands out at judging tables.
-- Sponsor tracks usually draw fewer entries than broad tracks.
-- Prizes (per HACKATHON_CONTEXT.md, unverified): 1st ElevenLabs Scale plan for
-  3 months, 2nd Pro plan for 3 months.
+Team rationale, not verified judging guidance: voice AI appears compatible with
+the AI/ML focus and could support a manageable, visible demo. Ease of integration
+depends on the eventual project. The earlier suggestion that sponsor tracks draw
+fewer entries is unverified; it is not an established event fact.
 
 ### Alternatives considered
 
-- **Computer Science Department** ($1,000 team scholarship, $250/member):
-  highest-value prize, but judged on architecture, algorithms and code quality,
-  which favours experienced teams. It is run by EMU's CS department and our team
-  is from GVSU; **ask an organizer whether non-EMU students are eligible** before
-  choosing it.
-- **Best use of Base44**: rejected. Requires building inside Base44's no-code
-  builder rather than our own code, and is judged by community vote.
+- **Computer Science Department**: considered for its scholarship. The team
+  perceived the engineering emphasis as potentially harder for beginners; no
+  comparative difficulty or highest-value ranking is confirmed. Eligibility for
+  non-EMU students remains unconfirmed; ask an organizer before choosing it.
+- **Best use of Base44**: rejected based on the team's preference for writing its
+  own code. The earlier claim that entry exclusively requires a no-code workflow
+  has not been verified. Event-listed details remain in the reference document.
 
 ## Implications for the build
 
-- The project must clearly use AI/ML and should integrate the ElevenLabs API
-  (voice input and/or output) as a visible part of the demo.
+- The project must clearly use AI/ML. ElevenLabs voice input/output remains a
+  proposed demo integration while the project and third track are unconfirmed.
 - Keep scope beginner-sized: a working end-to-end demo beats extra features.
-- ElevenLabs API key goes in `.env` only (suggested name: `ELEVENLABS_API_KEY`,
-  to be added to `.env.example` when the integration is built). Never commit keys.
+- If built, the ElevenLabs integration should use `ELEVENLABS_API_KEY` (suggested
+  name; add to `.env.example` then). Store the value using the
+  [shared secret-handling rules](../AGENTS.md#collaboration-and-safety).
 
 ## Open items
 
 - Project idea: not chosen yet.
 - Confirm the third track is actually selected in the app.
-- Draft due on Devpost and the event app at **12:00 AM Sunday, Nov 15**; final
-  submission due **12:00 PM Sunday** (Eastern).
+- Submission deadlines: see [the event schedule](HACKATHON_CONTEXT.md#critical-deadlines).

@@ -7,6 +7,24 @@ Update the entry as work completes. Keep facts and accepted decisions in their
 existing reference documents; never include secrets or whole chat transcripts.
 In a shared checkout, the coordinator serializes entries from its workers.
 
+## 2026-11-14 — codex-context-sync — documentation consolidation
+
+- Branch/base: local `work` to shared `main`, starting at `ea39194`.
+- Input: apply the duplication review and require concise, uniform organization
+  after future changes. The preceding review was report-only; cleanup is now authorized.
+- Owned files: shared instructions, README, team decisions, event-reference
+  cross-references, this handoff, and Claude/Codex role instruction files.
+- Outcome: shared rules consolidated in AGENTS.md; role duties moved intact to
+  AGENT_ROLES.md with thin Claude/Codex entries. Added a mandatory organization
+  check, simplified navigation, and clarified secret storage and unverified
+  track rationale. Shared facts and team choices remain in their own documents.
+- Validation: Markdown links/anchors and whitespace pass; six TOMLs parse;
+  platform metadata and worker duties preserved. Markdown/TOML content reduced
+  by about 36%. App settings, dependencies, and code unchanged.
+- Remaining limitation: Codex role activation is unverified, now noted in README.
+  No external blocker identified. Publication must be verified against the GitHub
+  commit containing this entry; the entry alone does not establish push success.
+
 ## 2026-11-14 — codex-context-sync
 
 - Branch: local `work`, publishing to shared `main`; base: `ca2dda3`.
