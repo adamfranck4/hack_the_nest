@@ -40,6 +40,7 @@ backend/.venv/Scripts/python -m pytest backend/tests
 | `GEMINI_API_KEY` | yes | Gemini REST, header `x-goog-api-key` |
 | `ELEVENLABS_API_KEY` | yes | ElevenLabs REST, header `xi-api-key` |
 | `GEMINI_MODEL` | no | default `gemini-flash-lite-latest` (falls back to `gemini-3.5-flash`) |
+| `VOICE_DAILY_CREDIT_LIMIT` | no | daily ElevenLabs budget in estimated credits; unset/empty = unlimited (local dev); `0` = voice off. Render sets it. |
 
 Never put key values in URLs, logs, code, tests or docs.
 
@@ -124,6 +125,25 @@ gemini, elevenlabs` then `gemini.character_reply(...)`) so tests can monkeypatch
   `"timeout"`. Else `"active"`.
 - Sessions live in memory (dict keyed by uuid4 hex). Lost on restart; that's fine.
 
+## Voice budget (v1.2)
+
+Protects the ElevenLabs free monthly quota on the public deploy. Owned by backend
+(`backend/app/budget.py`, new).
+
+- In-memory counter of estimated credits used per **UTC day**; resets at UTC
+  midnight and on server restart (Render free restarts after idle). It is a pacing
+  guard, not a hard guarantee — the hard cap is the ElevenLabs key's own usage
+  limit set in the ElevenLabs dashboard.
+- Cost estimate: TTS = `len(text)` credits; STT = 100 credits per call.
+- Before each TTS call: if `used + len(text) > limit`, skip TTS (`audio_b64: null`)
+  and don't call ElevenLabs. Count only successful calls.
+- Audio turn (no `text`) when `used + 100 > limit` → **429** `{"detail": "Today's
+  voice limit is reached — type your reply instead."}`; STT is not called.
+- `voice_available` = limit unset, or `used + 100 <= limit` (and key configured).
+- `POST /api/sessions` (201) and `POST .../turns` (200) responses gain
+  `"voice_available": bool` (evaluated after the call). The UI hides the mic and
+  shows a small "Voice paused for today — typing still works" notice when false.
+
 ## HTTP API
 
 Errors use FastAPI's default body `{"detail": "<message>"}`.
@@ -132,7 +152,7 @@ Errors use FastAPI's default body `{"detail": "<message>"}`.
 
 | Method & path | Request | Success | Errors |
 |---|---|---|---|
-| `GET /api/health` | — | `200 {"status": "ok", "gemini": bool, "elevenlabs": bool}` (bools = key configured) | — |
+| `GET /api/health` | — | `200 {"status": "ok", "gemini": bool, "elevenlabs": bool, "voice_available": bool, "voice_credits_left_today": int | null}` (null = unlimited) | — |
 | `GET /api/characters` | — | `200 {"characters": [CharacterPublic]}` | — |
 | `POST /api/sessions` | JSON `{"character_id": str}` | `201 {"session_id", "character": CharacterPublic, "mood", "status": "active", "turn": 0, "max_turns": 8, "opening": {"text", "audio_b64": str \| null, "suggestions": [str]}}` (suggestions = `character.starter_suggestions`) | 404 unknown character |
 | `POST /api/sessions/{id}/turns` | `multipart/form-data`: `audio` file (optional, browser webm/ogg) and/or `text` field (optional); at least one | `200 {"turn", "user_text", "reply_text", "reply_audio_b64": str \| null, "mood", "mood_delta", "techniques": [str], "note", "suggestions": [str], "status", "max_turns"}` (suggestions pass through from Gemini; `[]` when status is not `active`) | 404 session, 409 not active, 422 neither field / empty transcript, 502 Gemini or STT failure |

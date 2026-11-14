@@ -19,3 +19,6 @@ services:
         sync: false
       - key: GEMINI_MODEL
         value: gemini-flash-lite-latest
+      # ~300/day keeps the ElevenLabs free tier (about 10k credits/month) in budget.
+      - key: VOICE_DAILY_CREDIT_LIMIT
+        value: "300"
