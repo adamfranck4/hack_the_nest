@@ -9,6 +9,7 @@ Project for Hack The Nest 2026 at Eastern Michigan University, November 14–15,
 - [Hackathon context](docs/HACKATHON_CONTEXT.md): event rules, deadlines, tracks,
   prizes, logistics, and verification status. All event times are Eastern
   (`America/Detroit`).
+- [Team decisions](docs/TEAM_DECISIONS.md): our team, chosen tracks and why.
 - [Shared agent instructions](AGENTS.md): file ownership, Git safety, and required
   GitHub synchronization for all agents, including Codex sessions from different accounts.
 - [Claude Code instructions](CLAUDE.md): entry point for Claude-specific guidance.
