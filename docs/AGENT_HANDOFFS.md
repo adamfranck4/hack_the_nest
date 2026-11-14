@@ -7,6 +7,19 @@ Update the entry as work completes. Keep facts and accepted decisions in their
 existing reference documents; never include secrets or whole chat transcripts.
 In a shared checkout, the coordinator serializes entries from its workers.
 
+## 2026-11-14 — claude-manager — Talk It Out MVP build
+
+- Branch/base: shared `main` on Adam's machine, base `3ba42ad`.
+- Input: Adam chose the "Talk It Out" conversation-practice app and a Python +
+  React stack (see [team decisions](TEAM_DECISIONS.md#project-accepted-by-adam-2026-11-14)).
+- Owned files: everything listed in [API_CONTRACT.md](API_CONTRACT.md#folder-layout-and-ownership)
+  (`backend/`, `frontend/`, `README.md`, `docs/DEMO_SCRIPT.md`, `docs/DEVPOST_DRAFT.md`,
+  `.env.example`). Other sessions: please don't edit these during the build;
+  propose changes via a handoff entry instead.
+- Outcome: in progress — contract published; five Claude workers building.
+- Blockers: none. Note: `google-genai`/`elevenlabs` SDKs can't install on this
+  machine (no `cryptography` wheel for Python 3.14 ARM64); REST via `httpx` instead.
+
 ## 2026-11-14 — codex-context-sync — documentation consolidation
 
 - Branch/base: local `work` to shared `main`, starting at `ea39194`.

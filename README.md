@@ -11,6 +11,7 @@ no application, dependency manifest, or test suite yet.
 |---|---|
 | [Hackathon context](docs/HACKATHON_CONTEXT.md) | Rules, deadlines, tracks, prizes, logistics, verification status |
 | [Team decisions](docs/TEAM_DECISIONS.md) | Team roster, selected tracks, rationale, open decisions |
+| [Build contract](docs/API_CONTRACT.md) | App API, module interfaces, folder ownership, run commands |
 | [Agent handoffs](docs/AGENT_HANDOFFS.md) | Current ownership, input/status history, blockers |
 | [Shared agent instructions](AGENTS.md) | Mandatory workflow and organization rules for all agents/accounts |
 | [Agent roles](docs/AGENT_ROLES.md) | Manager and worker responsibilities |

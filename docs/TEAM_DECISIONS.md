@@ -54,8 +54,27 @@ fewer entries is unverified; it is not an established event fact.
   name; add to `.env.example` then). Store the value using the
   [shared secret-handling rules](../AGENTS.md#collaboration-and-safety).
 
+## Project (accepted by Adam, 2026-11-14)
+
+**Talk It Out**: a "conversation gym" app where you practice hard conversations
+by voice with AI characters — a toddler mid-meltdown, an angry customer caller,
+an upset friend — and a live mood meter shows whether you are calming them down.
+A scorecard grades the communication techniques used. Gemini plays the
+characters and scores; ElevenLabs provides voices and speech-to-text.
+
+Ideas considered and dropped: interview coach (too bland), single-character
+toddler simulator (folded in as one character), financial-literacy game.
+
+**Stack (accepted):** Python (FastAPI) backend + React frontend. Node is not
+installed on the build machine, so the frontend uses React via CDN with no build
+step. Full contract, ownership and run commands: [API_CONTRACT.md](API_CONTRACT.md).
+
+API keys: Gemini (AI Studio, free tier) and ElevenLabs (restricted key, 7-day
+expiry) are stored in Adam's git-ignored `.env`; teammates need their own copy
+shared privately.
+
 ## Open items
 
-- Project idea: not chosen yet.
+- MVP scope: 3 characters; stretch: custom character, difficulty levels.
 - Confirm the third track is actually selected in the app.
 - Submission deadlines: see [the event schedule](HACKATHON_CONTEXT.md#critical-deadlines).

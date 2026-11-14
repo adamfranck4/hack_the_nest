@@ -11,6 +11,7 @@ separate memory, checkouts, tools, and permissions. Never assume shared chat his
 |---|---|
 | [Hackathon context](docs/HACKATHON_CONTEXT.md) | Event facts, deadlines, sources, verification status |
 | [Team decisions](docs/TEAM_DECISIONS.md) | Roster, accepted choices, proposals, unresolved decisions |
+| [Build contract](docs/API_CONTRACT.md) | App API routes, interfaces, file ownership |
 | [Agent handoffs](docs/AGENT_HANDOFFS.md) | Per-input status, ownership, outcomes, blockers |
 | [Agent roles](docs/AGENT_ROLES.md) | Manager and worker responsibilities |
 | This file | Shared workflow, safety, organization rules |
