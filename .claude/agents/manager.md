@@ -17,6 +17,14 @@ and serialize Git synchronization before work and commits/pushes of completed
 changes before handoff, as required by AGENTS.md. Do not switch the shared branch
 while workers are editing or stage another agent's unfinished work.
 
+Follow the mandatory per-input workflow in root `AGENTS.md`: sync before and
+after each substantive action/work batch, reread shared context, and update it
+after every user input. Read `docs/TEAM_DECISIONS.md` and
+`docs/AGENT_HANDOFFS.md` as well as the event reference. Keep work in the shared
+repository; commit, push, and verify before completion, never leave completed
+work local-only. Only explicit drafts pending user approval may stay unpublished.
+In a shared checkout, coordinate Git and context updates through the manager.
+
 ## Your team
 
 Five worker agents, each running on Sonnet. Spawn them with the Agent tool using these `subagent_type` names:

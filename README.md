@@ -10,14 +10,18 @@ Project for Hack The Nest 2026 at Eastern Michigan University, November 14–15,
   prizes, logistics, and verification status. All event times are Eastern
   (`America/Detroit`).
 - [Team decisions](docs/TEAM_DECISIONS.md): our team, chosen tracks and why.
+- [Agent handoffs](docs/AGENT_HANDOFFS.md): cross-session input, status, and blockers.
 - [Shared agent instructions](AGENTS.md): file ownership, Git safety, and required
   GitHub synchronization for all agents, including Codex sessions from different accounts.
 - [Claude Code instructions](CLAUDE.md): entry point for Claude-specific guidance.
 - [Gemini instructions](GEMINI.md): entry point if Gemini joins; no connection is
   currently confirmed.
 
-All agents must sync with GitHub before work and push completed changes before
-handoff, following AGENTS.md. The draft submission is due Sunday, November 15,
+Every agent must sync with GitHub before and after substantive actions/work
+batches, update shared context after every input, and commit, push, and verify
+completed work and context before handoff. Work belongs in this shared repository;
+only explicit drafts awaiting user approval may stay unpublished. Follow the
+mandatory workflow in AGENTS.md. The draft submission is due Sunday, November 15,
 at 12:00 AM; final submission is due that Sunday at 12:00 PM (noon), Eastern.
 
 ## What it does

@@ -9,6 +9,52 @@ participating agent, account, and session. When event context is relevant, read
 [docs/HACKATHON_CONTEXT.md](docs/HACKATHON_CONTEXT.md).
 It is the shared event reference; preserve its source and verification labels.
 Keep event research there rather than duplicating it in agent instructions.
+Also read [docs/TEAM_DECISIONS.md](docs/TEAM_DECISIONS.md) for current team
+choices and [docs/AGENT_HANDOFFS.md](docs/AGENT_HANDOFFS.md) for cross-session
+status. The mandatory workflow below applies after every new user input.
+
+## Mandatory workflow for every input and action
+
+1. **Sync before acting.** On every user input, before substantive research,
+   documentation, coding, delegation, or a repository-based answer, inspect Git
+   state, fetch, safely integrate the intended remote branch, and reread changed
+   instructions and shared context. Repeat before resuming work after an
+   interruption and before each new substantive action or work batch. Git safety
+   inspection and synchronization commands are the prerequisites to this rule.
+2. **Update shared context after every input.** Persist new facts, decisions,
+   constraints, corrections, ownership, and blockers before dependent work.
+   Event facts go in `docs/HACKATHON_CONTEXT.md`; team/project decisions go in
+   `docs/TEAM_DECISIONS.md`; collaboration rules go in these instructions.
+   Preserve facts versus proposals, approval status, and verification labels.
+   Record a concise input/status handoff in `docs/AGENT_HANDOFFS.md`, even when
+   the input adds no new decision. Do not copy whole chats or secrets into docs.
+3. **Work in the shared repository.** Keep authorized work, documentation,
+   context, and handoffs in the existing checkout of
+   `github.com/adamfranck4/hack_the_nest`. Separate accounts may use their own
+   checkouts of this same repository; publish to its agreed branches, not an
+   unrelated repository, private fork, or disconnected project copy. Do not keep
+   the only copy of completed work in chat, scratch files, or a local branch.
+4. **Sync and publish after acting.** After each completed substantive action or
+   work batch, and before any completion report, handoff, or final response,
+   update context with the outcome, fetch and reconcile concurrent changes,
+   validate affected work, commit only your intended changes, and push to the
+   agreed GitHub branch. Fetch again and verify that the remote branch contains
+   your commit. A Git commit is initially local by design; it counts as shared
+   delivery only after a verified push. No local-only completion claims.
+5. **Draft exception.** Only material explicitly pending user approval may
+   remain a draft outside published repository work. Mark it as a draft and do
+   not treat it as an accepted decision or implementation. Record its existence
+   and pending status in the shared handoff without publishing the draft itself
+   if it is meant to stay private. Once approved, integrate it into the shared
+   repository, commit, push, and verify. Do not invent approval gates for routine
+   work already authorized by the user.
+
+If sync, context updates, or publication are blocked, preserve all work, finish
+unaffected work where safe, and report the exact blocker and unpublished state.
+Never overwrite another agent's changes, force-push, expose secrets, or claim a
+successful sync to satisfy this workflow. Shared-checkout workers send context
+and completion deltas to their coordinator, who serializes updates and pushes;
+they must not concurrently edit common handoff files or switch the shared branch.
 
 ## Collaboration rules
 
@@ -55,11 +101,12 @@ Keep event research there rather than duplicating it in agent instructions.
 
 ## Required GitHub synchronization — all agents
 
-- Before starting any task or resuming edits, inspect Git status, branch, staged
+- Before every input-driven action or resumed work batch, inspect Git status, branch, staged
   changes, and recent history, then `git fetch origin`. Synchronize with the
   intended remote branch before doing substantive work. For shared work that
   branch is `origin/main`; for a coordinated feature branch, synchronize with its
-  upstream and account for new changes on `origin/main`.
+  upstream and account for new changes on `origin/main`. Repeat synchronization
+  after work as required by the mandatory workflow above.
 - With a clean checkout and compatible history, use a fast-forward-only merge
   (for example, `git merge --ff-only origin/main` for shared work). If history
   diverges or another agent has uncommitted changes, inspect and coordinate a

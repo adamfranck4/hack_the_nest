@@ -11,6 +11,13 @@ relevant, preserving its verification labels.
 Multiple Codex agents from different accounts and Claude Code may work here
 simultaneously. Identify your session distinctly, coordinate files and interfaces,
 and preserve every other agent's work. Do not assume shared chat history,
-checkouts, or credentials. Sync before work; commit, push, and verify completed
-changes before handoff as required by AGENTS.md. Keep event research and shared
-rules in their existing documents rather than duplicating them here.
+checkouts, or credentials. Follow the mandatory per-input workflow in AGENTS.md:
+sync before and after each substantive action/work batch, reread context, and
+update it after every input. Read
+[docs/TEAM_DECISIONS.md](docs/TEAM_DECISIONS.md) and
+[docs/AGENT_HANDOFFS.md](docs/AGENT_HANDOFFS.md) too. Keep work in the shared
+repository; commit, push, and verify changes and context before completion or
+handoff. Only explicit drafts pending user approval may stay unpublished, with
+their pending status recorded. Coordinate shared-checkout Git and context updates
+through the coordinator. Keep event research and shared rules in their existing
+documents rather than duplicating them here.

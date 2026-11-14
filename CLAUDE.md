@@ -4,12 +4,20 @@ Read [AGENTS.md](AGENTS.md) and
 [docs/HACKATHON_CONTEXT.md](docs/HACKATHON_CONTEXT.md). Follow the shared
 collaboration rules and preserve the event reference's verification labels.
 
-**Required for every participating agent and account:** Before starting any task or
-resuming edits, inspect Git state, fetch from GitHub, and synchronize with the
-intended remote branch as described in AGENTS.md. Commit and push completed work
-before every completion report or handoff, and verify the remote contains it.
-Fetch again before pushing; safely reconcile concurrent changes without
-overwriting work or force-pushing. Report any synchronization blocker explicitly.
+**Required for every input and every participating agent/account:** Follow the
+mandatory workflow in AGENTS.md. Sync before and after each substantive action or
+work batch; reread changed instructions and shared context. After every user
+input, persist relevant context and a concise handoff before dependent work, then
+record the outcome before responding. Read
+[docs/TEAM_DECISIONS.md](docs/TEAM_DECISIONS.md) and
+[docs/AGENT_HANDOFFS.md](docs/AGENT_HANDOFFS.md) alongside the event reference.
+
+Work in the shared repository. Commit, push, and verify completed changes and
+context before completion or handoff; a local commit alone is insufficient.
+Only drafts explicitly pending user approval may stay unpublished, with their
+pending status recorded rather than treated as accepted decisions. Follow the
+shared-checkout coordinator and safety rules; report sync/publication blockers
+without discarding another agent's work.
 
 Multiple Codex agents from different accounts may be editing this repository
 simultaneously; Gemini may join later but is not confirmed connected. Use distinct
