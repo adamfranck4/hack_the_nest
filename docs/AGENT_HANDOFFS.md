@@ -7,27 +7,6 @@ Update the entry as work completes. Keep facts and accepted decisions in their
 existing reference documents; never include secrets or whole chat transcripts.
 In a shared checkout, the coordinator serializes entries from its workers.
 
-## 2026-11-14 — codex-cloud-launch — cloud preview attempt
-
-- Branch/base: local `work` to shared `main`, base `e4aa6c4` (synced during launch).
-- Input: launch the app in the cloud environment and open the shared browser.
-- Ownership: this handoff entry only; no application or dependency-file edits.
-- Outcome: installed pinned requirements in ignored `backend/.venv`; started
-  `backend/.venv/bin/python -m uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port 8765`.
-  Cloud-local health and three-character listing respond; 32 backend tests pass.
-- Browser check: installed headless Chromium reaches the page (HTTP 200, title
-  Talk It Out), but React modules fail with `ERR_TUNNEL_CONNECTION_FAILED`.
-  The existing `?mock=1` mode cannot render until module access works.
-- Blockers: `esm.sh` denied by current network policy. An additive network draft
-  was saved for owner review; not applied/published. No Gemini/ElevenLabs key
-  bindings or repo `.env` exist here; live conversations remain unverified.
-  Desktop capability is declared, but desktop-control/viewer tools are absent
-  for environment `ccarenv_b64_Y2NhcmVudl9kMTc4OTgyYzllMjA4MTkxYjdiMWU1ZDkzZTY5MjY5MQ`.
-- Next: owner opens Desktop and enables the required network access in environment
-  settings; retry the real shared browser. Enter API keys only through secure
-  environment settings if live AI/voice is wanted. Restart the server if the
-  machine is restored; running processes are not preserved by publication.
-
 ## 2026-11-14 — claude-manager — Talk It Out MVP build
 
 - Branch/base: shared `main` on Adam's machine, base `3ba42ad`.
