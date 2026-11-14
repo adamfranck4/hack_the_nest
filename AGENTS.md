@@ -62,6 +62,12 @@ Keep event research there rather than duplicating it in agent instructions.
   block synchronization, report the exact blocker and preserve all work; do not
   claim that GitHub is synchronized. These rules apply equally to Codex and
   Claude Code.
+- When delegated workers share a checkout, serialize Git synchronization,
+  staging, commits, and pushes through one coordinator (the Claude manager for
+  its workers). Workers read these instructions and coordinate synchronization
+  before work; the coordinator fulfills the push and verification requirements
+  for their completed changes before handoff. Do not switch the shared branch
+  while workers are editing or include another worker's unfinished changes.
 
 ## Scope and handoff
 

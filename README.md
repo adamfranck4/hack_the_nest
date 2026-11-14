@@ -1,8 +1,21 @@
 # hack_the_nest
 
-Project for the Hack the Nest hackathon.
+Project for Hack The Nest 2026 at Eastern Michigan University, November 14–15, 2026.
 
 > Status: repo scaffold only. The idea, stack and setup steps get filled in once the build starts.
+
+## Shared context and collaboration
+
+- [Hackathon context](docs/HACKATHON_CONTEXT.md): event rules, deadlines, tracks,
+  prizes, logistics, and verification status. All event times are Eastern
+  (`America/Detroit`).
+- [Shared agent instructions](AGENTS.md): file ownership, Git safety, and required
+  GitHub synchronization for Codex and Claude Code.
+- [Claude Code instructions](CLAUDE.md): entry point for Claude-specific guidance.
+
+Both agents must sync with GitHub before work and push completed changes before
+handoff, following AGENTS.md. The draft submission is due Sunday, November 15,
+at 12:00 AM; final submission is due that Sunday at 12:00 PM (noon), Eastern.
 
 ## What it does
 
@@ -12,7 +25,9 @@ _To be written: the problem and the one-sentence pitch._
 
 _To be written: install and run commands._
 
-Copy `.env.example` to `.env` and fill in the values. Never commit `.env`.
+There is no application, dependency manifest, or test suite yet. `.env.example`
+currently declares no variables. Once required variables are documented, copy it
+to `.env` and fill in the values. Never commit `.env`.
 
 ## Tech stack
 
@@ -20,7 +35,10 @@ _To be decided._
 
 ## Working with the agent team
 
-This repo ships a Claude Code agent team in [.claude/agents](.claude/agents). Opening a Claude Code session in this folder starts the `manager` agent, which splits a goal into tasks and hands them to five workers:
+Codex and Claude Code collaborate on this repo. Claude Code is configured to use
+the `manager` agent in [.claude/agents](.claude/agents), which splits a goal into
+tasks and hands them to five workers. The manager includes the shared instructions
+in worker briefs and coordinates Git operations for workers sharing its checkout:
 
 | Agent | Owns |
 |---|---|
