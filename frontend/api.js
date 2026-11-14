@@ -1,5 +1,7 @@
 // All calls to the backend live here. Add ?mock=1 to the page URL to use fake data.
 export const MOCK = new URLSearchParams(location.search).get("mock") === "1";
+// With ?mock=1&novoice=1 the mock backend pretends the daily voice budget is used up.
+const MOCK_NOVOICE = new URLSearchParams(location.search).get("novoice") === "1";
 
 async function request(path, options) {
   let res;
@@ -16,7 +18,9 @@ async function request(path, options) {
         detail = typeof body.detail === "string" ? body.detail : JSON.stringify(body.detail);
       }
     } catch (e) { /* keep default message */ }
-    throw new Error(detail);
+    const err = new Error(detail);
+    err.status = res.status;
+    throw err;
   }
   return res.json();
 }
@@ -73,7 +77,7 @@ const mockApi = {
     const id = Math.random().toString(16).slice(2);
     mockSessions[id] = { character, mood: character.start_mood, turn: 0, status: "active", transcript: [] };
     return {
-      session_id: id, character, mood: character.start_mood, status: "active", turn: 0, max_turns: 8,
+      session_id: id, character, mood: character.start_mood, status: "active", turn: 0, max_turns: 8, voice_available: !MOCK_NOVOICE,
       opening: { text: `*sniffle* ${character.name} here... everything is going wrong today!`, audio_b64: null, suggestions: ["I can tell this is really upsetting. Tell me what happened.", "I'm sorry that happened, and I want to help fix it."] },
     };
   },
@@ -82,6 +86,11 @@ const mockApi = {
     const s = mockSessions[sessionId];
     if (!s) throw new Error("Session not found");
     if (s.status !== "active") throw new Error("Session is not active");
+    if (!payload.text && MOCK_NOVOICE) {
+      const err = new Error("Today's voice limit is reached — type your reply instead.");
+      err.status = 429;
+      throw err;
+    }
     const text = payload.text || "I hear you, that sounds really frustrating. I'm sorry.";
     if (text.toLowerCase().includes("fail")) throw new Error("Mock failure: Gemini did not respond"); // try typing "fail"
     const calm = /sorry|understand|hear|feel|help|calm/i.test(text);
@@ -99,7 +108,7 @@ const mockApi = {
       suggestions: s.status === "active" ? (calm
         ? ["What would help you feel better right now?", "Thanks for telling me, I'm here and I'm listening."]
         : ["I hear you, that sounds really frustrating.", "I'm sorry, let me understand what went wrong."]) : [],
-      status: s.status, max_turns: 8,
+      status: s.status, max_turns: 8, voice_available: !MOCK_NOVOICE,
     };
   },
   async getScorecard(sessionId) {

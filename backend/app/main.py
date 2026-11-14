@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from app import characters, config, sessions
+from app import budget, characters, config, sessions
 from app.integrations import IntegrationError, elevenlabs, gemini
 
 log = logging.getLogger("talk_it_out")
@@ -36,11 +36,19 @@ def character_public(c) -> dict:
 
 def tts_b64(text: str, voice_id: str):
     """TTS never fails a request: return None on any error."""
+    if not budget.can_spend(len(text)):
+        return None
     try:
-        return base64.b64encode(elevenlabs.text_to_speech(text, voice_id)).decode("ascii")
+        out = base64.b64encode(elevenlabs.text_to_speech(text, voice_id)).decode("ascii")
     except Exception as exc:  # noqa: BLE001 - audio is optional
         log.warning("TTS failed: %s", type(exc).__name__)
         return None
+    budget.spend(len(text))
+    return out
+
+
+def voice_available() -> bool:
+    return bool(config.elevenlabs_configured()) and budget.voice_available()
 
 
 class SessionCreate(BaseModel):
@@ -53,6 +61,8 @@ def health():
         "status": "ok",
         "gemini": config.gemini_configured(),
         "elevenlabs": config.elevenlabs_configured(),
+        "voice_available": voice_available(),
+        "voice_credits_left_today": budget.credits_left(),
     }
 
 
@@ -67,6 +77,7 @@ def create_session(body: SessionCreate):
     if character is None:
         raise HTTPException(status_code=404, detail="Unknown character")
     session = sessions.create_session(character)
+    audio_b64 = tts_b64(character.opening_line, character.voice_id)
     return {
         "session_id": session.id,
         "character": character_public(character),
@@ -76,9 +87,10 @@ def create_session(body: SessionCreate):
         "max_turns": sessions.MAX_TURNS,
         "opening": {
             "text": character.opening_line,
-            "audio_b64": tts_b64(character.opening_line, character.voice_id),
+            "audio_b64": audio_b64,
             "suggestions": list(getattr(character, "starter_suggestions", ())),
         },
+        "voice_available": voice_available(),
     }
 
 
@@ -106,6 +118,11 @@ def take_turn(
         data = audio.file.read()
         if not data:
             raise HTTPException(status_code=422, detail="Audio file is empty")
+        if not budget.can_spend(budget.STT_COST):
+            raise HTTPException(
+                status_code=429,
+                detail="Today's voice limit is reached — type your reply instead.",
+            )
         try:
             user_text = (
                 elevenlabs.speech_to_text(
@@ -115,6 +132,7 @@ def take_turn(
             ).strip()
         except IntegrationError as exc:
             raise HTTPException(status_code=502, detail=str(exc))
+        budget.spend(budget.STT_COST)
         if not user_text:
             raise HTTPException(status_code=422, detail="Could not hear anything; try again")
 
@@ -141,11 +159,12 @@ def take_turn(
         if isinstance(raw, (list, tuple)):
             suggestions = [s.strip() for s in raw if isinstance(s, str) and s.strip()][:2]
 
+    reply_audio = tts_b64(reply_text, character.voice_id)
     return {
         "turn": new_turn,
         "user_text": user_text,
         "reply_text": reply_text,
-        "reply_audio_b64": tts_b64(reply_text, character.voice_id),
+        "reply_audio_b64": reply_audio,
         "mood": new_mood,
         "mood_delta": delta,
         "techniques": list(result.get("techniques") or []),
@@ -153,6 +172,7 @@ def take_turn(
         "suggestions": suggestions,
         "status": status,
         "max_turns": sessions.MAX_TURNS,
+        "voice_available": voice_available(),
     }
 
 

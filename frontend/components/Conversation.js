@@ -37,6 +37,8 @@ export function Conversation({ session, onFinish, onQuit }) {
   const [draft, setDraft] = useState("");
   const [suggestions, setSuggestions] = useState(session.opening.suggestions || []);
   const [hints, setHints] = useState(readHints);
+  // Missing field means voice is fine (older backend).
+  const [voiceAvailable, setVoiceAvailable] = useState(session.voice_available !== false);
   const inputRef = useRef(null);
   const recorderRef = useRef(null);
   const chunksRef = useRef([]);
@@ -58,6 +60,11 @@ export function Conversation({ session, onFinish, onQuit }) {
       endRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
     }
   }, [messages, busy, error, suggestions, hints]);
+
+  // When voice goes away, put the cursor in the text box (once it is enabled again).
+  useEffect(() => {
+    if (!voiceAvailable && !busy && inputRef.current) inputRef.current.focus();
+  }, [voiceAvailable, busy]);
 
   function toggleHints() {
     const next = !hints;
@@ -94,9 +101,16 @@ export function Conversation({ session, onFinish, onQuit }) {
       setSuggestions(r.suggestions || []);
       setDelta({ value: r.mood_delta, key: r.turn });
       setLastPayload(null);
+      setVoiceAvailable(r.voice_available !== false);
       speak(r.reply_audio_b64);
     } catch (e) {
-      setError(e.message);
+      if (e.status === 429 && payload.audio) {
+        // Daily voice budget used up: not an error, just switch to typing.
+        setVoiceAvailable(false);
+        setLastPayload(null);
+      } else {
+        setError(e.message);
+      }
     } finally {
       setBusy(false);
       setPendingText(null);
@@ -203,10 +217,12 @@ export function Conversation({ session, onFinish, onQuit }) {
 
       ${active && html`
         <section class="controls">
-          <button class=${"mic" + (recording ? " recording" : "")} onClick=${toggleMic} disabled=${busy}
-            aria-label=${recording ? "Stop recording and send" : "Start recording"}>
-            ${recording ? "⏹ Stop & send" : "🎤 Tap to talk"}
-          </button>
+          ${voiceAvailable
+            ? html`<button class=${"mic" + (recording ? " recording" : "")} onClick=${toggleMic} disabled=${busy}
+                aria-label=${recording ? "Stop recording and send" : "Start recording"}>
+                ${recording ? "⏹ Stop & send" : "🎤 Tap to talk"}
+              </button>`
+            : html`<p class="voice-note" role="status">🔇 Voice paused for today — typing still works.</p>`}
           ${recording && html`<span class="rec-note"><span class="rec-dot"></span> Recording… tap again to send</span>`}
           <form class="typed" onSubmit=${sendText}>
             <input type="text" ref=${inputRef} value=${draft} onInput=${(e) => setDraft(e.target.value)} disabled=${inputsOff || recording}
