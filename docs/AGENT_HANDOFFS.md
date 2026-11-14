@@ -9,6 +9,23 @@ In a shared checkout, the coordinator serializes entries from its workers.
 Apply the [shared transparency requirements](../AGENTS.md#required-transparency-for-every-agent)
 to operational actions and push/deployment status as well as code changes.
 
+## 2026-11-14 — codex-product-submission — product focus and verified rules
+
+- Branch/base: local `work` to shared `main`, base `b47e897`.
+- Input: emphasize product improvements and explain video/submission/judging
+  requirements. User supplied the official Devpost event URL.
+- Ownership: shared research/submission documents and this handoff only.
+- Research: retrieved the official Devpost overview and rules, confirming the
+  EMU event/date, mandatory public GitHub plus video <=3 minutes, teammate/AI
+  disclosure, midnight draft/noon final, and live science-fair judging 1:15–2:15 PM.
+  Resource/date subpages returned 403; their contents were not used as evidence.
+- Changes: updated authoritative context and internal drafts, distinguished the
+  two-minute video target from the three-minute rule, incorporated confirmed
+  ElevenLabs selection, and added product-focused recommendations without
+  accepting them as implementation decisions. No app, settings, or paid API changes.
+- Validation: reference/anchor and diff checks before docs-only push; no app
+  tests required. Existing Render auto-deploy may run on this `main` docs push.
+
 ## 2026-11-14 — codex-track-assessment — judging review
 
 - Branch/base: local `work` to shared `main`, base `70dcb25`.

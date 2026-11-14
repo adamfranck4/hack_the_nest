@@ -24,6 +24,8 @@ status. Reference links alone do not establish that all their contents were chec
 | Official app | <https://app.hackthenest.tech/> |
 | Selectable tracks | <https://app.hackthenest.tech/tracks> |
 | Schedule | <https://app.hackthenest.tech/schedule> |
+| Devpost event | <https://hack-the-nest.devpost.com/> |
+| Official submission/judging rules | <https://hack-the-nest.devpost.com/rules> |
 
 ## Independently checked track descriptions
 
@@ -46,7 +48,7 @@ or confirmed additional sponsor requirements were found in the reviewed cards.
 | Topic | Supplied rule or status |
 |---|---|
 | Team size | 1–4 participants |
-| AI use | All AI usage is permitted |
+| AI use | AI tools are allowed; disclose which tools were used and how. Judges score what the team built and can explain. |
 | Provided resources | AI credits and certain sponsor technologies are provided |
 | Multiple awards | A single project may win multiple categories |
 | Track selection | The official app displays **“Pick up to 3”** tracks |
@@ -54,9 +56,42 @@ or confirmed additional sponsor requirements were found in the reviewed cards.
 | Submission platform | Devpost; the midnight draft is due on both Devpost and the event app |
 | Requirements precedence | Event-specific submission requirements take precedence over general MLH guidance |
 
-An event-specific Devpost URL, complete submission checklist, and any additional
-eligibility conditions were not supplied. No additional submission rules or
-judging criteria are established by this document.
+### Verified Devpost submission requirements
+
+The [official event page](https://hack-the-nest.devpost.com/) and
+[rules](https://hack-the-nest.devpost.com/rules) were retrieved November 14, 2026;
+their dates and EMU location match this event. They require:
+
+- A project name, short description, and explanation of the problem solved.
+- A **public GitHub repository** and a **demo video of three minutes or less**
+  for every submission. The reviewed public pages do not specify the upload host.
+- Every teammate added to the project, with all team members registered and
+  checked in at the event. Teams have one to four members.
+- One main track plus applicable partner, academic, and MLH prize entries.
+  A project can win at most one academic track. App selection names/limits are a
+  separate portal workflow, not evidence that three separate projects are needed.
+- All project code written within the hacking window; prior ideas/planning allowed.
+- Disclosure of AI tools and how they were used.
+- Public, synthetic, or the team's own data only; no real patient data or medical
+  advice. Partner keys/codes must remain private and out of GitHub.
+
+Devpost confirms the midnight draft and noon final deadline below, with no late
+final entries. The requirement to also update the event app at draft time comes
+from supplied attendee instructions, not the retrieved public Devpost checklist.
+
+### Verified judging requirements
+
+Main/overall criteria are **Does it work**, **Technical challenge**, **Originality
+and impact**, **Design and usability**, and **Learning and growth**. Partner
+tracks add meaningful use of the partner's tool/data. Numerical weights for these
+categories are not stated. Best Beginner's specific learning emphasis remains
+recorded in the website descriptions above.
+
+Judging is science-fair style in the **Student Center Ballroom**, Sunday,
+November 15, **1:15–2:15 PM Eastern**. Find the demo table at **1:00 PM**; at least
+one team member must be at it during judging. The core feature must work in a
+live demo; slides or a mockup are insufficient. Devpost currently lists judge
+Rishi Babu (IceCube, Michigan State University); this need not be the complete panel.
 
 ## Critical deadlines
 
@@ -70,7 +105,7 @@ at the start of November 15; 12:00 PM Sunday is noon.**
 | Sunday, Nov 15, 12:00 AM | Draft submission due on Devpost and the event app |
 | Sunday, Nov 15, 12:00 PM | Hacking ends; final submission deadline |
 | Sunday, Nov 15, 1:00 PM | Demo table setup |
-| Sunday, Nov 15, 1:15 PM | Project demos and judging |
+| Sunday, Nov 15, 1:15–2:15 PM | Science-fair demos/judging, Student Center Ballroom |
 | Sunday, Nov 15, 2:30 PM | Judges deliberate |
 | Sunday, Nov 15, 3:00 PM | Awards ceremony |
 | Sunday, Nov 15, 4:00 PM | Event ends |
@@ -122,6 +157,8 @@ the app selection list. “Coming soon” and unspecified terms describe the sup
 listing, not an independently checked current status. Unless explicitly stated,
 the supplied information does not establish whether an award is per member or
 per team. Official links are listed in [event references](#event-and-official-references).
+For current award listings, consult Devpost; this original website snapshot is
+retained as historical context and differs from some newer Devpost prizes/names.
 
 | Category / sponsor | Subject or resources | Originally listed prizes / terms |
 |---|---|---|
@@ -196,7 +233,6 @@ unestablished. No award status should be inferred from inclusion here.
 ## Outstanding factual confirmations
 
 - Whether multiple separate projects may be submitted remains unestablished.
-- The exact event Devpost URL and full submission requirements were not supplied.
 - Website categories and app tracks differ; their complete mapping is unconfirmed.
 - Breez bounty amounts and qualifying criteria were not specified.
 - Sponsor history and project award statuses require official historical sources.

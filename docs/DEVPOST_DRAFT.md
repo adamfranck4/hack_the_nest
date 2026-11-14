@@ -2,10 +2,11 @@
 
 **DRAFT. Fill in and verify after the build.**
 
-Deadlines (Eastern, see [event schedule](HACKATHON_CONTEXT.md#critical-deadlines)):
-draft due **12:00 AM Sunday, Nov 15** on Devpost AND the event app; final
-submission **12:00 PM Sunday, Nov 15**. The event-specific Devpost URL has not
-been supplied yet.
+Submit through [the official event](https://hack-the-nest.devpost.com/).
+Requirements and deadlines are authoritative in
+[event context](HACKATHON_CONTEXT.md#verified-devpost-submission-requirements).
+The video is required and must be **three minutes or less**; the two-minute
+shot list is a suggested target. Add every teammate and disclose AI tool use.
 
 Everything marked `VERIFY` must be checked against the running app before pasting.
 
@@ -104,10 +105,20 @@ python, fastapi, uvicorn, httpx, gemini-api, google-gemini, elevenlabs, react, h
 
 <!-- VERIFY after build: trim this list to what the final code actually uses -->
 
+## AI tools and contributions
+
+Claude Code and OpenAI Codex assisted with implementation, documentation, tests,
+review and debugging. Gemini powers in-app character responses and scoring;
+ElevenLabs provides speech transcription and synthesis. Before submission, the
+team should confirm this account and add what each human contributed/learned.
+Do not include prompts containing private data, credentials, or secret values.
+
 ## Tracks
 
-AI/ML, Best Beginner, Best use of ElevenLabs (confirm all three are selected in
-the event app). Also eligible for MLH Best Use of Gemini API.
+AI/ML, Best Beginner, Best use of ElevenLabs are selected in the event app per
+[team decisions](TEAM_DECISIONS.md#tracks). Enter the corresponding main/partner/
+event-wide awards in Devpost. Confirm any additional MLH Gemini entry and the
+AI/ML-to-Future-of-Intelligence mapping with the organizer.
 
 ## Team
 

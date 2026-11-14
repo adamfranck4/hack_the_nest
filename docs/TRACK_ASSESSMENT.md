@@ -3,14 +3,17 @@
 Assessment date: November 14, 2026. Code baseline: `70dcb25`. These are Codex's
 recommendations, not organizer scoring weights or accepted team decisions.
 Current selections/status remain in [TEAM_DECISIONS.md](TEAM_DECISIONS.md#tracks).
+Subsequent same-day updates confirm all three tracks selected and identify the
+official Devpost event/rules. The verified five judging criteria and submission
+requirements are recorded in [event context](HACKATHON_CONTEXT.md#verified-judging-requirements).
 
 ## Overall assessment
 
 Best Beginner is the strongest present fit. Best Use of ElevenLabs is a credible
 target if judges experience the real voice loop. AI/ML needs provider-eligibility
 clarification and a more convincing account of scoring quality and originality.
-There is no basis to assign win probabilities without the competing projects,
-judges, and full event rubric.
+There is no basis to assign win probabilities without the competing projects
+and judges' comparisons.
 
 | Track | Published basis | Current judging assessment |
 |---|---|---|
@@ -19,7 +22,7 @@ judges, and full event rubric.
 | AI/ML | Website's differently named Future of Intelligence promotes OpenAI models and Exa search, useful agents/apps/tools and product polish | Gemini roleplay, structured feedback and stateful gameplay are implemented, but provider eligibility is unresolved and the general coaching concept is established elsewhere |
 
 Published descriptions are in the [event context](HACKATHON_CONTEXT.md#independently-checked-track-descriptions).
-No numerical judging weights were found in the reviewed public cards. The
+Numerical judging weights remain unpublished in the reviewed material. The
 entrant app's AI/ML wording must not be assumed identical to the website challenge.
 
 ## What I would ask as a judge
@@ -127,7 +130,7 @@ identical transcribed words is what changes the meter.
 
 | Priority | Action | Why / completion evidence |
 |---|---|---|
-| First | Ask organizers whether the app's AI/ML award requires OpenAI and/or Exa, and confirm all three selections | Resolve eligibility before spending time on a provider port. Do not add decorative APIs or logos. |
+| First | Ask organizers whether the app's AI/ML award requires OpenAI and/or Exa | All three app selections are now confirmed; resolve provider eligibility before a port. Do not add decorative APIs or logos. |
 | First | Rehearse a complete real voice round with an adequate, explicitly bounded demo budget | Essential evidence for the ElevenLabs story; microphone-to-audio recording works on the judging device |
 | Next | Add a transcript-grounded skill rubric and explain task success separately from mood | Makes the AI feedback defensible; demonstrate exact evidence and several scoring sanity checks |
 | Next | Lead the demo with one relatable adult scenario, then optionally show the toddler | Roommate/coworker practice gives a student audience a concrete use case without expanding the feature set |
@@ -144,10 +147,32 @@ framework migration. They do not address the largest current judging questions.
 If provider changes are required, use them for real roleplay/coaching work and
 rerun affected tests rather than adding a token integration.
 
+## Product priorities (recommendations, not an implementation request)
+
+1. **Evidence-backed coaching:** improve the scorecard's named skill assessments,
+   exact player quotes, explanations, and one actionable next step. Existing
+   technique tags and overall score are the starting point, not validation.
+2. **A useful scenario outcome:** assess the practical goal separately from mood,
+   such as correcting Casey's credit or agreeing a concrete dish plan with Sam.
+3. **A repeat-practice loop:** let the learner retry a response in the same
+   context, or restart with a specific skill goal and hints off. Make improvement
+   visible without requiring accounts or a database.
+4. **A dependable voice experience:** test a complete real microphone round,
+   choose appropriate voices, reduce waiting, and plan enough bounded quota for
+   a full session. Consider reviewing/editing transcription before grading so
+   speech-recognition errors are not scored as communication errors.
+
+These recommendations directly support working functionality, meaningful AI/
+partner use, a clear user/problem, and quick usability in the now-published rubric.
+The voice path currently sends recorded turns rather than streaming; the scoring
+uses words, not vocal tone. Do not promise either capability without implementing it.
+
 ## Research limits and sources
 
 - [Official EMU event](https://hackthenest.tech/#tracks): event identity and public
   descriptions for the three relevant tracks, checked November 14, 2026.
+- [Official Devpost rules](https://hack-the-nest.devpost.com/rules): subsequently
+  verified submission requirements, five criteria, and in-person judging schedule.
 - [Entrant tracks](https://app.hackthenest.tech/tracks): team selections come from
   supplied shared context. This research session was redirected to login, so
   current signed-in provider conditions/selection state need confirmation.

@@ -2,7 +2,9 @@
 
 Judging is Sunday, Nov 15 at 1:15 PM (table setup 1:00 PM). See
 [event schedule](HACKATHON_CONTEXT.md#critical-deadlines). Lines and timings below
-are a plan written before the build finished.
+are planning targets. The [official rules](https://hack-the-nest.devpost.com/rules)
+require a video of **three minutes or less** and live science-fair judging; the
+two-minute video and three-minute table scripts are not official slot limits.
 
 <!-- VERIFY after build: rehearse the whole script against the running app and adjust lines, meter numbers and timings -->
 
