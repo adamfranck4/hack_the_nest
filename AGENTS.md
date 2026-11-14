@@ -4,7 +4,8 @@
 
 These rules apply to every Codex session/account, Claude Code, and any other
 agent working on [the shared repository](https://github.com/adamfranck4/hack_the_nest).
-Gemini may join later; no connection is confirmed. Different sessions may have
+Gemini coding-agent participation is unconfirmed; the app's Gemini API use is a
+separate integration. Different sessions may have
 separate memory, checkouts, tools, and permissions. Never assume shared chat history.
 
 | Document | Authoritative content |
@@ -107,3 +108,26 @@ Before delivering each batch, review the affected files and their references:
   material within the authorized scope. Record checks, remaining issues, branch,
   commit link, and push status in the handoff/report. Do not claim role activation
   or runtime behavior from file presence alone.
+
+## Required transparency for every agent
+
+- Keep GitHub-visible updates factual and concise: the handoff and commit/PR
+  description must explain the request, behavior changed, files/ownership,
+  validation commands and actual results, and remaining risks or incomplete work.
+  Label docs-only plans, mock demonstrations, tested implementation, and verified
+  live behavior separately. Do not present another agent's report as your own test.
+- Record operational actions too, even when they do not change source: dependency
+  installation, processes started/stopped, environment or access changes, external
+  service use, deployment attempts, cancellations, and rollback results. State
+  what was done, its outcome, and anything the next agent must clean up or resume.
+- Explain what each push contains and any expected automatic deployment. Verify
+  the remote commit, then distinguish GitHub delivery from deployment requested,
+  building, live-verified, failed, or unverified. Verify live behavior separately;
+  do not infer it from a successful push or a passing mock test.
+- Protect private information while reporting actions: include variable names
+  and configuration status, never key values, tokens, credential files, private
+  account details, authenticated URLs, or unredacted logs. Summarize/redact private
+  inputs rather than copying them into GitHub. Do not commit ignored local setup.
+- Give the user progress updates and a final account of changes, checks, blockers,
+  destination branch, and commit link. Shared-checkout workers send these details
+  to their coordinator for the combined handoff; avoid duplicating full logs.

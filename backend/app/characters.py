@@ -266,3 +266,22 @@ def list_characters() -> list[Character]:
 
 def get_character(character_id: str) -> Character | None:
     return next((c for c in _CHARACTERS if c.id == character_id), None)
+
+
+def public_character(character: Character) -> dict:
+    """The shared public catalog shape; excludes voice IDs and persona prompts."""
+    return {name: getattr(character, name) for name in (
+        "id", "name", "emoji", "title", "scenario", "goal", "meter_label", "start_mood"
+    )}
+
+
+def demo_catalog() -> dict:
+    """Safe static demo data generated from the same definitions as the live API."""
+    return {"characters": [
+        {"character": public_character(character), "opening": {
+            "text": character.opening_line,
+            "audio_b64": None,
+            "suggestions": list(character.starter_suggestions),
+        }}
+        for character in list_characters()
+    ]}

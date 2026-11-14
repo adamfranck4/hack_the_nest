@@ -4,6 +4,7 @@ These responsibilities apply to both Claude Code and Codex role definitions.
 Read [AGENTS.md](../AGENTS.md) first for the mandatory workflow and safety rules.
 Workers follow their assigned brief and file ownership; role names are not unique
 session identities. Runtime entry files retain only platform metadata and links.
+Every role's report follows the [shared transparency requirements](../AGENTS.md#required-transparency-for-every-agent).
 
 ## manager
 

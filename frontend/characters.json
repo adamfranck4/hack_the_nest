@@ -1,0 +1,124 @@
+{
+  "characters": [
+    {
+      "character": {
+        "id": "toddler",
+        "name": "Milo",
+        "emoji": "🧸",
+        "title": "Toddler",
+        "scenario": "Milo is 3 and refuses to put his shoes on. The whole family is already late for grandma's party, and he is flopped on the hallway floor.",
+        "goal": "Get Milo calm and cooperative enough to put his shoes on.",
+        "meter_label": "Meltdown meter",
+        "start_mood": 70
+      },
+      "opening": {
+        "text": "No shoes! Me no want shoes! Waaah!",
+        "audio_b64": null,
+        "suggestions": [
+          "Milo, you are really sad about the shoes. Do you want the red ones or the blue ones?",
+          "First we put on shoes, then you can bring your dinosaur to the car."
+        ]
+      }
+    },
+    {
+      "character": {
+        "id": "angry_caller",
+        "name": "Dana",
+        "emoji": "📞",
+        "title": "Angry caller",
+        "scenario": "Dana's order has arrived broken for the third time. She is on the phone with you, the support agent, and she has had enough.",
+        "goal": "Defuse Dana's anger and leave her with a concrete fix she believes in.",
+        "meter_label": "Anger meter",
+        "start_mood": 75
+      },
+      "opening": {
+        "text": "This is the THIRD time my order showed up smashed! What kind of company are you running?",
+        "audio_b64": null,
+        "suggestions": [
+          "I am so sorry, Dana. Three broken orders is completely unacceptable. Tell me what happened.",
+          "I will personally send a replacement today and email you the tracking number within the hour."
+        ]
+      }
+    },
+    {
+      "character": {
+        "id": "upset_friend",
+        "name": "Jordan",
+        "emoji": "🎂",
+        "title": "Upset friend",
+        "scenario": "You forgot your best friend Jordan's birthday. They never mention it, but you can tell they're hurt and they've just picked up your call.",
+        "goal": "Repair things with Jordan so they feel heard and valued.",
+        "meter_label": "Hurt meter",
+        "start_mood": 68
+      },
+      "opening": {
+        "text": "Oh. Hey. Yeah, I'm fine. It's not like anything important happened this week.",
+        "audio_b64": null,
+        "suggestions": [
+          "I forgot your birthday, and I am really sorry. That was not okay, and it is on me.",
+          "You have every right to be hurt. Can I take you out for dinner this weekend to make it up?"
+        ]
+      }
+    },
+    {
+      "character": {
+        "id": "teen",
+        "name": "Riley",
+        "emoji": "📱",
+        "title": "Teenager",
+        "scenario": "Riley is 15 and you just caught them scrolling on their phone at 1 AM on a school night. You need the phone handed over without a blowup.",
+        "goal": "Get Riley to hand over the phone and head to bed without a fight.",
+        "meter_label": "Eye-roll meter",
+        "start_mood": 72
+      },
+      "opening": {
+        "text": "Seriously? It's, like, one minute. Why are you even awake?",
+        "audio_b64": null,
+        "suggestions": [
+          "Hey, I am not mad. What is keeping you up so late tonight?",
+          "I get that it feels unfair. Want to pick where the phone charges tonight, so we both win?"
+        ]
+      }
+    },
+    {
+      "character": {
+        "id": "roommate",
+        "name": "Sam",
+        "emoji": "🍽️",
+        "title": "Annoyed roommate",
+        "scenario": "Sam is your roommate and you keep leaving dirty dishes in the sink. They have finally snapped and are standing in the kitchen waiting for you.",
+        "goal": "Own the problem and agree a fair dish plan Sam believes in.",
+        "meter_label": "Tension meter",
+        "start_mood": 70
+      },
+      "opening": {
+        "text": "Oh good, you're here. We need to talk about the sink. Again.",
+        "audio_b64": null,
+        "suggestions": [
+          "You are right, the dishes are on me. I can see why you are fed up.",
+          "I will wash my dishes the same night, and we can swap Sundays for deep cleaning. What works for you?"
+        ]
+      }
+    },
+    {
+      "character": {
+        "id": "coworker",
+        "name": "Casey",
+        "emoji": "💼",
+        "title": "Credit-taking coworker",
+        "scenario": "In today's team meeting, your coworker Casey presented your project idea as their own. You have pulled them aside to sort out the credit without wrecking the working relationship.",
+        "goal": "Get the credit corrected while keeping a good working relationship with Casey.",
+        "meter_label": "Defensiveness meter",
+        "start_mood": 72
+      },
+      "opening": {
+        "text": "Look, if this is about the meeting, I really don't have time for drama right now.",
+        "audio_b64": null,
+        "suggestions": [
+          "Thanks for taking a minute. In the meeting, the idea you presented was one I shared with you last week.",
+          "I would like to assume this was a mix-up. Can we correct the record together at the next standup?"
+        ]
+      }
+    }
+  ]
+}

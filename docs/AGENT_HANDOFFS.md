@@ -6,6 +6,33 @@ owned, new context or an explicit no-decision-change note, outcome, and blockers
 Update the entry as work completes. Keep facts and accepted decisions in their
 existing reference documents; never include secrets or whole chat transcripts.
 In a shared checkout, the coordinator serializes entries from its workers.
+Apply the [shared transparency requirements](../AGENTS.md#required-transparency-for-every-agent)
+to operational actions and push/deployment status as well as code changes.
+
+## 2026-11-14 — codex-review-fixes — consistency and transparency
+
+- Branch/base: local `work` targeting shared `main`, base `d423481`.
+- Input: fix concurrent voice overspending, early-end outcomes, and stale mock
+  scenarios; review consistency and require transparent, privacy-safe agent updates.
+  Test all changes before finalization and verify the public deployment separately
+  from the repository's configured Render auto-deploy behavior.
+- Ownership: voice-budget and scorecard paths, shared character/demo data,
+  associated tests, affected documentation, and shared agent instructions.
+- Changes: atomic voice-credit reservations/refunds (including midnight rollover),
+  explicit `ended` scorecard outcome in real/mock modes, and a generated static
+  demo catalog sourced from live character definitions with parity checks.
+  Aligned setup/status/interface docs and centralized transparency requirements.
+- Validation before push: 89 backend tests and 4 Node frontend tests passed;
+  Markdown links/anchors, generated JSON, TOML syntax, and diff checks passed.
+  Tests use fakes and do not call paid AI services. A pre-existing Starlette
+  TestClient deprecation warning remains; it does not affect these results.
+- Operations: installed pinned test dependencies in a temporary `/tmp` virtual
+  environment; no source dependency declarations, keys, or environment settings
+  changed. No persistent app server was started for these checks.
+- Delivery: pushing this batch to `main` is expected to trigger Render auto-deploy.
+  Deployment/site checks will follow the push; they are not established by local
+  tests or by this handoff. GitHub commit link and observed deployment outcome
+  are reported separately to the user, without including private credentials.
 
 ## 2026-11-14 — claude-manager — Talk It Out MVP build
 

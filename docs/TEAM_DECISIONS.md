@@ -4,8 +4,8 @@ Team choices and strategy for Hack The Nest 2026. Event facts (rules, deadlines,
 prize lists) live in [HACKATHON_CONTEXT.md](HACKATHON_CONTEXT.md); this file
 records what *our team* decided and why. Update it when a decision changes.
 
-Last updated: Saturday, November 14, 2026 (codex-context-sync; wording clarified,
-existing roster and track decisions preserved).
+Last updated: Saturday, November 14, 2026 (codex-review-fixes; aligned status with
+the accepted project and six implemented scenarios; roster/track choices unchanged).
 
 ## Team
 
@@ -32,7 +32,7 @@ Selection rules and prizes are recorded in
 
 Team rationale, not verified judging guidance: voice AI appears compatible with
 the AI/ML focus and could support a manageable, visible demo. Ease of integration
-depends on the eventual project. The earlier suggestion that sponsor tracks draw
+depends on the project. The earlier suggestion that sponsor tracks draw
 fewer entries is unverified; it is not an established event fact.
 
 ### Alternatives considered
@@ -47,27 +47,27 @@ fewer entries is unverified; it is not an established event fact.
 
 ## Implications for the build
 
-- The project must clearly use AI/ML. ElevenLabs voice input/output remains a
-  proposed demo integration while the project and third track are unconfirmed.
+- The accepted project uses Gemini for character/scoring and ElevenLabs for
+  speech. The ElevenLabs integration is implemented; third-track selection in
+  the event app remains a separate, unconfirmed decision.
 - Keep scope beginner-sized: a working end-to-end demo beats extra features.
-- If built, the ElevenLabs integration should use `ELEVENLABS_API_KEY` (suggested
-  name; add to `.env.example` then). Store the value using the
+- The ElevenLabs integration uses `ELEVENLABS_API_KEY`. Store the value using the
   [shared secret-handling rules](../AGENTS.md#collaboration-and-safety).
 
 ## Project (accepted by Adam, 2026-11-14)
 
 **Talk It Out**: a "conversation gym" app where you practice hard conversations
-by voice with AI characters — a toddler mid-meltdown, an angry customer caller,
-an upset friend — and a live mood meter shows whether you are calming them down.
+by voice with AI characters and a live mood meter shows whether you are calming them down.
 A scorecard grades the communication techniques used. Gemini plays the
 characters and scores; ElevenLabs provides voices and speech-to-text.
 
 Ideas considered and dropped: interview coach (too bland), single-character
 toddler simulator (folded in as one character), financial-literacy game.
 
-**Stack (accepted):** Python (FastAPI) backend + React frontend. Node is not
-installed on the build machine, so the frontend uses React via CDN with no build
-step. Full contract, ownership and run commands: [API_CONTRACT.md](API_CONTRACT.md).
+**Stack (accepted):** Python (FastAPI) backend + React frontend with no build
+step. This originally accommodated a build machine without Node; Node is optional
+for frontend regression checks, not required to run the app. Full contract and
+ownership: [API_CONTRACT.md](API_CONTRACT.md).
 
 API keys: Gemini (AI Studio, free tier) and ElevenLabs (restricted key, 8,000-credit
 usage cap, no expiry) are stored in Adam's git-ignored `.env`; teammates need their own copy
@@ -75,6 +75,7 @@ shared privately.
 
 ## Open items
 
-- MVP scope: 3 characters; stretch: custom character, difficulty levels.
+- Implemented scope: six scenarios; the catalog lives in
+  `backend/app/characters.py`. Custom characters and difficulty levels remain stretch goals.
 - Confirm the third track is actually selected in the app.
 - Submission deadlines: see [the event schedule](HACKATHON_CONTEXT.md#critical-deadlines).

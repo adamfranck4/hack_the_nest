@@ -40,7 +40,7 @@ feelings, offering choices, sincere apology, and taking ownership.
 - Live "Try saying" suggestion chips help when you are stuck; a Hints toggle
   turns them off.
 - A daily voice budget protects the public demo: when it runs out, characters
-  go text-only and typing always works.
+  go text-only and typed input remains available.
 - Win by getting the meter to 15 or below. Lose at 100. You have 8 turns.
 - A scorecard shows a score, which techniques you used, your best line, your
   worst line, and a better alternative for the worst one.

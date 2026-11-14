@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 import pytest
 
 from app.characters import get_character, list_characters
@@ -44,3 +47,17 @@ def test_character_fields_valid():
 def test_get_character():
     assert get_character("nope") is None
     assert get_character("toddler").id == "toddler"
+
+
+def test_static_demo_catalog_matches_live_characters(client):
+    from app.characters import demo_catalog
+
+    path = Path(__file__).resolve().parents[2] / "frontend" / "characters.json"
+    demo = json.loads(path.read_text(encoding="utf-8"))
+    assert demo == demo_catalog(), "Run python backend/scripts/export_demo_characters.py"
+    assert [entry["character"] for entry in demo["characters"]] == client.get(
+        "/api/characters"
+    ).json()["characters"]
+    assert all(entry["opening"]["text"] for entry in demo["characters"])
+    assert "voice_id" not in path.read_text(encoding="utf-8")
+    assert "persona_prompt" not in path.read_text(encoding="utf-8")

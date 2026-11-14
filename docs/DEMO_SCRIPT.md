@@ -9,7 +9,7 @@ are a plan written before the build finished.
 ## Before judges arrive (1:00 PM setup)
 
 - [ ] Laptop charged, on power, volume up, external speaker if available.
-- [ ] Server running: `backend/.venv/Scripts/python -m uvicorn app.main:app --app-dir backend --port 8000`
+- [ ] Server running using the [platform-appropriate quick start](../README.md#quick-start).
 - [ ] Open <http://localhost:8000>. Check `http://localhost:8000/api/health` shows both keys configured.
 - [ ] Mic permission already granted in the browser. Do one throwaway round to confirm audio in and out.
 - [ ] Pre-recorded backup video open in a second tab or on a phone (see fallbacks).
@@ -22,7 +22,7 @@ are a plan written before the build finished.
 | 0:00-0:20 | Hook. Landing screen with the six characters. | "Pilots practice in simulators. Why do we practice hard conversations for the first time on real people? Talk It Out is a conversation gym: you talk to an AI character by voice and try to calm them down." |
 | 0:20-1:10 | Pick Milo (toddler). Let him speak his opening line. Play the calming lines below, one per turn, pointing at the Meltdown meter as it drops. | "Milo is refusing to put his shoes on. Watch the meter. Gemini plays him and moves it based on what I say." |
 | 1:10-1:35 | Restart Milo. Say the bad line. Meter spikes. | "Now what most of us do under stress." Then: "It jumped. The app knows the difference between a technique and a reaction." |
-| 1:35-2:05 | Finish a round (win or time out) and open the scorecard. | "At the end you get a scorecard: techniques used, your best line, your worst line, and a better thing you could have said." |
+| 1:35-2:05 | Finish a round or choose End & score (labeled Ended early), then open the scorecard. | "At the end you get a scorecard: techniques used, your best line, your worst line, and a better thing you could have said." |
 | 2:05-2:35 | Switch to Dana, the angry caller. One or two turns only, show the Anger meter. Mention the rest. | "Same engine, real-world use: a customer whose order arrived broken for the third time. This is customer-service de-escalation practice with no real customer at risk. There are six scenarios in all: a teen caught on their phone at 1 AM, a roommate fed up with dishes, a coworker who took credit for your idea, and an upset friend." |
 | 2:35-3:00 | Close. | "Built by three people from Grand Valley, mostly first hackathon. Gemini plays and scores the character, ElevenLabs voices it and transcribes you. Next: dementia-care and de-escalation scenarios, custom characters, difficulty levels, and progress tracking, for new parents, babysitters, support teams and nursing students. Thank you." |
 
@@ -74,8 +74,8 @@ Say: "Same engine, workplace stakes: you practice asking for credit without wrec
 | No voice from the character (ElevenLabs down or key limit) | The reply text still appears; read it aloud yourself or just continue. Voice failing does not stop the game. |
 | Gemini error or slow reply | Retry once. If it fails again, switch to the backup video immediately. |
 | Wi-Fi down | Switch to the backup video. The app needs internet for both APIs. |
-| Server crashed | Restart the uvicorn command above. Sessions are in memory, so start a new round. |
-| Public site voice limit reached | The live site has a daily voice budget. When it is used up the app tells you to type your reply; typing always works. Use the local server for a voiced demo. |
+| Server crashed | Restart the server using the quick-start instructions. Sessions are in memory, so start a new round. |
+| Public site voice limit reached | The live site has a daily voice budget. When it is used up the app tells you to type your reply; typed input remains available. Use the local server for a voiced demo. |
 | Anything else | Play the pre-recorded screen video and narrate over it. Do not debug at the table. |
 
 Record the backup video before the final deadline: one clean full run, with audio,

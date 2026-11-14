@@ -22,29 +22,19 @@ app.add_middleware(
 
 
 def character_public(c) -> dict:
-    return {
-        "id": c.id,
-        "name": c.name,
-        "emoji": c.emoji,
-        "title": c.title,
-        "scenario": c.scenario,
-        "goal": c.goal,
-        "meter_label": c.meter_label,
-        "start_mood": c.start_mood,
-    }
+    return characters.public_character(c)
 
 
 def tts_b64(text: str, voice_id: str):
     """TTS never fails a request: return None on any error."""
-    if not budget.can_spend(len(text)):
-        return None
     try:
-        out = base64.b64encode(elevenlabs.text_to_speech(text, voice_id)).decode("ascii")
+        with budget.reserve(len(text)) as allowed:
+            if not allowed:
+                return None
+            return base64.b64encode(elevenlabs.text_to_speech(text, voice_id)).decode("ascii")
     except Exception as exc:  # noqa: BLE001 - audio is optional
         log.warning("TTS failed: %s", type(exc).__name__)
         return None
-    budget.spend(len(text))
-    return out
 
 
 def voice_available() -> bool:
@@ -118,21 +108,21 @@ def take_turn(
         data = audio.file.read()
         if not data:
             raise HTTPException(status_code=422, detail="Audio file is empty")
-        if not budget.can_spend(budget.STT_COST):
-            raise HTTPException(
-                status_code=429,
-                detail="Today's voice limit is reached — type your reply instead.",
-            )
         try:
-            user_text = (
-                elevenlabs.speech_to_text(
-                    data, audio.filename or "audio.webm", audio.content_type or "audio/webm"
-                )
-                or ""
-            ).strip()
+            with budget.reserve(budget.STT_COST) as allowed:
+                if not allowed:
+                    raise HTTPException(
+                        status_code=429,
+                        detail="Today's voice limit is reached — type your reply instead.",
+                    )
+                user_text = (
+                    elevenlabs.speech_to_text(
+                        data, audio.filename or "audio.webm", audio.content_type or "audio/webm"
+                    )
+                    or ""
+                ).strip()
         except IntegrationError as exc:
             raise HTTPException(status_code=502, detail=str(exc))
-        budget.spend(budget.STT_COST)
         if not user_text:
             raise HTTPException(status_code=422, detail="Could not hear anything; try again")
 
@@ -181,14 +171,15 @@ def scorecard(session_id: str):
     session = _require_session(session_id)
     if session.turn == 0:
         raise HTTPException(status_code=409, detail="No turns played yet")
+    outcome = "ended" if session.status == "active" else session.status
     try:
         result = gemini.score_session(
-            session.character, list(session.history), session.mood, session.status
+            session.character, list(session.history), session.mood, outcome
         )
     except IntegrationError as exc:
         raise HTTPException(status_code=502, detail=str(exc))
     return {
-        "outcome": session.status,
+        "outcome": outcome,
         "final_mood": session.mood,
         "score": result["score"],
         "summary": result["summary"],

@@ -7,6 +7,7 @@ const OUTCOMES = {
   won: "🎉 You calmed them down",
   lost: "🌋 Full meltdown",
   timeout: "⏱️ Out of turns",
+  ended: "🏁 Ended early",
 };
 
 export function Scorecard({ sessionId, character, onRetry, onPickAnother }) {

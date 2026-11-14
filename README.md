@@ -6,7 +6,7 @@ before you have them with real people.
 Built at Hack The Nest 2026 (Eastern Michigan University, November 14-15, 2026).
 
 **Live demo:** <https://talk-it-out-0dzk.onrender.com> (free hosting: the first visit after
-idle can take 30-60 seconds to wake up; voice is limited per day, typing always works).
+idle can take 30-60 seconds to wake up; voice is limited per day, typed input remains available).
 
 > Pilots practice in simulators. Why do we practice hard conversations for the
 > first time on real people?
@@ -45,54 +45,73 @@ A Hints toggle turns them off if you want a harder round.
   and a better alternative for the worst one.
 
 
-## Quick start (Windows)
+## Quick start
 
-You need Python 3 and two API keys. No Node.js is required.
+Use the repository root. Python is required; Node.js is not required to run the
+app. Preserve an existing `.env`; otherwise copy `.env.example` using the commands
+below. For real conversations, enter `GEMINI_API_KEY` and `ELEVENLABS_API_KEY`
+privately. Optional settings and defaults are in
+[the build contract](docs/API_CONTRACT.md#env-vars-repo-root-env-git-ignored-names-only-here).
+Get keys from [Google AI Studio](https://aistudio.google.com) and
+[ElevenLabs](https://elevenlabs.io); never commit their values.
 
-1. Get keys (free tiers are enough):
-   - Gemini: [aistudio.google.com](https://aistudio.google.com)
-   - ElevenLabs: [elevenlabs.io](https://elevenlabs.io)
-2. From the repo root, create the virtual environment and install dependencies:
-
-   ```powershell
-   python -m venv backend/.venv
-   backend/.venv/Scripts/python -m pip install -r backend/requirements.txt
-   ```
-
-3. Copy `.env.example` to `.env` and fill in the keys:
-
-   ```powershell
-   copy .env.example .env
-   ```
-
-   | Variable | Required | Purpose |
-   |---|---|---|
-   | `GEMINI_API_KEY` | yes | Gemini REST API |
-   | `ELEVENLABS_API_KEY` | yes | ElevenLabs text-to-speech and speech-to-text |
-   | `GEMINI_MODEL` | no | Defaults to `gemini-flash-lite-latest` |
-   | `VOICE_DAILY_CREDIT_LIMIT` | no | Daily ElevenLabs budget (estimated credits); empty means unlimited |
-
-   Never commit `.env`. It is git-ignored.
-
-4. Run the server:
-
-   ```powershell
-   backend/.venv/Scripts/python -m uvicorn app.main:app --app-dir backend --reload --port 8000
-   ```
-
-5. Open <http://localhost:8000>. Allow microphone access, or use the text box.
-
-`GET /api/health` reports whether each key is configured and how much of the
-daily voice budget is left. When the budget is used up, voice is switched off
-and the app falls back to text only: typing always works.
-
-Run the tests:
+### Windows (PowerShell)
 
 ```powershell
-backend/.venv/Scripts/python -m pytest backend/tests
+python -m venv backend/.venv
+backend/.venv/Scripts/python -m pip install -r backend/requirements.txt
+if (!(Test-Path .env)) { Copy-Item .env.example .env }
+backend/.venv/Scripts/python -m uvicorn app.main:app --app-dir backend --reload --port 8000
 ```
 
-<!-- VERIFY after build: every command above runs from a clean checkout; .env.example lists the variables -->
+### macOS / Linux
+
+```bash
+python3 -m venv backend/.venv
+backend/.venv/bin/python -m pip install -r backend/requirements.txt
+test -f .env || cp .env.example .env
+backend/.venv/bin/python -m uvicorn app.main:app --app-dir backend --reload --port 8000
+```
+
+Open <http://localhost:8000>. Allow microphone access or type your reply. Keep the
+terminal running; Ctrl+C stops the server. Health/key-presence and voice-budget
+status are available at `/api/health` (key presence does not verify API access).
+If the voice budget runs out, typed input remains available.
+
+### Simulated demo (no keys)
+
+Use `?mock=1` on the local or live URL. It simulates replies and scorecards without
+calling Gemini or ElevenLabs; it does not provide real speech transcription or
+spoken replies. Add `&novoice=1` to exercise the exhausted-voice UI. The demo uses
+the same scenario catalog, opening lines, hints, and early-ending labels as the
+real app. Ending a round early displays **Ended early**, not Out of turns.
+
+## Validation and demo data
+
+Run the backend suite with your virtual environment's interpreter:
+
+```bash
+backend/.venv/bin/python -m pytest backend/tests
+```
+
+On Windows, use `backend/.venv/Scripts/python` instead. Frontend API regression
+checks use Node's built-in runner (Node is optional for app use):
+
+```bash
+node --test frontend/tests/api.test.mjs
+```
+
+Character definitions are authoritative in `backend/app/characters.py`. After
+changing them, regenerate the committed static demo catalog:
+
+```bash
+python3 backend/scripts/export_demo_characters.py
+```
+
+On Windows, use `python` instead. Do not edit `frontend/characters.json` manually.
+The backend suite checks catalog parity; no build step or API keys are needed
+for export or the mocked tests. Live API and microphone checks must be reported
+separately from these automated checks.
 
 ## Tech stack
 
@@ -105,14 +124,11 @@ backend/.venv/Scripts/python -m pytest backend/tests
 We call both APIs directly over REST because the Google and ElevenLabs Python
 SDKs would not install on our Python 3.14 ARM64 machine.
 
-## Team
+## Team and tracks
 
-Adam Franck (captain), Gavin Robbins, Nolan Drake. Grand Valley State University.
-First hackathon for most of us.
-
-Tracks: AI/ML, Best Beginner, Best use of ElevenLabs. Also eligible for MLH Best
-Use of Gemini API. (Third track to be confirmed in the event app.
-See [team decisions](docs/TEAM_DECISIONS.md#tracks).)
+Roster and confirmed/pending track choices are maintained in
+[team decisions](docs/TEAM_DECISIONS.md). Event category and eligibility details
+remain in [the event reference](docs/HACKATHON_CONTEXT.md).
 
 ## What's next
 

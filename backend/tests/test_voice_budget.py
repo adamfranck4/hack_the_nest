@@ -1,5 +1,7 @@
 """Voice budget (API_CONTRACT v1.2): daily ElevenLabs credit pacing guard."""
 from datetime import datetime, timezone
+from concurrent.futures import ThreadPoolExecutor
+from threading import Event
 
 import pytest
 
@@ -249,3 +251,77 @@ def test_day_rollover_resets_counter(monkeypatch):
 def test_budget_state_does_not_leak_between_tests(monkeypatch):
     set_limit(monkeypatch, 100)
     assert budget.credits_left() == 100
+
+
+def test_simultaneous_tts_cannot_overspend(monkeypatch):
+    from app import main
+
+    set_limit(monkeypatch, 100)
+    entered, release = Event(), Event()
+    calls = []
+
+    def slow_tts(text, voice_id):
+        calls.append(text)
+        entered.set()
+        assert release.wait(5)
+        return b"audio"
+
+    monkeypatch.setattr(main.elevenlabs, "text_to_speech", slow_tts)
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        first = pool.submit(main.tts_b64, "x" * 80, "test-voice")
+        try:
+            assert entered.wait(5)
+            assert budget.credits_left() == 20  # Includes in-flight credits.
+            second = pool.submit(main.tts_b64, "y" * 80, "test-voice")
+            assert second.result(timeout=2) is None
+        finally:
+            release.set()
+        assert first.result(timeout=5)
+    assert len(calls) == 1
+    assert budget.credits_left() == 20
+
+
+def test_inflight_stt_reservation_blocks_competing_tts(client, new_session, monkeypatch):
+    from app import main
+
+    sid = new_session()["session_id"]
+    budget.reset()
+    set_limit(monkeypatch, 150)
+    entered, release = Event(), Event()
+
+    def slow_stt(*args):
+        entered.set()
+        assert release.wait(5)
+        return "I hear you"
+
+    monkeypatch.setattr(main.elevenlabs, "speech_to_text", slow_stt)
+    with ThreadPoolExecutor(max_workers=1) as pool:
+        request = pool.submit(audio_turn, client, sid)
+        try:
+            assert entered.wait(5)
+            assert budget.credits_left() == 50
+            assert main.tts_b64("x" * 80, "test-voice") is None
+        finally:
+            release.set()
+        assert request.result(timeout=5).status_code == 200
+    assert budget.credits_left() == 50 - len("fake reply")
+
+
+def test_failed_old_day_reservation_does_not_refund_new_day(monkeypatch):
+    set_limit(monkeypatch, 100)
+
+    class FakeDT:
+        value = datetime(2026, 1, 1, 23, 59, tzinfo=timezone.utc)
+
+        @classmethod
+        def now(cls, tz=None):
+            return cls.value
+
+    monkeypatch.setattr(budget, "datetime", FakeDT)
+    with pytest.raises(RuntimeError):
+        with budget.reserve(80) as allowed:
+            assert allowed
+            FakeDT.value = datetime(2026, 1, 2, 0, 1, tzinfo=timezone.utc)
+            budget.spend(30)
+            raise RuntimeError("upstream call failed after midnight")
+    assert budget.credits_left() == 70

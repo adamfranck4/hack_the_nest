@@ -255,7 +255,7 @@ def test_scorecard_shape(client, fakes, new_session):
     b = r.json()
     assert set(b) >= {"outcome", "final_mood", "score", "summary", "techniques_used",
                       "best_line", "worst_line", "transcript"}
-    assert b["outcome"] in {"active", "won", "lost", "timeout"}
+    assert b["outcome"] == "ended"
     assert b["score"] == 77 and b["techniques_used"][0]["name"] == "validation"
     t = b["transcript"]
     assert t[0] == {"role": "character", "text": s["opening"]["text"]}
@@ -270,6 +270,31 @@ def test_scorecard_gemini_failure_502(client, fakes, new_session):
     turn(client, s["session_id"])
     fakes.score_error = True
     assert client.get(f"/api/sessions/{s['session_id']}/scorecard").status_code == 502
+
+
+@pytest.mark.parametrize("status", ["won", "lost", "timeout"])
+def test_scorecard_keeps_terminal_outcome(client, fakes, new_session, status):
+    from app import sessions
+
+    s = new_session()
+    turn(client, s["session_id"])
+    session = sessions.get_session(s["session_id"])
+    session.status = status
+    response = client.get(f"/api/sessions/{s['session_id']}/scorecard")
+    assert response.json()["outcome"] == status
+    assert fakes.calls["score"][-1][-1] == status
+
+
+def test_early_scorecard_is_read_only(client, fakes, new_session):
+    from app import sessions
+
+    s = new_session()
+    turn(client, s["session_id"])
+    response = client.get(f"/api/sessions/{s['session_id']}/scorecard")
+    assert response.json()["outcome"] == "ended"
+    assert fakes.calls["score"][-1][-1] == "ended"
+    # GET computes a report outcome without mutating an active game session.
+    assert sessions.get_session(s["session_id"]).status == "active"
 
 
 # 6. reply suggestions
