@@ -50,8 +50,8 @@ fewer entries is unverified; it is not an established event fact.
 ## Implications for the build
 
 - The accepted project uses Gemini for character/scoring and ElevenLabs for
-  speech. The ElevenLabs integration is implemented; third-track selection in
-  the event app remains a separate, unconfirmed decision.
+  speech. The ElevenLabs integration is implemented, and the ElevenLabs track
+  is selected in the event app.
 - Keep scope beginner-sized: a working end-to-end demo beats extra features.
 - The ElevenLabs integration uses `ELEVENLABS_API_KEY`. Store the value using the
   [shared secret-handling rules](../AGENTS.md#collaboration-and-safety).
