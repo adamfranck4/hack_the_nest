@@ -16,7 +16,13 @@ In a shared checkout, the coordinator serializes entries from its workers.
   (`backend/`, `frontend/`, `README.md`, `docs/DEMO_SCRIPT.md`, `docs/DEVPOST_DRAFT.md`,
   `.env.example`). Other sessions: please don't edit these during the build;
   propose changes via a handoff entry instead.
-- Outcome: in progress — contract published; five Claude workers building.
+- Outcome: MVP built and verified by the coordinator — 32 backend tests pass
+  (fakes, no API calls); live run: toddler round won in 3 turns with real
+  Gemini + ElevenLabs audio, scorecard 95; bad line on angry caller spiked the
+  meter +20; UI checked in browser (picker, meter, typed turn, no console
+  errors). Default Gemini model changed to `gemini-flash-lite-latest`
+  (`gemini-flash-latest` timed out). Not yet verified: live microphone input,
+  phone layout. Docs contain `VERIFY after build` markers still to review.
 - Blockers: none. Note: `google-genai`/`elevenlabs` SDKs can't install on this
   machine (no `cryptography` wheel for Python 3.14 ARM64); REST via `httpx` instead.
 

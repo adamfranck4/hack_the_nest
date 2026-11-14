@@ -39,7 +39,7 @@ backend/.venv/Scripts/python -m pytest backend/tests
 |---|---|---|
 | `GEMINI_API_KEY` | yes | Gemini REST, header `x-goog-api-key` |
 | `ELEVENLABS_API_KEY` | yes | ElevenLabs REST, header `xi-api-key` |
-| `GEMINI_MODEL` | no | default `gemini-flash-latest` |
+| `GEMINI_MODEL` | no | default `gemini-flash-lite-latest` (falls back to `gemini-3.5-flash`) |
 
 Never put key values in URLs, logs, code, tests or docs.
 
