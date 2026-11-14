@@ -110,6 +110,7 @@ Adam Franck (captain), Gavin Robbins, Nolan Drake. Grand Valley State University
 
 ## Links to add
 
+- Live demo (Try it out): <https://talk-it-out-0dzk.onrender.com>
 - Code: <https://github.com/adamfranck4/hack_the_nest>
 - Demo video: TODO after recording (shot list in [DEMO_SCRIPT.md](DEMO_SCRIPT.md))
 - Screenshots: TODO (character select, meter mid-round, scorecard)

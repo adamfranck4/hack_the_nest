@@ -5,6 +5,9 @@ before you have them with real people.
 
 Built at Hack The Nest 2026 (Eastern Michigan University, November 14-15, 2026).
 
+**Live demo:** <https://talk-it-out-0dzk.onrender.com> (free hosting: the first visit after
+idle can take 30-60 seconds to wake up; voice is limited per day, typing always works).
+
 > Pilots practice in simulators. Why do we practice hard conversations for the
 > first time on real people?
 
