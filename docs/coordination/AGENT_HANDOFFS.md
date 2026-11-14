@@ -14,6 +14,26 @@ older ownership requests, test counts, placeholders, and verification notes
 describe their original task. Consult newer outcomes and the authoritative
 references before treating an older note as current.
 
+## 2026-11-14 — codex-microphone-status — documentation follow-up
+
+- Branch/base: local `work` targeting shared `main`, base `04c4563`.
+- Input: Adam confirmed the microphone is functional and clarified that the
+  question concerns pending or unclear documentation. Treat this as team-reported
+  validation; device/browser details, a complete voice round, and exported video
+  audio were not specified. Codex did not independently retest the microphone.
+- Outcome: updated microphone status in README, submission copy, assessment,
+  and demo readiness; preserved old handoffs as historical evidence. Remaining
+  submission unknowns are individual contributions/learning, AI/ML provider
+  eligibility/optional MLH entry, exported video checks, and final entry status.
+  Sponsor history and optional agent activation remain labeled background unknowns.
+- Validation: all 19 tracked Markdown pages render and 84 local links/anchors
+  resolve; stale current microphone caveats removed and diff checks passed.
+  No app/agent settings changed; app suites were not rerun for this docs-only update.
+- Operations/delivery: no dependency installation, app servers, paid API calls,
+  microphone retest, or secret changes. Ownership limited to the five affected
+  docs. Push targets GitHub `main`, verified after delivery and reported by commit
+  link; Render may auto-deploy, with deployment status unverified.
+
 ## 2026-11-14 — codex-docs-continuity — cross-document review
 
 - Branch/base: local `work` targeting shared `main`, base `2ef8e05`.

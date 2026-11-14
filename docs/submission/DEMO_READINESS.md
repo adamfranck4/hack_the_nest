@@ -11,8 +11,9 @@ Submission limits, deadlines, and attendance requirements are maintained in
   the public app early enough for the free host to wake.
 - Check `/api/health` for configured-key presence and voice availability. These
   flags alone do not prove provider authentication or microphone functionality.
-- On the actual recording/judging device, test microphone permission, recording,
-  transcription, character playback, and scorecard generation.
+- The team confirms microphone functionality. If the recording/judging device
+  changes, repeat the permission/input check; rehearse transcription, character
+  playback, and scorecard generation together on the device being used.
 - Confirm the recorder captures both the presenter and app audio by playing back
   a short test. Keep credentials, private tabs, and notifications out of view.
 - Plan sufficient bounded voice quota for a full session. Public pacing limits
@@ -30,8 +31,9 @@ coaching feedback rather than validated measures of learning.
 Mock mode is useful for reviewing the interface, but its responses and scores
 are simulated. Label it clearly and use real mode when demonstrating live AI
 and speech integration. Automated and live validation evidence belongs in
-[the dated handoffs](../coordination/AGENT_HANDOFFS.md); complete the device-specific checks
-above before claiming the full microphone path was verified.
+[the dated handoffs](../coordination/AGENT_HANDOFFS.md). Distinguish team-reported
+microphone functionality from independently observed checks and recorded-media
+verification; one does not establish all the others.
 
 ## Fallbacks
 

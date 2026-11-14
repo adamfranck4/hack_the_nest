@@ -20,7 +20,7 @@ and judges' comparisons.
 | Track | Published basis | Current judging assessment |
 |---|---|---|
 | Best Beginner | Official site says most members must be first-timers and judging emphasizes growth/learning, not polish | The team confirms all three are first-time attendees; strong fit if participants can explain their learning and decisions |
-| Best Use of ElevenLabs | Official site highlights ideas that talk/listen, conversational agents, TTS and STT; game characters are an explicit example | Meaningful integration: character speech plus user transcription. Main uncertainty is the unverified live microphone loop and whether voice delivery makes the practice convincing |
+| Best Use of ElevenLabs | Official site highlights ideas that talk/listen, conversational agents, TTS and STT; game characters are an explicit example | Meaningful integration: character speech plus user transcription. Adam confirms the microphone works; remaining demo considerations include sufficient voice quota and convincing delivery |
 | AI/ML | Website's differently named Future of Intelligence promotes OpenAI models and Exa search, useful agents/apps/tools and product polish | Gemini roleplay, structured feedback and stateful gameplay are implemented, but provider eligibility is unresolved and the general coaching concept is established elsewhere |
 
 Published descriptions are in the [event context](HACKATHON_CONTEXT.md#independently-checked-track-descriptions).
@@ -75,8 +75,9 @@ eight-turn round. The counter is an estimate, not an ElevenLabs billing quote.
 
 Before judging:
 
-- Rehearse microphone recording, transcription and reply playback end to end on
-  the actual laptop/browser. That microphone/STT path remains unverified by Codex.
+- Microphone functionality is now team-confirmed, as recorded in the
+  [handoffs](../coordination/AGENT_HANDOFFS.md). Codex has not independently retested it.
+  Recheck the full conversation when changing devices or preparing the recording.
 - Plan enough demo/rehearsal quota within the service key's real limit. Prefer a
   controlled local/demo configuration rather than removing protection from the
   public site. Change settings explicitly and record them in the handoff.

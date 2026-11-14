@@ -57,8 +57,9 @@ simultaneous voice requests from overspending the estimated daily budget.
 
 The [handoffs](../coordination/AGENT_HANDOFFS.md) record automated and live checks separately.
 Automated tests use fake integrations and do not validate paid services. A real
-typed Gemini round and scorecard were verified; the team still needs to confirm
-microphone capture/transcription and its recording setup on the actual device.
+typed Gemini round and scorecard were verified. Adam confirmed that the microphone
+is functional; this is team-reported validation. The separate screen-recording
+audio check remains part of demo readiness.
 
 Sessions and counters reset on restart. Feedback is generated from the transcript,
 not vocal tone, and scores are not validated measures of learning. Mock mode is

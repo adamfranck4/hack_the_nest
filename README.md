@@ -164,8 +164,8 @@ and live checks are recorded in [agent handoffs](docs/coordination/AGENT_HANDOFF
 - Mock mode uses matching scenario data but simulated replies and scorecards;
   it does not call Gemini/ElevenLabs or provide real transcription/playback.
   `?mock=1&novoice=1` exercises the text fallback.
-- Automated tests and a live typed Gemini round were verified. Real microphone
-  capture/transcription still needs team verification on the recording/judging device.
+- Automated tests and a live typed Gemini round were verified. Microphone
+  functionality is confirmed by the team; validation details are in the handoffs.
 
 ## Documentation
 
