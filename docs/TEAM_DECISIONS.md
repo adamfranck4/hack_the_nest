@@ -69,8 +69,8 @@ toddler simulator (folded in as one character), financial-literacy game.
 installed on the build machine, so the frontend uses React via CDN with no build
 step. Full contract, ownership and run commands: [API_CONTRACT.md](API_CONTRACT.md).
 
-API keys: Gemini (AI Studio, free tier) and ElevenLabs (restricted key, 7-day
-expiry) are stored in Adam's git-ignored `.env`; teammates need their own copy
+API keys: Gemini (AI Studio, free tier) and ElevenLabs (restricted key, 8,000-credit
+usage cap, no expiry) are stored in Adam's git-ignored `.env`; teammates need their own copy
 shared privately.
 
 ## Open items
