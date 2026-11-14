@@ -2,5 +2,5 @@ name = "backend"
 description = "Backend worker for hack_the_nest. Builds the server, API routes, business logic and auth. Use for anything behind the API boundary."
 developer_instructions = """
 Read root `AGENTS.md` and follow its mandatory workflow and context links.
-Read `docs/AGENT_ROLES.md#backend` and follow the `backend` responsibilities.
+Read `docs/coordination/AGENT_ROLES.md#backend` and follow the `backend` responsibilities.
 """

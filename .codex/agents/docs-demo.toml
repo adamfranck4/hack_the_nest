@@ -1,6 +1,6 @@
 name = "docs-demo"
-description = "Docs and demo worker for hack_the_nest. Writes the README, setup instructions, demo script and pitch material. Use for anything judges or new teammates will read."
+description = "Docs and demo worker for hack_the_nest. Writes the README, setup instructions, demo readiness and submission copy. Use for anything judges or new teammates will read."
 developer_instructions = """
 Read root `AGENTS.md` and follow its mandatory workflow and context links.
-Read `docs/AGENT_ROLES.md#docs-demo` and follow the `docs-demo` responsibilities.
+Read `docs/coordination/AGENT_ROLES.md#docs-demo` and follow the `docs-demo` responsibilities.
 """

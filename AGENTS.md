@@ -10,11 +10,11 @@ separate memory, checkouts, tools, and permissions. Never assume shared chat his
 
 | Document | Authoritative content |
 |---|---|
-| [Hackathon context](docs/HACKATHON_CONTEXT.md) | Event facts, deadlines, sources, verification status |
-| [Team decisions](docs/TEAM_DECISIONS.md) | Roster, accepted choices, proposals, unresolved decisions |
+| [Hackathon context](docs/hackathon/HACKATHON_CONTEXT.md) | Event facts, deadlines, sources, verification status |
+| [Team decisions](docs/coordination/TEAM_DECISIONS.md) | Roster, accepted choices, proposals, unresolved decisions |
 | [Build contract](docs/API_CONTRACT.md) | App API routes, interfaces, file ownership |
-| [Agent handoffs](docs/AGENT_HANDOFFS.md) | Per-input status, ownership, outcomes, blockers |
-| [Agent roles](docs/AGENT_ROLES.md) | Manager and worker responsibilities |
+| [Agent handoffs](docs/coordination/AGENT_HANDOFFS.md) | Per-input status, ownership, outcomes, blockers |
+| [Agent roles](docs/coordination/AGENT_ROLES.md) | Manager and worker responsibilities |
 | This file | Shared workflow, safety, organization rules |
 
 Read team decisions and current handoffs before work; consult event context when
@@ -85,7 +85,7 @@ unverified completion.
   work belonging to someone else.
 - Run relevant tests for application changes and report actual outcomes, including
   failed or unrun checks. Prioritize a working project before the final submission
-  deadline in [the event schedule](docs/HACKATHON_CONTEXT.md#critical-deadlines).
+  deadline in [the event schedule](docs/hackathon/HACKATHON_CONTEXT.md#critical-deadlines).
 - Never expose or commit keys, tokens, credentials, or other secrets. Use approved
   environment secret storage or ignored local configuration; document names only.
   Never share account credentials between agents.
@@ -101,6 +101,9 @@ Before delivering each batch, review the affected files and their references:
   do not turn the reviewer overview into an operational log.
 - Extend the appropriate existing file before creating a new one. New files need
   a distinct purpose and an index/reference link; avoid duplicate context files.
+- Group supporting docs in `docs/coordination/`, `docs/hackathon/`, or
+  `docs/submission/` as appropriate. Keep required agent entry files and deployment
+  configuration in their expected locations; update links when moving documents.
 - Keep platform entries thin: retain required metadata and runtime-specific
   instructions, and point to the shared rules/roles. Keep counterpart entry
   formats uniform without copying platform-specific tools or models across agents.

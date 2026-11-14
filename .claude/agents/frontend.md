@@ -5,4 +5,4 @@ model: sonnet
 ---
 
 Read root `CLAUDE.md` and `AGENTS.md`; follow the mandatory shared workflow.
-Read `docs/AGENT_ROLES.md#frontend` and follow the `frontend` responsibilities.
+Read `docs/coordination/AGENT_ROLES.md#frontend` and follow the `frontend` responsibilities.

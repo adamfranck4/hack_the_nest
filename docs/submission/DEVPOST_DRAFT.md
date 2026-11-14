@@ -3,8 +3,7 @@
 Prepared project text for the team's final review; this document does not mean
 an entry has been submitted. Submit through the
 [official event](https://hack-the-nest.devpost.com/) using the
-[verified requirements](HACKATHON_CONTEXT.md#verified-devpost-submission-requirements).
-The required video is managed separately from GitHub.
+[verified requirements](../hackathon/HACKATHON_CONTEXT.md#verified-devpost-submission-requirements).
 
 ## Project name
 
@@ -29,7 +28,7 @@ and a scorecard summarizes techniques, examples, and alternatives. The transcrip
 lets the learner review the exchange before another attempt.
 
 The live scenario definitions are maintained in
-[the character catalog](../backend/app/characters.py). Sessions have bounded
+[the character catalog](../../backend/app/characters.py). Sessions have bounded
 turns and explicit outcomes, including an early-ending report. Voice requests
 share an atomic estimated-credit budget; typed input remains available when
 voice is paused.
@@ -43,8 +42,8 @@ voice is paused.
 - In-memory session state and daily voice-credit reservations.
 - Automated API, game-rule, concurrency, and mock/live catalog regression checks.
 
-See the [architecture and code map](../README.md#architecture-and-code-map) for
-source entry points and the [API contract](API_CONTRACT.md) for interfaces.
+See the [architecture and code map](../../README.md#architecture-and-code-map) for
+source entry points and the [API contract](../API_CONTRACT.md) for interfaces.
 
 ## Engineering choices
 
@@ -56,7 +55,7 @@ simultaneous voice requests from overspending the estimated daily budget.
 
 ## Validation and limitations
 
-The [handoffs](AGENT_HANDOFFS.md) record automated and live checks separately.
+The [handoffs](../coordination/AGENT_HANDOFFS.md) record automated and live checks separately.
 Automated tests use fake integrations and do not validate paid services. A real
 typed Gemini round and scorecard were verified; the team still needs to confirm
 microphone capture/transcription and its recording setup on the actual device.
@@ -75,7 +74,7 @@ values, credential files, or sensitive logs belong in the entry.
 
 ## Team and tracks
 
-The [team record](TEAM_DECISIONS.md) contains the roster and confirmed app
+The [team record](../coordination/TEAM_DECISIONS.md) contains the roster and confirmed app
 selections. Enter the corresponding main-track and applicable award entries in
 Devpost. Provider conditions for AI/ML and any additional MLH entry remain
 organizer-confirmation items; selection alone does not establish eligibility.
@@ -84,12 +83,16 @@ organizer-confirmation items; selection alone does not establish eligibility.
 
 Custom scenarios, difficulty options, and practice history are possible future
 work, not current features. Product recommendations are kept separately in
-[the track assessment](TRACK_ASSESSMENT.md#product-priorities-recommendations-not-an-implementation-request).
+[the track assessment](../hackathon/TRACK_ASSESSMENT.md#product-priorities-recommendations-not-an-implementation-request).
 
 ## Links
 
 - [Live app](https://talk-it-out-0dzk.onrender.com/)
 - [Public repository](https://github.com/adamfranck4/hack_the_nest)
 
-The video URL and any media fields are entered directly in the submission form.
-Use only actual, checked media; no placeholder video links are kept here.
+## Submission media
+
+Submit the required video separately through Devpost; enter its checked URL and
+other media directly in the submission form. Keep the video and private recording
+script out of GitHub. Prepare requested narration privately in chat unless the
+user explicitly authorizes publishing it. Use only actual, checked media.

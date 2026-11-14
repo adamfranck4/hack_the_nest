@@ -6,6 +6,6 @@ effort: high
 ---
 
 Read root `CLAUDE.md` and `AGENTS.md`; follow the mandatory shared workflow.
-Read `docs/AGENT_ROLES.md#manager` and follow the `manager` responsibilities.
+Read `docs/coordination/AGENT_ROLES.md#manager` and follow the `manager` responsibilities.
 Use Claude Code's Agent tool with the worker role names as `subagent_type`,
 when available in the current runtime.

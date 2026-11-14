@@ -1,9 +1,9 @@
 # Team decisions
 
 Team choices and strategy for Hack The Nest 2026. Event facts (rules, deadlines,
-prize lists) live in [HACKATHON_CONTEXT.md](HACKATHON_CONTEXT.md); this file
+prize lists) live in [HACKATHON_CONTEXT.md](../hackathon/HACKATHON_CONTEXT.md); this file
 records what *our team* decided and why. Update it when a decision changes.
-The [track assessment](TRACK_ASSESSMENT.md) contains research and recommendations;
+The [track assessment](../hackathon/TRACK_ASSESSMENT.md) contains research and recommendations;
 it does not change the selections or accepted project recorded here.
 
 Last updated: Saturday, November 14, 2026 (codex-reviewer-docs; clarified references
@@ -22,7 +22,7 @@ We are a beginner team (first hackathon for most of us).
 ## Tracks
 
 Selection rules and prizes are recorded in
-[the event reference](HACKATHON_CONTEXT.md#selectable-tracks-in-the-official-app).
+[the event reference](../hackathon/HACKATHON_CONTEXT.md#selectable-tracks-in-the-official-app).
 
 | # | Track | Status |
 |---|---|---|
@@ -54,7 +54,7 @@ fewer entries is unverified; it is not an established event fact.
   is selected in the event app.
 - Keep scope beginner-sized: a working end-to-end demo beats extra features.
 - The ElevenLabs integration uses `ELEVENLABS_API_KEY`. Store the value using the
-  [shared secret-handling rules](../AGENTS.md#collaboration-and-safety).
+  [shared secret-handling rules](../../AGENTS.md#collaboration-and-safety).
 
 ## Project (accepted by Adam, 2026-11-14)
 
@@ -69,15 +69,15 @@ toddler simulator (folded in as one character), financial-literacy game.
 **Stack (accepted):** Python (FastAPI) backend + React frontend with no build
 step. This originally accommodated a build machine without Node; Node is optional
 for frontend regression checks, not required to run the app. Full contract and
-ownership: [API_CONTRACT.md](API_CONTRACT.md).
+ownership: [API_CONTRACT.md](../API_CONTRACT.md).
 
-Configure live services using the [setup instructions](../README.md#2-configure-live-services)
-and follow the [shared secret-handling rules](../AGENTS.md#collaboration-and-safety).
+Configure live services using the [setup instructions](../../README.md#2-configure-live-services)
+and follow the [shared secret-handling rules](../../AGENTS.md#collaboration-and-safety).
 Keep credentials out of the repository.
 
 ## Scope and references
 
 - Implemented scope: six scenarios; the catalog lives in
-  [the character definitions](../backend/app/characters.py).
+  [the character definitions](../../backend/app/characters.py).
 - Custom characters and difficulty levels remain stretch goals, not current features.
-- Submission deadlines: see [the event schedule](HACKATHON_CONTEXT.md#critical-deadlines).
+- Submission deadlines: see [the event schedule](../hackathon/HACKATHON_CONTEXT.md#critical-deadlines).

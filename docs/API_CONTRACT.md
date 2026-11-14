@@ -5,7 +5,7 @@ routes and payloads, Python module interfaces, and env var names. The current
 task coordinator records interface changes here; delegated workers report needed
 changes instead of editing around it. Initial build ownership below is historical
 guidance; current assignments are recorded in agent handoffs. Project rationale lives in
-[TEAM_DECISIONS.md](TEAM_DECISIONS.md).
+[TEAM_DECISIONS.md](coordination/TEAM_DECISIONS.md).
 
 ## What the app does
 
@@ -47,8 +47,8 @@ Never put key values in URLs, logs, code, tests or docs.
 | `backend/app/characters.py`, `backend/app/integrations/` (`__init__.py`, `gemini.py`, `elevenlabs.py`), `backend/scripts/` | data-integrations |
 | `frontend/` | frontend |
 | `backend/tests/` | qa-tester |
-| `README.md`, `docs/DEMO_SCRIPT.md`, `docs/DEVPOST_DRAFT.md` | docs-demo |
-| `.env.example`, this file, `docs/TEAM_DECISIONS.md`, `docs/AGENT_HANDOFFS.md`, shared-checkout Git operations | current task coordinator |
+| `README.md`, `docs/submission/DEMO_READINESS.md`, `docs/submission/DEVPOST_DRAFT.md` | docs-demo |
+| `.env.example`, this file, `docs/coordination/TEAM_DECISIONS.md`, `docs/coordination/AGENT_HANDOFFS.md`, shared-checkout Git operations | current task coordinator |
 
 Delegated workers do not run `git add/commit/push/checkout` in a shared checkout;
 their coordinator does. Independent sessions/checkouts still follow AGENTS.md.

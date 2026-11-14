@@ -8,8 +8,7 @@ University, November 14–15.
 [**Simulated demo — no API keys**](https://talk-it-out-0dzk.onrender.com/?mock=1)
 
 Free hosting may take 30–60 seconds to wake after inactivity. Voice has a daily
-budget; typed input remains available when it runs out. The judges' video is
-submitted separately.
+budget; typed input remains available when it runs out.
 
 ## The experience
 
@@ -38,6 +37,9 @@ Gemini generates the dialogue, suggested mood change, hints, and scorecard.
 Python validates the supported technique names and bounds, applies the game
 rules, and reserves estimated voice credits before external speech calls.
 
+<details>
+<summary>Explore the code map</summary>
+
 | Start here | Responsibility |
 |---|---|
 | [API routes](backend/app/main.py) | Sessions, turns, scorecards, health, and frontend serving |
@@ -49,6 +51,8 @@ rules, and reserves estimated voice credits before external speech calls.
 | [Frontend](frontend/app.js) · [components](frontend/components/) | Character picker, conversation, meter, and scorecard |
 | [API client and simulator](frontend/api.js) | Real requests and clearly labeled mock behavior |
 | [Backend tests](backend/tests/) · [frontend tests](frontend/tests/) | API, game, budget, and demo regression checks |
+
+</details>
 
 Payloads, environment variables, and deployment behavior are documented in the
 [API contract](docs/API_CONTRACT.md).
@@ -63,7 +67,8 @@ Run commands from the repository root. Choose your platform below.
 
 ### 1. Install dependencies and prepare local configuration
 
-**macOS / Linux**
+<details>
+<summary>macOS / Linux commands</summary>
 
 ```bash
 python3 -m venv backend/.venv
@@ -71,13 +76,18 @@ backend/.venv/bin/python -m pip install -r backend/requirements.txt
 test -f .env || cp .env.example .env
 ```
 
-**Windows PowerShell**
+</details>
+
+<details>
+<summary>Windows PowerShell commands</summary>
 
 ```powershell
 python -m venv backend/.venv
 backend/.venv/Scripts/python -m pip install -r backend/requirements.txt
 if (!(Test-Path .env)) { Copy-Item .env.example .env }
 ```
+
+</details>
 
 ### 2. Configure live services
 
@@ -92,17 +102,23 @@ To explore only the simulated demo, leave keys unset and use `?mock=1`.
 
 ### 3. Start and open the app
 
-**macOS / Linux**
+<details>
+<summary>macOS / Linux commands</summary>
 
 ```bash
 backend/.venv/bin/python -m uvicorn app.main:app --app-dir backend --reload --port 8000
 ```
 
-**Windows PowerShell**
+</details>
+
+<details>
+<summary>Windows PowerShell commands</summary>
 
 ```powershell
 backend/.venv/Scripts/python -m uvicorn app.main:app --app-dir backend --reload --port 8000
 ```
+
+</details>
 
 Open <http://localhost:8000> for live conversations, or
 <http://localhost:8000/?mock=1> for the simulator. Keep the terminal running;
@@ -132,7 +148,7 @@ python3 backend/scripts/export_demo_characters.py
 
 On Windows, use `python` instead. Do not edit the JSON manually; the backend
 suite checks that the static demo catalog matches the live catalog. Test outcomes
-and live checks are recorded in [agent handoffs](docs/AGENT_HANDOFFS.md).
+and live checks are recorded in [agent handoffs](docs/coordination/AGENT_HANDOFFS.md).
 
 ## Current boundaries
 
@@ -148,7 +164,7 @@ and live checks are recorded in [agent handoffs](docs/AGENT_HANDOFFS.md).
 
 ## Documentation
 
-[API contract](docs/API_CONTRACT.md) · [Team and selected tracks](docs/TEAM_DECISIONS.md) ·
+[API contract](docs/API_CONTRACT.md) · [Team and selected tracks](docs/coordination/TEAM_DECISIONS.md) ·
 [Documentation index](docs/README.md)
 
 The index separates technical references, submission preparation, research, and

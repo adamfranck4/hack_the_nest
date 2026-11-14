@@ -6,8 +6,33 @@ owned, new context or an explicit no-decision-change note, outcome, and blockers
 Update the entry as work completes. Keep facts and accepted decisions in their
 existing reference documents; never include secrets or whole chat transcripts.
 In a shared checkout, the coordinator serializes entries from its workers.
-Apply the [shared transparency requirements](../AGENTS.md#required-transparency-for-every-agent)
+Apply the [shared transparency requirements](../../AGENTS.md#required-transparency-for-every-agent)
 to operational actions and push/deployment status as well as code changes.
+
+## 2026-11-14 — codex-docs-layout — documentation organization
+
+- Branch/base: local `work` targeting shared `main`, base `81a6b96`.
+- Input: apply the layout review: group documentation, rename demo readiness,
+  simplify README display, and align recording guidance. Preserve application
+  code and functional agent entry/configuration files.
+- Ownership: documentation moves and references in Markdown/Codex role entries;
+  no application, dependency, deployment configuration, or secret changes.
+- Outcome: moved seven existing documents into coordination/hackathon/submission
+  folders; renamed demo readiness and updated the index, root entries, ownership
+  table, and all 12 platform role references. README now has five collapsible
+  sections. Centralized submission media handling and aligned the docs-demo role.
+  Preserved team choices, research text, history, and optional agent scaffolding;
+  no new context documents or private scripts were added.
+- Validation: 20 Markdown files and 82 local links/anchors checked; no obsolete
+  doc paths remain. All six Codex TOMLs and six Claude metadata blocks parse;
+  agent model metadata is unchanged. All 10 overview/doc pages render with a
+  CommonMark parser; the README table and command blocks sit inside their intended
+  disclosure panels. Diff checks pass; app, test, dependency, and deployment files
+  are unchanged. App suites were not rerun for this documentation-only batch.
+- Operations: installed a Markdown renderer only in the existing temporary
+  `/tmp` validation environment; no app server, paid API calls, secret changes,
+  or hosting changes. Delivery targets GitHub `main`, verified after push and
+  reported with a commit link. Render may auto-deploy; deployment is unverified.
 
 ## 2026-11-14 — codex-reviewer-docs — repository presentation
 
@@ -65,7 +90,7 @@ to operational actions and push/deployment status as well as code changes.
   selection using prior context, current code, and new official-source research.
 - Ownership: assessment/provenance documentation and this handoff only. No app,
   track selections, environment settings, or deployment settings are being changed.
-- Outcome: [TRACK_ASSESSMENT.md](TRACK_ASSESSMENT.md) separates verified descriptions,
+- Outcome: [TRACK_ASSESSMENT.md](../hackathon/TRACK_ASSESSMENT.md) separates verified descriptions,
   judge-style assessment, and prioritized recommendations. Verified website text
   adds beginner learning emphasis and flags unresolved OpenAI/Exa provider fit.
   Entrant tracks redirected to login; current account selection cannot be verified.
@@ -123,8 +148,8 @@ to operational actions and push/deployment status as well as code changes.
 - Branch/base: shared `main` on Adam's machine, base `3ba42ad`.
 - Input: Adam chose the "Talk It Out" conversation-practice app and a Python +
   React stack (see [team decisions](TEAM_DECISIONS.md#project-accepted-by-adam-2026-11-14)).
-- Owned files: everything listed in [API_CONTRACT.md](API_CONTRACT.md#folder-layout-and-ownership)
-  (`backend/`, `frontend/`, `README.md`, `docs/DEMO_SCRIPT.md`, `docs/DEVPOST_DRAFT.md`,
+- Owned files: everything listed in [API_CONTRACT.md](../API_CONTRACT.md#folder-layout-and-ownership)
+  (`backend/`, `frontend/`, `README.md`, `docs/submission/DEMO_READINESS.md`, `docs/submission/DEVPOST_DRAFT.md`,
   `.env.example`). Other sessions: please don't edit these during the build;
   propose changes via a handoff entry instead.
 - Outcome: MVP built and verified by the coordinator — 32 backend tests pass

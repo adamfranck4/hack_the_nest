@@ -1,13 +1,13 @@
 # Demo readiness
 
-The judges' video and private recording script are handled separately from
-GitHub. This file contains only readiness checks and fallback guidance.
+Readiness checks and fallback guidance for the live demonstration.
+[Submission media](DEVPOST_DRAFT.md#submission-media) has the video-handling instructions.
 Submission limits, deadlines, and attendance requirements are maintained in
-[the event reference](HACKATHON_CONTEXT.md#verified-devpost-submission-requirements).
+[the event reference](../hackathon/HACKATHON_CONTEXT.md#verified-devpost-submission-requirements).
 
 ## Before a real demonstration
 
-- Start the service using the [quick start](../README.md#quick-start), or open
+- Start the service using the [quick start](../../README.md#quick-start), or open
   the public app early enough for the free host to wake.
 - Check `/api/health` for configured-key presence and voice availability. These
   flags alone do not prove provider authentication or microphone functionality.
@@ -16,7 +16,7 @@ Submission limits, deadlines, and attendance requirements are maintained in
 - Confirm the recorder captures both the presenter and app audio by playing back
   a short test. Keep credentials, private tabs, and notifications out of view.
 - Plan sufficient bounded voice quota for a full session. Public pacing limits
-  are described in the [API contract](API_CONTRACT.md#voice-budget-v12).
+  are described in the [API contract](../API_CONTRACT.md#voice-budget-v12).
 - Coordinate a pause in `main` pushes during the demonstration: Render can
   redeploy, and in-memory sessions reset when the process restarts.
 
@@ -30,7 +30,7 @@ coaching feedback rather than validated measures of learning.
 Mock mode is useful for reviewing the interface, but its responses and scores
 are simulated. Label it clearly and use real mode when demonstrating live AI
 and speech integration. Automated and live validation evidence belongs in
-[the dated handoffs](AGENT_HANDOFFS.md); complete the device-specific checks
+[the dated handoffs](../coordination/AGENT_HANDOFFS.md); complete the device-specific checks
 above before claiming the full microphone path was verified.
 
 ## Fallbacks
@@ -45,6 +45,6 @@ above before claiming the full microphone path was verified.
 | Connectivity fails | Use a local copy of the recorded backup; the live app needs internet |
 
 For the separately submitted video, verify duration and access against the
-[official requirements](HACKATHON_CONTEXT.md#verified-devpost-submission-requirements).
+[official requirements](../hackathon/HACKATHON_CONTEXT.md#verified-devpost-submission-requirements).
 Do not publish or describe a recording as completed until the team has checked
 its exported file and judge-facing link.

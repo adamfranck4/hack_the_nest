@@ -2,7 +2,7 @@
 
 Assessment date: November 14, 2026. Code baseline: `70dcb25`. These are Codex's
 recommendations, not organizer scoring weights or accepted team decisions.
-Current selections/status remain in [TEAM_DECISIONS.md](TEAM_DECISIONS.md#tracks).
+Current selections/status remain in [TEAM_DECISIONS.md](../coordination/TEAM_DECISIONS.md#tracks).
 Subsequent same-day updates confirm all three tracks selected and identify the
 official Devpost event/rules. The verified five judging criteria and submission
 requirements are recorded in [event context](HACKATHON_CONTEXT.md#verified-judging-requirements).
@@ -44,7 +44,7 @@ The implemented app gives the team substantial learning material: a public
 deployment, Python/React integration, structured model responses, audio handling,
 mock/live parity, concurrent budgeting, and meaningful regression checks.
 Prior validation includes 89 backend tests, four frontend checks, mobile/browser
-flows and a real typed Gemini round; see [the handoff](AGENT_HANDOFFS.md).
+flows and a real typed Gemini round; see [the handoff](../coordination/AGENT_HANDOFFS.md).
 
 Those achievements help only if the participants understand and explain them.
 All AI use was permitted in the supplied rules, so disclose Claude/Codex use

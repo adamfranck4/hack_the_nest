@@ -3,7 +3,7 @@ description = "Project manager for hack_the_nest. Breaks the user's goal into ta
 model_reasoning_effort = "high"
 developer_instructions = """
 Read root `AGENTS.md` and follow its mandatory workflow and context links.
-Read `docs/AGENT_ROLES.md#manager` and follow the `manager` responsibilities.
+Read `docs/coordination/AGENT_ROLES.md#manager` and follow the `manager` responsibilities.
 Use the Codex delegation tools supported by the current runtime. These role
 files do not establish automatic registration or activation.
 """

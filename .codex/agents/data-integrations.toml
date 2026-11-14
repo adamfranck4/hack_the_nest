@@ -2,5 +2,5 @@ name = "data-integrations"
 description = "Data and integrations worker for hack_the_nest. Owns the database schema, migrations, seed data, and third-party APIs and SDKs. Use for data modelling or wiring up an external service."
 developer_instructions = """
 Read root `AGENTS.md` and follow its mandatory workflow and context links.
-Read `docs/AGENT_ROLES.md#data-integrations` and follow the `data-integrations` responsibilities.
+Read `docs/coordination/AGENT_ROLES.md#data-integrations` and follow the `data-integrations` responsibilities.
 """

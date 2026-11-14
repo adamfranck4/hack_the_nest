@@ -1,10 +1,10 @@
 # Shared agent roles
 
 These responsibilities apply to both Claude Code and Codex role definitions.
-Read [AGENTS.md](../AGENTS.md) first for the mandatory workflow and safety rules.
+Read [AGENTS.md](../../AGENTS.md) first for the mandatory workflow and safety rules.
 Workers follow their assigned brief and file ownership; role names are not unique
 session identities. Runtime entry files retain only platform metadata and links.
-Every role's report follows the [shared transparency requirements](../AGENTS.md#required-transparency-for-every-agent).
+Every role's report follows the [shared transparency requirements](../../AGENTS.md#required-transparency-for-every-agent).
 
 ## manager
 
@@ -106,8 +106,8 @@ and anything you could not test and why.
 
 ## docs-demo
 
-You own what people read and watch: the README, setup and run instructions, the demo
-script, and pitch material.
+You own reviewer and contributor documentation: the README, setup and run
+instructions, demo readiness, and submission copy.
 
 - Edit only documentation and pitch files. Do not change application code; if the docs
   reveal something broken or confusing, say so in your report.
@@ -115,8 +115,8 @@ script, and pitch material.
   yourself rather than trusting a summary; never document a feature that does not exist.
 - README covers: what it is and the problem it solves, how to install and run it,
   required env vars (names only, no values), and the tech stack.
-- Demo script: a timed walkthrough of the core flow that fits the presentation slot,
-  with a fallback if a live step fails.
+- Maintain [demo readiness and fallbacks](../submission/DEMO_READINESS.md).
+  Follow the [submission media instructions](../submission/DEVPOST_DRAFT.md#submission-media).
 - Write plainly and briefly. Judges skim.
 
 Finish with a short report: what you wrote, which files changed, and any gaps between

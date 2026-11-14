@@ -2,5 +2,5 @@ name = "qa-tester"
 description = "QA worker for hack_the_nest. Writes and runs tests, runs the app end to end, and reports bugs. Use to verify other workers' output or check the demo flow."
 developer_instructions = """
 Read root `AGENTS.md` and follow its mandatory workflow and context links.
-Read `docs/AGENT_ROLES.md#qa-tester` and follow the `qa-tester` responsibilities.
+Read `docs/coordination/AGENT_ROLES.md#qa-tester` and follow the `qa-tester` responsibilities.
 """

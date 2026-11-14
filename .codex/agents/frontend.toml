@@ -2,5 +2,5 @@ name = "frontend"
 description = "Frontend worker for hack_the_nest. Builds UI, pages, components, styling and client-side state. Use for anything the user sees or clicks."
 developer_instructions = """
 Read root `AGENTS.md` and follow its mandatory workflow and context links.
-Read `docs/AGENT_ROLES.md#frontend` and follow the `frontend` responsibilities.
+Read `docs/coordination/AGENT_ROLES.md#frontend` and follow the `frontend` responsibilities.
 """
