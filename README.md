@@ -10,10 +10,12 @@ Project for Hack The Nest 2026 at Eastern Michigan University, November 14–15,
   prizes, logistics, and verification status. All event times are Eastern
   (`America/Detroit`).
 - [Shared agent instructions](AGENTS.md): file ownership, Git safety, and required
-  GitHub synchronization for Codex and Claude Code.
+  GitHub synchronization for all agents, including Codex sessions from different accounts.
 - [Claude Code instructions](CLAUDE.md): entry point for Claude-specific guidance.
+- [Gemini instructions](GEMINI.md): entry point if Gemini joins; no connection is
+  currently confirmed.
 
-Both agents must sync with GitHub before work and push completed changes before
+All agents must sync with GitHub before work and push completed changes before
 handoff, following AGENTS.md. The draft submission is due Sunday, November 15,
 at 12:00 AM; final submission is due that Sunday at 12:00 PM (noon), Eastern.
 
@@ -35,7 +37,9 @@ _To be decided._
 
 ## Working with the agent team
 
-Codex and Claude Code collaborate on this repo. Claude Code is configured to use
+Multiple Codex agents from different accounts and Claude Code may collaborate on
+this repo, with a possible future Gemini connection. Each session must identify
+itself and coordinate ownership using AGENTS.md. Claude Code is configured to use
 the `manager` agent in [.claude/agents](.claude/agents), which splits a goal into
 tasks and hands them to five workers. The manager includes the shared instructions
 in worker briefs and coordinates Git operations for workers sharing its checkout:

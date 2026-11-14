@@ -2,21 +2,24 @@
 
 ## Shared context
 
-Codex and Claude Code may work simultaneously on this repository. When event
-context is relevant, read [docs/HACKATHON_CONTEXT.md](docs/HACKATHON_CONTEXT.md).
+Multiple Codex agents, including agents from different accounts, and Claude Code
+may work simultaneously on this repository. Gemini may also join in the future;
+its connection is not yet confirmed. These shared instructions apply to every
+participating agent, account, and session. When event context is relevant, read
+[docs/HACKATHON_CONTEXT.md](docs/HACKATHON_CONTEXT.md).
 It is the shared event reference; preserve its source and verification labels.
 Keep event research there rather than duplicating it in agent instructions.
 
 ## Collaboration rules
 
-1. Codex and Claude Code share this repository. Establish the files each agent
+1. All participating agents share this repository. Establish the files each agent
    owns for the current task before overlapping work.
 2. Inspect the current Git branch, status, diffs, staged changes, and recent
    commits before changes. Recheck before staging or committing.
 3. Do not discard or overwrite another agent's work or uncommitted changes. Do
    not reset, revert, clean, or force-push to resolve overlapping work.
 4. Prefer separate branches and focused commits. In a shared checkout, branch
-   switches affect both agents: coordinate first. Use existing isolated checkouts
+   switches affect everyone using it: coordinate first. Use existing isolated checkouts
    where available; do not create a Git worktree unless explicitly requested.
    Stage only files intentionally changed for your task; do not use blanket
    staging that can capture another agent's changes.
@@ -36,7 +39,21 @@ Keep event research there rather than duplicating it in agent instructions.
     noon Eastern (`America/Detroit`)**, the final submission deadline. The draft
     is due at the start of that Sunday, **12:00 AM**, on Devpost and the event app.
 
-## Required GitHub synchronization — both agents
+## Agent identity and coordination across accounts
+
+- Do not assume “Codex” identifies a single agent. Use a distinct, non-sensitive
+  session label in task briefs and handoffs, together with the working branch,
+  base commit, and files owned. Distinguish separate Codex sessions even when
+  they use the same model or local branch name.
+- Separate accounts or sessions may have different checkouts, memory, tools,
+  and GitHub permissions. Do not assume another agent has read this chat or
+  received an instruction until it is available in the shared repository.
+- Coordinate through shared repository instructions and GitHub-visible handoffs
+  (such as commit or PR descriptions). Report the branch, commit link, changes,
+  and outstanding ownership or interface issues so other sessions can resume.
+  Never share account credentials to enable collaboration.
+
+## Required GitHub synchronization — all agents
 
 - Before starting any task or resuming edits, inspect Git status, branch, staged
   changes, and recent history, then `git fetch origin`. Synchronize with the
@@ -60,8 +77,8 @@ Keep event research there rather than duplicating it in agent instructions.
 - Verify the intended remote branch contains the pushed commit and report the
   branch and commit link. If authentication, conflicts, or branch protection
   block synchronization, report the exact blocker and preserve all work; do not
-  claim that GitHub is synchronized. These rules apply equally to Codex and
-  Claude Code.
+  claim that GitHub is synchronized. These rules apply equally to every Codex
+  session/account, Claude Code, and any Gemini or other agent that joins.
 - When delegated workers share a checkout, serialize Git synchronization,
   staging, commits, and pushes through one coordinator (the Claude manager for
   its workers). Workers read these instructions and coordinate synchronization
