@@ -7,9 +7,6 @@ University, November 14–15.
 [**Live app**](https://talk-it-out-0dzk.onrender.com/) ·
 [**Simulated demo — no API keys**](https://talk-it-out-0dzk.onrender.com/?mock=1)
 
-Free hosting may take 30–60 seconds to wake after inactivity. Voice has a daily
-budget; typed input remains available when it runs out.
-
 ## The experience
 
 Choose a toddler, angry caller, upset friend, teenager, roommate, or coworker.
@@ -17,6 +14,19 @@ Speak or type a reply, watch the character's mood change, and review coaching
 notes. Optional **Try saying** hints help you get started; turn them off to
 practice independently. Finish the round or choose **End & score** to see a
 scorecard and transcript, then try again.
+
+## Quick start
+
+1. Open [Talk It Out on Render](https://talk-it-out-0dzk.onrender.com/) in your browser.
+   No installation or personal API keys are needed to use the hosted app.
+2. Choose a character, then type a reply or allow microphone access to speak.
+3. Continue the conversation and review the coaching. After at least one reply,
+   choose **End & score**, or finish the round, to see your scorecard and transcript.
+
+The free Render service may take 30–60 seconds to wake after inactivity. Voice
+has a daily budget; continue with typed input when voice is unavailable.
+For a preview with simulated responses, open the
+[simulated demo](https://talk-it-out-0dzk.onrender.com/?mock=1).
 
 ## Architecture and code map
 
@@ -57,7 +67,10 @@ rules, and reserves estimated voice credits before external speech calls.
 Payloads, environment variables, and deployment behavior are documented in the
 [API contract](docs/API_CONTRACT.md).
 
-## Quick start
+## Run locally
+
+<details>
+<summary>Developer setup and local launch instructions</summary>
 
 **Prerequisites:** Python 3.12 is verified. Internet access is needed for browser
 modules and live AI services. Node 22+ is needed only for the optional frontend
@@ -67,8 +80,7 @@ Run commands from the repository root. Choose your platform below.
 
 ### 1. Install dependencies and prepare local configuration
 
-<details>
-<summary>macOS / Linux commands</summary>
+**macOS / Linux**
 
 ```bash
 python3 -m venv backend/.venv
@@ -76,18 +88,13 @@ backend/.venv/bin/python -m pip install -r backend/requirements.txt
 test -f .env || cp .env.example .env
 ```
 
-</details>
-
-<details>
-<summary>Windows PowerShell commands</summary>
+**Windows PowerShell**
 
 ```powershell
 python -m venv backend/.venv
 backend/.venv/Scripts/python -m pip install -r backend/requirements.txt
 if (!(Test-Path .env)) { Copy-Item .env.example .env }
 ```
-
-</details>
 
 ### 2. Configure live services
 
@@ -102,28 +109,24 @@ To explore only the simulated demo, leave keys unset and use `?mock=1`.
 
 ### 3. Start and open the app
 
-<details>
-<summary>macOS / Linux commands</summary>
+**macOS / Linux**
 
 ```bash
 backend/.venv/bin/python -m uvicorn app.main:app --app-dir backend --reload --port 8000
 ```
 
-</details>
-
-<details>
-<summary>Windows PowerShell commands</summary>
+**Windows PowerShell**
 
 ```powershell
 backend/.venv/Scripts/python -m uvicorn app.main:app --app-dir backend --reload --port 8000
 ```
 
-</details>
-
 Open <http://localhost:8000> for live conversations, or
 <http://localhost:8000/?mock=1> for the simulator. Keep the terminal running;
 Ctrl+C stops the server. `/api/health` reports configured-key presence and budget
 availability, not successful authentication with the providers.
+
+</details>
 
 ## Validation and demo data
 

@@ -7,7 +7,7 @@ Submission limits, deadlines, and attendance requirements are maintained in
 
 ## Before a real demonstration
 
-- Start the service using the [quick start](../../README.md#quick-start), or open
+- Start the service using the [local setup](../../README.md#run-locally), or open
   the public app early enough for the free host to wake.
 - Check `/api/health` for configured-key presence and voice availability. These
   flags alone do not prove provider authentication or microphone functionality.

@@ -26,7 +26,7 @@ end a scorecard grades the communication techniques you used.
   components written with `htm` tagged templates instead of JSX.
 - One origin: FastAPI serves `/api/*` and serves `frontend/` as static files at
   `/`. Open <http://localhost:8000>.
-- Setup, run, and validation commands: [README](../README.md#quick-start).
+- Setup, run, and validation commands: [README](../README.md#run-locally).
 
 ## Env vars (repo-root `.env`, git-ignored; names only here)
 

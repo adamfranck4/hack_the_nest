@@ -9,6 +9,23 @@ In a shared checkout, the coordinator serializes entries from its workers.
 Apply the [shared transparency requirements](../../AGENTS.md#required-transparency-for-every-agent)
 to operational actions and push/deployment status as well as code changes.
 
+## 2026-11-14 — codex-hosted-quickstart — README entry path
+
+- Branch/base: local `work` targeting shared `main`, base `17d4cda`.
+- Input/ownership: make the hosted webpage the README quick start; retain local
+  setup as secondary developer guidance and update affected reference links.
+  No product decisions or app code changes.
+- Outcome: hosted browser steps now lead the README before architecture; local
+  commands are preserved in one collapsed developer section. Updated technical
+  and demo-readiness backlinks to the local-setup anchor.
+- Validation: hosted quick-start rendering, collapsed local commands, all 20
+  Markdown files/82 local references, and diff checks passed. Read-only GETs to
+  both hosted entry URLs returned HTTP 200 with the expected app HTML; this is
+  not an end-to-end AI/microphone check. App suites were not rerun for docs only.
+- Operations/delivery: no app code, keys, dependencies, servers, paid AI calls,
+  or hosting settings changed. Push targets GitHub `main`, verified after delivery;
+  Render may auto-deploy from the docs push, with deployment status unverified.
+
 ## 2026-11-14 — codex-docs-layout — documentation organization
 
 - Branch/base: local `work` targeting shared `main`, base `81a6b96`.
