@@ -28,7 +28,7 @@ Selection rules and prizes are recorded in
 |---|---|---|
 | 1 | AI/ML | **Selected** in the event app |
 | 2 | Best Beginner | **Selected** in the event app |
-| 3 | Best use of ElevenLabs | **Recommended**; not yet confirmed as selected in the app |
+| 3 | Best use of ElevenLabs | **Selected** in the event app (confirmed by Adam) |
 
 ### Why ElevenLabs for the third track
 
@@ -79,5 +79,4 @@ shared privately.
 
 - Implemented scope: six scenarios; the catalog lives in
   `backend/app/characters.py`. Custom characters and difficulty levels remain stretch goals.
-- Confirm the third track is actually selected in the app.
 - Submission deadlines: see [the event schedule](HACKATHON_CONTEXT.md#critical-deadlines).
